@@ -1,9 +1,13 @@
 import Menu from './components/Menu';
 import Page from './pages/Page';
 import React from 'react';
-import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
+import { IonApp, IonItem, IonLabel, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
+
+import { ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { useQuery, gql } from '@apollo/client';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -24,10 +28,42 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+
+
+const client = new ApolloClient({
+  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  cache: new InMemoryCache()
+});
+const EXCHANGE_RATES = gql`
+  query GetExchangeRates {
+    rates(currency: "USD") {
+      currency
+      rate
+    }
+  }
+`;
+
+function ExchangeRates() {
+  const { loading, error, data } = useQuery(EXCHANGE_RATES);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+
+  return data.rates.map(({ currency, rate }) => (
+    <IonItem>
+      <IonLabel>
+        {currency} : {rate}
+      </IonLabel>
+    </IonItem>
+    
+  ));
+}
+
 const App: React.FC = () => {
 
   return (
     <IonApp>
+      <ApolloProvider client = {client}>
       <IonReactRouter>
         <IonSplitPane contentId="main">
           <Menu />
@@ -37,8 +73,14 @@ const App: React.FC = () => {
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
+      </ApolloProvider>
     </IonApp>
   );
 };
 
-export default App;
+
+
+export{
+  App,
+  ExchangeRates
+}
