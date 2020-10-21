@@ -1,5 +1,4 @@
 import {
-    IonButton,
     IonButtons,
     IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
     IonCardTitle,
@@ -11,7 +10,7 @@ import {
     IonToolbar
 } from '@ionic/react';
 import React from 'react';
-import '../pages/Page.css';
+import '../Page.css';
 import {gql, useQuery} from "@apollo/client";
 
 
@@ -43,9 +42,7 @@ function Traerdatos() {
                     <IonItem>con el profesor {profesor}</IonItem>
                     <IonItem>en el salon {salon}</IonItem>
                 </IonList>
-                <IonButton>
-                    Ver
-                </IonButton>
+
             </IonCardContent>
         </IonCard>
 
@@ -53,7 +50,7 @@ function Traerdatos() {
 }
 
 
-const StudentClasses: React.FC = () => {
+const TeacherGrades: React.FC = () => {
 
     return (
         <IonPage>
@@ -68,8 +65,9 @@ const StudentClasses: React.FC = () => {
             <IonContent>
                 <Traerdatos/>
             </IonContent>
+
         </IonPage>
     );
 };
 
-export default StudentClasses;
+export default TeacherGrades;

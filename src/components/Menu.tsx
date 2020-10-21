@@ -48,14 +48,14 @@ const appPages: AppPage[] = [
     mdIcon: personSharp
   },
   {
-    title: 'Ver materias ESTUDIANTE',
-    url: '/page/NotasEstudiante',
+    title: 'Ver clase ESTUDIANTE',
+    url: '/page/ClasesEstudiante',
     iosIcon: schoolOutline,
     mdIcon: schoolSharp
   },
   {
-    title: 'Ver materia PROFESOR',
-    url: '/page/NotasProfesor',
+    title: 'Ver clase PROFESOR',
+    url: '/page/ClasesProfesor',
     iosIcon: schoolOutline,
     mdIcon: schoolSharp
   },

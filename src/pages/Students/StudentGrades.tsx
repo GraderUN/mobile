@@ -1,5 +1,4 @@
 import {
-    IonButton,
     IonButtons,
     IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
     IonCardTitle,
@@ -11,16 +10,16 @@ import {
     IonToolbar
 } from '@ionic/react';
 import React from 'react';
-import '../pages/Page.css';
+import '../Page.css';
 import {gql, useQuery} from "@apollo/client";
 
 
 const CLASES = gql`
     query {
-        AssignementsByProfessor(professor: "1234"){
-            id,
+        AssignementsByCourse(courseID: "5f8e5d11090c20a6b6feef3d"){
             materia,
             salon,
+            profesor,
             horario
         }
     }
@@ -32,7 +31,7 @@ function Traerdatos() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
-    return data.AssignementsByCourse.map(({ id, materia, salon , horario}) => (
+    return data.AssignementsByCourse.map(({ materia, salon , profesor , horario}) => (
         <IonCard>
             <IonCardHeader>
                 <IonCardSubtitle>{horario}</IonCardSubtitle>
@@ -40,11 +39,10 @@ function Traerdatos() {
             </IonCardHeader>
             <IonCardContent>
                 <IonList>
+                    <IonItem>con el profesor {profesor}</IonItem>
                     <IonItem>en el salon {salon}</IonItem>
                 </IonList>
-                <IonButton>
-                ver
-                </IonButton>
+
             </IonCardContent>
         </IonCard>
 
@@ -52,7 +50,7 @@ function Traerdatos() {
 }
 
 
-const TeacherClasses: React.FC = () => {
+const StudentGrades: React.FC = () => {
 
     return (
         <IonPage>
@@ -72,4 +70,4 @@ const TeacherClasses: React.FC = () => {
     );
 };
 
-export default TeacherClasses;
+export default StudentGrades;
