@@ -1,4 +1,4 @@
-import { IonButtons, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonCard, IonCardHeader, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
 import { useParams } from 'react-router';
 import '../Page.css';
@@ -85,6 +85,11 @@ const Students: React.FC = () => {
                     <IonInput type="number" value={studentId} placeholder="Enter Number" onIonChange={e => studentId = parseInt(e.detail.value!, 10)}></IonInput>
                 </IonItem>
                 <DatosPersonales/>
+                <IonCard>
+                    <IonCardHeader>
+                        <IonButton href= "/pages/Inbox">Botón</IonButton>
+                    </IonCardHeader>
+                </IonCard>
             </IonContent>
         </IonPage>
     );
