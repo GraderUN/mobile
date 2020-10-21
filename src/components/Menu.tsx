@@ -12,7 +12,7 @@ import {
 
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { archiveOutline, archiveSharp, documentOutline, documentSharp, homeOutline, homeSharp,personOutline, personSharp, schoolOutline, schoolSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import { documentAttachOutline, documentAttachSharp, easelOutline, easelSharp, homeOutline, homeSharp,libraryOutline,librarySharp,logOutOutline,logOutSharp,personOutline, personSharp, schoolOutline, schoolSharp, storefrontOutline, storefrontSharp} from 'ionicons/icons';
 import './Menu.css';
 
 interface AppPage {
@@ -30,28 +30,64 @@ const appPages: AppPage[] = [
     mdIcon: homeSharp
   },
   {
-    title: 'Datos personales',
-    url: '/page/Outbox',
+    title: 'Datos personales Estudiante',
+    url: '/page/PersonalStudentData',
     iosIcon: personOutline,
     mdIcon: personSharp
   },
   {
-    title: 'Notas',
-    url: '/page/Favorites',
+    title: 'Datos personales Profesor',
+    url: '/page/PersonalTeacherData',
+    iosIcon: personOutline,
+    mdIcon: personSharp
+  },
+  {
+    title: 'Datos personales Administrador',
+    url: '/page/PersonalAdminData',
+    iosIcon: personOutline,
+    mdIcon: personSharp
+  },
+  {
+    title: 'Ver notas ESTUDIANTE',
+    url: '/page/NotasEstudiante',
+    iosIcon: schoolOutline,
+    mdIcon: schoolSharp
+  },
+  {
+    title: 'Ver notas PROFESOR',
+    url: '/page/NotasProfesor',
     iosIcon: schoolOutline,
     mdIcon: schoolSharp
   },
   {
     title: 'Solicitudes',
-    url: '/page/Favorites',
-    iosIcon: documentOutline,
-    mdIcon: documentSharp
+    url: '/page/Solicitudes',
+    iosIcon: documentAttachOutline,
+    mdIcon: documentAttachSharp
+  },
+  {
+    title: 'Salones ADMIN',
+    url: '/page/SalonesAdmin',
+    iosIcon: storefrontOutline,
+    mdIcon: storefrontSharp
+  },
+  {
+    title: 'Cursos ADMIN',
+    url: '/page/CursosAdmin',
+    iosIcon: libraryOutline,
+    mdIcon: librarySharp
+  },
+  {
+    title: 'Clases ADMIN',
+    url: '/page/ClasesAdmin',
+    iosIcon: easelOutline,
+    mdIcon: easelSharp
   },
   {
     title: 'Cerrar sesión',
     url: '/page/Trash',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp
+    iosIcon: logOutOutline,
+    mdIcon: logOutSharp
   },
 ];
 

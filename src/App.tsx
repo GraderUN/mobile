@@ -1,5 +1,11 @@
 import Menu from './components/Menu';
+
+
 import Page from './pages/Page';
+import {Students} from './pages/Students/StudentPersonalData'
+import { Admin } from './pages/Admin/AdminPersonalData';
+import { Teacher } from './pages/Teacher/TeacherPersonalData';
+
 import React from 'react';
 import { IonApp, IonItem, IonLabel, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -31,7 +37,7 @@ import './theme/variables.css';
 
 
 const client = new ApolloClient({
-  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  uri: 'http://localhost:5000',
   cache: new InMemoryCache()
 });
 const EXCHANGE_RATES = gql`
@@ -69,6 +75,9 @@ const App: React.FC = () => {
           <Menu />
           <IonRouterOutlet id="main">
             <Route path="/page/:name" component={Page} exact />
+            <Route path="/page/PersonalStudentData" component={Students} exact />
+            <Route path="/page/PersonalAdminData" component={Admin} exact />
+            <Route path="/page/PersonalTeacherData" component={Teacher} exact />
             <Redirect from="/" to="/page/Inbox" exact />
           </IonRouterOutlet>
         </IonSplitPane>

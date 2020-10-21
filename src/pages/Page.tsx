@@ -2,7 +2,6 @@ import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, Io
 import React from 'react';
 import { useParams } from 'react-router';
 import './Page.css';
-import {ExchangeRates} from '../App';
 const Page: React.FC = () => {
 
   const { name } = useParams<{ name: string; }>();
@@ -24,7 +23,6 @@ const Page: React.FC = () => {
             <IonTitle size="large">{name}</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExchangeRates></ExchangeRates>
       </IonContent>
     </IonPage>
   );
