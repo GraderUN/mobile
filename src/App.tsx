@@ -6,6 +6,8 @@ import {Students} from './pages/Students/StudentPersonalData'
 import { Admin } from './pages/Admin/AdminPersonalData';
 import { Teacher } from './pages/Teacher/TeacherPersonalData';
 
+import TeacherClasses from "./Teacher/TeacherClasses";
+import StudentClasses from "./Student/StudentClasses"
 import React from 'react';
 import { IonApp, IonItem, IonLabel, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -78,7 +80,9 @@ const App: React.FC = () => {
             <Route path="/page/PersonalStudentData" component={Students} exact />
             <Route path="/page/PersonalAdminData" component={Admin} exact />
             <Route path="/page/PersonalTeacherData" component={Teacher} exact />
-            <Redirect from="/" to="/page/Inbox" exact />
+              <Route path="/page/ClasesProfesor" component={TeacherClasses} exact />
+              <Route path="/page/ClasesEstudiante" component={StudentClasses} exact />
+              <Redirect from="/" to="/page/Inbox" exact />
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
