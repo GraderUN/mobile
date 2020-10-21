@@ -1,9 +1,10 @@
 import {
+    IonButton,
     IonButtons,
     IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
     IonCardTitle,
     IonContent,
-    IonHeader,
+    IonHeader, IonItem, IonList,
     IonMenuButton,
     IonPage,
     IonTitle,
@@ -13,30 +14,38 @@ import React from 'react';
 import '../pages/Page.css';
 import {gql, useQuery} from "@apollo/client";
 
-const EXCHANGE_RATES = gql`
-  query GetExchangeRates {
-    rates(currency: "USD") {
-      currency
-      rate
+
+const CLASES = gql`
+    query {
+        AssignementsByCourse(courseID: "5f8e5d11090c20a6b6feef3d"){
+            materia,
+            salon,
+            profesor,
+            horario
+        }
     }
-  }
 `;
 
-
 function Traerdatos() {
-    const { loading, error, data } = useQuery(EXCHANGE_RATES);
+    const { loading, error, data } = useQuery(CLASES);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
-    return data.rates.map(({ currency, rate }) => (
+    return data.AssignementsByCourse.map(({ materia, salon , profesor , horario}) => (
         <IonCard>
             <IonCardHeader>
-                <IonCardSubtitle>{currency}</IonCardSubtitle>
-                <IonCardTitle>{rate}</IonCardTitle>
+                <IonCardSubtitle>{horario}</IonCardSubtitle>
+                <IonCardTitle>{materia}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-                this is the content
+                <IonList>
+                    <IonItem>con el profesor {profesor}</IonItem>
+                    <IonItem>en el salon {salon}</IonItem>
+                </IonList>
+                <IonButton>
+                    Ver
+                </IonButton>
             </IonCardContent>
         </IonCard>
 
@@ -44,7 +53,7 @@ function Traerdatos() {
 }
 
 
-const Teacher: React.FC = () => {
+const StudentClasses: React.FC = () => {
 
     return (
         <IonPage>
@@ -53,7 +62,7 @@ const Teacher: React.FC = () => {
                     <IonButtons slot="start">
                         <IonMenuButton />
                     </IonButtons>
-                    <IonTitle>Profesor</IonTitle>
+                    <IonTitle>Estudiante</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
@@ -64,4 +73,4 @@ const Teacher: React.FC = () => {
     );
 };
 
-export default Teacher;
+export default StudentClasses;

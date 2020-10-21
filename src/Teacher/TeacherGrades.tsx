@@ -50,7 +50,7 @@ function Traerdatos() {
 }
 
 
-const Student: React.FC = () => {
+const TeacherGrades: React.FC = () => {
 
     return (
         <IonPage>
@@ -59,7 +59,7 @@ const Student: React.FC = () => {
                     <IonButtons slot="start">
                         <IonMenuButton />
                     </IonButtons>
-                    <IonTitle>Profesor</IonTitle>
+                    <IonTitle>Estudiante</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
@@ -70,4 +70,4 @@ const Student: React.FC = () => {
     );
 };
 
-export default Student;
+export default TeacherGrades;
