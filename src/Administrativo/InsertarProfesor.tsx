@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonLabel, IonList, IonButton } from '@ionic/react';
+import { 
+    IonContent, 
+    IonHeader, 
+    IonPage, 
+    IonTitle, 
+    IonToolbar, 
+    IonInput, 
+    IonItem, 
+    IonLabel, 
+    IonList, 
+    IonButton 
+} from '@ionic/react';
 
 const InsertarProfesor: React.FC = () => {
   const [text, setText] = useState<string>();

@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonLabel, IonList } from '@ionic/react';
+import { 
+    IonButton, 
+    IonContent, 
+    IonHeader, 
+    IonPage, 
+    IonTitle, 
+    IonToolbar, 
+    IonInput, 
+    IonItem, 
+    IonLabel, 
+    IonList 
+} from '@ionic/react';
 
 const EliminarAdministrativo: React.FC = () => {
     const [text, setText] = useState<string>();

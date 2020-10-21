@@ -1,7 +1,20 @@
 //Pagina principal del administrativo
 import React, { useState } from 'react';
-import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonLabel, IonList, IonIcon } from '@ionic/react';
 import { briefcase } from 'ionicons/icons';
+import { 
+    IonButton, 
+    IonContent, 
+    IonHeader, 
+    IonPage, 
+    IonTitle, 
+    IonToolbar, 
+    IonInput, 
+    IonItem, 
+    IonLabel, 
+    IonList, 
+    IonIcon 
+} from '@ionic/react';
+
 
 const GestionUsuarios: React.FC = () => {
     const [text, setText] = useState<string>();

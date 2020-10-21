@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
-import { IonButton, IonIcon, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonLabel, IonList } from '@ionic/react';
-import { add, star } from 'ionicons/icons';
+import { 
+    IonButton, 
+    IonIcon, 
+    IonContent, 
+    IonHeader, 
+    IonPage, 
+    IonTitle, 
+    IonToolbar,
+    IonInput, 
+    IonItem, 
+    IonLabel, 
+    IonList 
+} from '@ionic/react';
 
 const InsertarEstudiante: React.FC = () => {
     const [text, setText] = useState<string>();
