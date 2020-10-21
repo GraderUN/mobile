@@ -68,7 +68,6 @@ const StudentClasses: React.FC = () => {
             <IonContent>
                 <Traerdatos/>
             </IonContent>
-
         </IonPage>
     );
 };
