@@ -3,13 +3,12 @@ import Page from './pages/Page';
 import TeacherClasses from "./Teacher/TeacherClasses";
 import StudentClasses from "./Student/StudentClasses"
 import React from 'react';
-import { IonApp, IonItem, IonLabel, IonRouterOutlet, IonSplitPane } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 
 import { ApolloProvider } from '@apollo/client';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { useQuery, gql } from '@apollo/client';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
