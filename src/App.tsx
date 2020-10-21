@@ -36,29 +36,6 @@ const client = new ApolloClient({
   uri: 'http://localhost:5000',
   cache: new InMemoryCache()
 });
-const EXCHANGE_RATES = gql`
-  query GetExchangeRates {
-    rates(currency: "USD") {
-      currency
-      rate
-    }
-  }
-`;
-function ExchangeRates() {
-  const { loading, error, data } = useQuery(EXCHANGE_RATES);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-
-  return data.rates.map(({ currency, rate }) => (
-    <IonItem>
-      <IonLabel>
-        {currency} : {rate}
-      </IonLabel>
-    </IonItem>
-    
-  ));
-}
 
 const App: React.FC = () => {
 
@@ -85,5 +62,4 @@ const App: React.FC = () => {
 
 export{
   App,
-  ExchangeRates
 }
