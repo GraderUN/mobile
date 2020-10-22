@@ -13,6 +13,20 @@ import {
     IonList 
 } from '@ionic/react';
 
+interface estudiante{
+
+    id: number,
+    nombre: string,
+    apellido: string,
+    edad: number,
+    sexo: string,
+    nombreTutor: string,
+    apellidoTutor: string,
+    telefonoTutor: bigint,
+    emailTutor: string
+
+}
+
 const InsertarEstudiante: React.FC = () => {
     const [text, setText] = useState<string>();
     const [number, setNumber] = useState<number>();
