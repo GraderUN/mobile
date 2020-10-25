@@ -54,6 +54,12 @@ const appPages: AppPage[] = [
     iosIcon: trashOutline,
     mdIcon: trashSharp
   },
+  {
+    title: 'Insertar Administrativo',
+    url: '/page/InsertarAdministrativo',
+    iosIcon: trashOutline,
+    mdIcon: trashSharp
+  },
 ];
 
 const Menu: React.FC = () => {
