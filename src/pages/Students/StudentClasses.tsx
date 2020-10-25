@@ -17,7 +17,7 @@ import {gql, useQuery} from "@apollo/client";
 
 const CLASES = gql`
     query {
-        AssignementsByCourse(courseID: "5f8e5d11090c20a6b6feef3d"){
+        assignementsbyStudent(id: "11"){
             materia,
             salon,
             profesor,
@@ -32,7 +32,7 @@ function Traerdatos() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
-    return data.AssignementsByCourse.map(({ materia, salon , profesor , horario}) => (
+    return data.assignementsbyStudent.map(({ materia, salon , profesor , horario}) => (
         <IonCard>
             <IonCardHeader>
                 <IonCardSubtitle>{horario}</IonCardSubtitle>
@@ -62,7 +62,7 @@ const StudentClasses: React.FC = () => {
                     <IonButtons slot="start">
                         <IonMenuButton />
                     </IonButtons>
-                    <IonTitle>Estudiante</IonTitle>
+                    <IonTitle>Clases cursadas</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>

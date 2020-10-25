@@ -35,11 +35,12 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import InsertarAdministrativo from './Administrativo/InsertarAdministrativo';
-import VerInfoAdministrativo from './Administrativo/VerInfoAdministrativo';
+import InsertarAdministrativo from './pages/Admin/InsertarAdministrativo';
+import VerInfoAdministrativo from './pages/Admin/VerInfoAdministrativo';
 
 import StudentGrades from "./pages/Students/StudentGrades";
 import TeacherGrades from "./pages/Teacher/TeacherGrades";
+import TeacherClass from "./pages/Teacher/TeacherClass";
 
 
 
@@ -89,7 +90,7 @@ const App: React.FC = () => {
             <Route path="/page/ClasesEstudiante" component={StudentClasses} exact />
             <Route path="/Studentgrades" component={StudentGrades} exact />
             <Route path="/Teachergrades" component={TeacherGrades} exact />
-
+            <Route path="/TeacherCourse" component={TeacherClass} exact />
 
             <Redirect from="/" to="/page/Inbox" exact />
               <Route path="/ClasesProfesor" component={TeacherClasses} exact />

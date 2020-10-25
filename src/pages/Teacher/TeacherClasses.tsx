@@ -17,8 +17,8 @@ import {gql, useQuery} from "@apollo/client";
 
 const CLASES = gql`
     query {
-        AssignementsByProfessor(professor: "1234"){
-            id,
+        AssignementsByProfessor(professor: "15"){
+            curso,
             materia,
             salon,
             horario
@@ -32,7 +32,7 @@ function Traerdatos() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
-    return data.AssignementsByCourse.map(({ materia, salon , horario}) => (
+    return data.AssignementsByProfessor.map(({ curso ,materia, salon , horario}) => (
         <IonCard>
             <IonCardHeader>
                 <IonCardSubtitle>{horario}</IonCardSubtitle>
@@ -41,9 +41,10 @@ function Traerdatos() {
             <IonCardContent>
                 <IonList>
                     <IonItem>en el salon {salon}</IonItem>
+                    <IonItem>con el curso {curso}</IonItem>
                 </IonList>
-                <IonButton>
-                ver
+                <IonButton href="/TeacherCourse">
+                    ver curso
                 </IonButton>
             </IonCardContent>
         </IonCard>
@@ -61,7 +62,7 @@ const TeacherClasses: React.FC = () => {
                     <IonButtons slot="start">
                         <IonMenuButton />
                     </IonButtons>
-                    <IonTitle>Estudiante</IonTitle>
+                    <IonTitle>Mis Clases</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
