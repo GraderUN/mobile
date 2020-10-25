@@ -1,37 +1,44 @@
-import Menu from './components/Menu';
+import Menu from "./components/Menu";
 
-
-import Page from './pages/Page';
-import {Students} from './pages/Students/StudentPersonalData'
-import { Admin } from './pages/Admin/AdminPersonalData';
-import { Teacher } from './pages/Teacher/TeacherPersonalData';
+import Page from "./pages/Page";
+import { Students } from "./pages/Students/StudentPersonalData";
+import { Admin } from "./pages/Admin/AdminPersonalData";
+import { Teacher } from "./pages/Teacher/TeacherPersonalData";
 
 import TeacherClasses from "./pages/Teacher/TeacherClasses";
-import StudentClasses from "./pages/Students/StudentClasses"
-import React from 'react';
-import { IonApp, IonItem, IonLabel, IonRouterOutlet, IonSplitPane } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import { Redirect, Route } from 'react-router-dom';
+import StudentClasses from "./pages/Students/StudentClasses";
 
-import { ApolloProvider } from '@apollo/client';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { useQuery, gql } from '@apollo/client';
+import React from "react";
+
+import {
+  IonApp,
+  IonItem,
+  IonLabel,
+  IonRouterOutlet,
+  IonSplitPane,
+} from "@ionic/react";
+import { IonReactRouter } from "@ionic/react-router";
+import { Redirect, Route } from "react-router-dom";
+
+import { ApolloProvider } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { useQuery, gql } from "@apollo/client";
 
 /* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css';
+import "@ionic/react/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css';
-import '@ionic/react/css/structure.css';
-import '@ionic/react/css/typography.css';
+import "@ionic/react/css/normalize.css";
+import "@ionic/react/css/structure.css";
+import "@ionic/react/css/typography.css";
 
 /* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
-import '@ionic/react/css/text-alignment.css';
-import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
+import "@ionic/react/css/padding.css";
+import "@ionic/react/css/float-elements.css";
+import "@ionic/react/css/text-alignment.css";
+import "@ionic/react/css/text-transformation.css";
+import "@ionic/react/css/flex-utils.css";
+import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import './theme/variables.css';
@@ -42,11 +49,9 @@ import StudentGrades from "./pages/Students/StudentGrades";
 import TeacherGrades from "./pages/Teacher/TeacherGrades";
 import TeacherClass from "./pages/Teacher/TeacherClass";
 
-
-
 const client = new ApolloClient({
-  uri: 'http://localhost:5000',
-  cache: new InMemoryCache()
+  uri: "http://localhost:5000",
+  cache: new InMemoryCache(),
 });
 const EXCHANGE_RATES = gql`
   query GetExchangeRates {
@@ -69,12 +74,10 @@ function ExchangeRates() {
         {currency} : {rate}
       </IonLabel>
     </IonItem>
-    
   ));
 }
 
 const App: React.FC = () => {
-
   return (
     <IonApp>
       <ApolloProvider client = {client}>
@@ -104,9 +107,4 @@ const App: React.FC = () => {
   );
 };
 
-
-
-export{
-  App,
-  ExchangeRates
-}
+export { App, ExchangeRates };
