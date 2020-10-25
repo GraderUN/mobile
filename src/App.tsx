@@ -35,6 +35,8 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import InsertarAdministrativo from './Administrativo/InsertarAdministrativo';
+import VerInfoAdministrativo from './Administrativo/VerInfoAdministrativo';
 
 import StudentGrades from "./pages/Students/StudentGrades";
 import TeacherGrades from "./pages/Teacher/TeacherGrades";
@@ -90,6 +92,9 @@ const App: React.FC = () => {
 
 
             <Redirect from="/" to="/page/Inbox" exact />
+              <Route path="/ClasesProfesor" component={TeacherClasses} exact />
+              <Route path="/ClasesEstudiante" component={StudentClasses} exact />
+              <Redirect from="/" to="/page/InsertarAdministrativo" exact />
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
