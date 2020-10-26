@@ -1,7 +1,7 @@
 import { IonButtons, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
 import { useParams } from 'react-router';
-import '../Page.css';
+import '../Startup/Page.css';
 import { useQuery, gql } from '@apollo/client';
 
 

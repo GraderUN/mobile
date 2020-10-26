@@ -43,7 +43,7 @@ interface AppPage {
 const appPages: AppPage[] = [
   {
     title: 'Inicio',
-    url: '/page/Inbox',
+    url: '/page/Inicio',
     iosIcon: homeOutline,
     mdIcon: homeSharp
   },

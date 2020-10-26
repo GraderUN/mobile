@@ -16,17 +16,18 @@ import {
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import "../Page.css";
+import '../Startup/Page.css';
 import { useQuery, gql } from "@apollo/client";
 
 import { Plugins } from "@capacitor/core";
 const { Storage } = Plugins;
 
 const Students: React.FC = () => {
-  function DatosPersonales() {
+
+  function DatosPersonales({id}) {
     const DATOS_PERSONALES = gql`
-      query estudiante {
-        estudianteById(id: 10) {
+      query($id: Int!){
+        estudianteById(id: $id) {
           id
           nombre
           apellido
@@ -39,7 +40,8 @@ const Students: React.FC = () => {
         }
       }
     `;
-    const { loading, error, data } = useQuery(DATOS_PERSONALES);
+    
+    const { loading, error, data } = useQuery(DATOS_PERSONALES, {variables: {id}});
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
@@ -103,17 +105,9 @@ const Students: React.FC = () => {
             <IonTitle size="large">{name}</IonTitle>
           </IonToolbar>
         </IonHeader>
+        <DatosPersonales id={parseInt(fullData)}/>
         <IonItem>
-          <IonInput
-            type="number"
-            value={studentId}
-            placeholder="Enter Number"
-            onIonChange={(e) => (studentId = parseInt(e.detail.value!, 10))}
-          ></IonInput>
-        </IonItem>
-        <DatosPersonales />
-        <IonItem>
-          <IonLabel> DATO: {fullData}</IonLabel>
+          <IonLabel> DATO: {parseInt(fullData)}</IonLabel>
         </IonItem>
         <IonCard>
           <IonCardHeader>

@@ -10,7 +10,7 @@ import {
     IonToolbar
 } from '@ionic/react';
 import React from 'react';
-import '../Page.css';
+import '../Startup/Page.css';
 import {gql, useQuery} from "@apollo/client";
 
 

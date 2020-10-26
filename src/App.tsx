@@ -1,9 +1,9 @@
 import Menu from "./components/Menu";
 
-import Page from "./pages/Page";
 import { Students } from "./pages/Students/StudentPersonalData";
 import { Admin } from "./pages/Admin/AdminPersonalData";
 import { Teacher } from "./pages/Teacher/TeacherPersonalData";
+import  Inicio  from "./pages/Startup/Inicio"
 
 import TeacherClasses from "./pages/Teacher/TeacherClasses";
 import StudentClasses from "./pages/Students/StudentClasses";
@@ -42,9 +42,6 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import './theme/variables.css';
-import InsertarAdministrativo from './pages/Admin/InsertarAdministrativo';
-import VerInfoAdministrativo from './pages/Admin/VerInfoAdministrativo';
-
 import StudentGrades from "./pages/Students/StudentGrades";
 import TeacherGrades from "./pages/Teacher/TeacherGrades";
 import TeacherClass from "./pages/Teacher/TeacherClass";
@@ -85,7 +82,7 @@ const App: React.FC = () => {
         <IonSplitPane contentId="main">
           <Menu />
           <IonRouterOutlet id="main">
-            <Route path="/page/:name" component={Page} exact />
+            <Route path="/page/Inicio" component={Inicio} exact />
             <Route path="/page/PersonalStudentData" component={Students} exact />
             <Route path="/page/PersonalAdminData" component={Admin} exact />
             <Route path="/page/PersonalTeacherData" component={Teacher} exact />
@@ -95,10 +92,9 @@ const App: React.FC = () => {
             <Route path="/Teachergrades" component={TeacherGrades} exact />
             <Route path="/TeacherCourse" component={TeacherClass} exact />
 
-            <Redirect from="/" to="/page/Inbox" exact />
-              <Route path="/ClasesProfesor" component={TeacherClasses} exact />
-              <Route path="/ClasesEstudiante" component={StudentClasses} exact />
-              <Redirect from="/" to="/page/InsertarAdministrativo" exact />
+            <Redirect from="/" to="/page/Inicio" exact />
+            <Route path="/ClasesProfesor" component={TeacherClasses} exact />
+            <Route path="/ClasesEstudiante" component={StudentClasses} exact />
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
