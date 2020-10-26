@@ -29,6 +29,8 @@ const CLASES = gql`
 function Traerdatos() {
     const { loading, error, data } = useQuery(CLASES);
 
+    console.log(data);
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 

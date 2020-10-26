@@ -49,8 +49,12 @@ function Traerdatos() {
         <IonCard>
                 <IonCardHeader>{id_students}</IonCardHeader>
             <IonCardContent>
-                <IonButton href="/TeacherCourse">
-                    ver nota
+                <IonButton href="/TeacherGrades">
+                    ver notas
+                </IonButton>
+
+                <IonButton href="/Agregarnota">
+                    Agregar Nota
                 </IonButton>
             </IonCardContent>
         </IonCard>
@@ -68,7 +72,7 @@ const TeacherClass: React.FC = () => {
                     <IonButtons slot="start">
                         <IonMenuButton />
                     </IonButtons>
-                    <IonTitle>Estudiante</IonTitle>
+                    <IonTitle>Estudiantes</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>

@@ -47,7 +47,7 @@ const InsertarAdministrativo: React.FC = () => {
     const edadInput = useRef<HTMLIonInputElement>(null);
     const telefonoInput = useRef<HTMLIonInputElement>(null);
     const emailInput = useRef<HTMLIonInputElement>(null);
-    console.log("nombreI");
+
     const [createAdministrativo] =useMutation(AGREGAR_ADMIN);
 
     return(
@@ -81,7 +81,7 @@ const InsertarAdministrativo: React.FC = () => {
                     </IonItem>
                 </IonList>
                 <IonButton onClick={e => () => {
-                            console.log("nombreI");
+
                             e.preventDefault();
                             
                             const nombreI = nombreInput.current?.value as string;
