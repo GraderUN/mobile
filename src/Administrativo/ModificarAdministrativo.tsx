@@ -14,7 +14,13 @@ import {
 import { gql, useMutation } from '@apollo/client';
 
 const MODIFICAR_ADMIN = gql`
-    mutation updateAdministrativo($id: Int!, $nombre: String!, $apellido: String!, $edad: Int!, $telefono: Int!, $email: String!){
+    mutation updateAdministrativo(
+        $id: Int!, 
+        $nombre: String!, 
+        $apellido: String!, 
+        $edad: Int!, 
+        $telefono: Int!, 
+        $email: String!){
         updateAdministrativo(id: $id, administrativo: {
             nombre: $nombre,
             apellido: $apellido,
@@ -44,9 +50,17 @@ const ModificarAdministrativo: React.FC = () => {
         const telefonoI = telefonoInput.current?.value as string;
         const emailI = emailInput.current?.value as string;
         if(idI && nombreI && apellidoI && edadI && telefonoI && telefonoI && emailI){
-            updateAdministrativo({ variables: {id: parseInt(idI, 10), nombre: nombreI, apellido: apellidoI, edad: parseInt(edadI, 10), telefono: parseInt(telefonoI, 10), email: emailI}})
+            updateAdministrativo({ 
+                variables: {
+                    id: parseInt(idI, 10), 
+                    nombre: nombreI, 
+                    apellido: apellidoI, 
+                    edad: parseInt(edadI, 10), 
+                    telefono: parseInt(telefonoI, 10), 
+                    email: emailI}})
         }
     }
+
     return(
 
         <IonPage>

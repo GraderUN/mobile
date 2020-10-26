@@ -31,8 +31,12 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import InsertarAdministrativo from './Administrativo/InsertarAdministrativo';
 import VerInfoAdministrativo from './Administrativo/VerInfoAdministrativo';
-import EliminarAdministrativo from './Administrativo/EliminarAdministrativo';
-import ModificarAdministrativo from './Administrativo/ModificarAdministrativo';
+import InsertarEstudiante from './Administrativo/InsertarEstudiante';
+import InsertarProfesor from './Administrativo/InsertarProfesor';
+import EliminarEstudiante from './Administrativo/EliminarEstudiante';
+import EliminarProfesor from './Administrativo/EliminarProfesor';
+import ModificarEstudiante from './Administrativo/ModificarEstudiante';
+import ModificarProfesor from './Administrativo/ModificarProfesor';
 
 
 
@@ -73,7 +77,7 @@ const App: React.FC = () => {
         <IonSplitPane contentId="main">
           <Menu />
           <IonRouterOutlet id="main">
-            <Route path="/page/:name" component={ModificarAdministrativo} exact />
+            <Route path="/page/:name" component={ModificarProfesor} exact />
               <Route path="/ClasesProfesor" component={TeacherClasses} exact />
               <Route path="/ClasesEstudiante" component={StudentClasses} exact />
               <Redirect from="/" to="/page/InsertarAdministrativo" exact />
@@ -84,8 +88,6 @@ const App: React.FC = () => {
     </IonApp>
   );
 };
-
-
 
 export{
   App,

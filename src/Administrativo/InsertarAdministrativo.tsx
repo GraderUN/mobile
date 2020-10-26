@@ -14,7 +14,12 @@ import {
 } from '@ionic/react';
 
 const AGREGAR_ADMIN = gql`
-    mutation createAdministrativo($nombre: String!, $apellido: String!, $edad: Int!, $telefono: Int!, $email: String!){
+    mutation createAdministrativo(
+        $nombre: String!, 
+        $apellido: String!, 
+        $edad: Int!, 
+        $telefono: Int!, 
+        $email: String!){
         createAdministrativo(administrativo: {
             nombre: $nombre,
             apellido: $apellido,
@@ -42,7 +47,15 @@ const InsertarAdministrativo: React.FC = () => {
         const telefonoI = telefonoInput.current?.value as string;
         const emailI = emailInput.current?.value as string;
         if(nombreI && apellidoI && edadI && telefonoI && telefonoI && emailI){
-            createAdministrativo({ variables: {nombre: nombreI, apellido: apellidoI, edad: parseInt(edadI, 10), telefono: parseInt(telefonoI, 10), email: emailI}})
+            createAdministrativo({ 
+                variables: {
+                    nombre: nombreI, 
+                    apellido: apellidoI, 
+                    edad: parseInt(edadI, 10), 
+                    telefono: parseInt(telefonoI, 10), 
+                    email: emailI
+                }
+            })
         }
     }
 
