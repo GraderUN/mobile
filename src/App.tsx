@@ -31,6 +31,8 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import InsertarAdministrativo from './Administrativo/InsertarAdministrativo';
 import VerInfoAdministrativo from './Administrativo/VerInfoAdministrativo';
+import EliminarAdministrativo from './Administrativo/EliminarAdministrativo';
+import ModificarAdministrativo from './Administrativo/ModificarAdministrativo';
 
 
 
@@ -71,7 +73,7 @@ const App: React.FC = () => {
         <IonSplitPane contentId="main">
           <Menu />
           <IonRouterOutlet id="main">
-            <Route path="/page/:name" component={InsertarAdministrativo} exact />
+            <Route path="/page/:name" component={ModificarAdministrativo} exact />
               <Route path="/ClasesProfesor" component={TeacherClasses} exact />
               <Route path="/ClasesEstudiante" component={StudentClasses} exact />
               <Redirect from="/" to="/page/InsertarAdministrativo" exact />

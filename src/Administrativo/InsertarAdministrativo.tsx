@@ -13,17 +13,6 @@ import {
     IonButton
 } from '@ionic/react';
 
-interface administrativo{
-
-    id: number,
-    nombre: string,
-    apellido: string,
-    edad: number,
-    telefono: number,
-    email: string
-
-}
-
 const AGREGAR_ADMIN = gql`
     mutation createAdministrativo($nombre: String!, $apellido: String!, $edad: Int!, $telefono: Int!, $email: String!){
         createAdministrativo(administrativo: {
