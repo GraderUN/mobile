@@ -1,4 +1,5 @@
 import {
+    IonButton,
     IonButtons,
     IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
     IonCardTitle,
@@ -14,43 +15,54 @@ import '../Page.css';
 import {gql, useQuery} from "@apollo/client";
 
 
-const CLASES = gql`
-    query {
-        AssignementsByCourse(courseID: "5f8e5d11090c20a6b6feef3d"){
-            materia,
-            salon,
-            profesor,
-            horario
-        }
-    }
+const NOTAS = gql`
+    query ($datosEstudianteClase : datosEstudianteClase!) { 
+    NotasEstudianteClase(
+      datosEstudianteClase : $datosEstudianteClase
+    ){
+    notasId,
+    notasIdEstudiante,
+    notasValor,
+    notasPorcentaje,
+    notasPeriodo,
+    NotasComentarios,
+    tipoNotasNombre
+  }
+}
 `;
 
 function Traerdatos() {
-    const { loading, error, data } = useQuery(CLASES);
+    const { loading, error, data } = useQuery(NOTAS , {variables : {datosEstudianteClase :{claseId : 1 , estudianteId : 1074187999} }});
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
-    return data.AssignementsByCourse.map(({ materia, salon , profesor , horario}) => (
+    return data.NotasEstudianteClase.map(({  notasIdEstudiante, notasValor , notasPorcentaje , notasPeriodo
+                                              , NotasComentarios, tipoNotasNombre}) => (
         <IonCard>
             <IonCardHeader>
-                <IonCardSubtitle>{horario}</IonCardSubtitle>
-                <IonCardTitle>{materia}</IonCardTitle>
+                <IonCardSubtitle>{notasIdEstudiante}</IonCardSubtitle>
+                <IonCardTitle>{notasValor}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
                 <IonList>
-                    <IonItem>con el profesor {profesor}</IonItem>
-                    <IonItem>en el salon {salon}</IonItem>
-                </IonList>
+                    <IonItem>recuerde que el porcentaje de la nota es {notasPorcentaje}</IonItem>
+                    <IonItem>nota en el periodo {notasPeriodo}</IonItem>
+                    <IonItem>tipo de nota {tipoNotasNombre}</IonItem>
+                    <IonItem>comentario {NotasComentarios}</IonItem>
 
+                </IonList>
+                <IonButton color="warning" href="/Editarnota">
+                    Editar
+                </IonButton>
             </IonCardContent>
         </IonCard>
 
     ));
 }
 
-
 const TeacherGrades: React.FC = () => {
+    //let variable = 1074187999;
 
     return (
         <IonPage>
@@ -59,7 +71,7 @@ const TeacherGrades: React.FC = () => {
                     <IonButtons slot="start">
                         <IonMenuButton />
                     </IonButtons>
-                    <IonTitle>Estudiante</IonTitle>
+                    <IonTitle>Notas</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>

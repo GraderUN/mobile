@@ -49,8 +49,7 @@ function Traerdatos() {
                 <IonList>
                     <IonItem>recuerde que el porcentaje de la nota es {notasPorcentaje}</IonItem>
                     <IonItem>nota en el periodo {notasPeriodo}</IonItem>
-                    <IonItem>tipo de nota{tipoNotasNombre}</IonItem>
-                    <IonItem>{NotasComentarios}</IonItem>
+                    <IonItem>tipo de nota {tipoNotasNombre}</IonItem>
 
                 </IonList>
 
