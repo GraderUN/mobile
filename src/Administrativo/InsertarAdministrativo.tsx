@@ -13,7 +13,6 @@ import {
     IonButton
 } from '@ionic/react';
 
-/*
 interface administrativo{
 
     id: number,
@@ -24,21 +23,18 @@ interface administrativo{
     email: string
 
 }
-*/
 
 const AGREGAR_ADMIN = gql`
-mutation{
-    createAdministrativo( $nombre: String!, $apellido: String!, $edad: Int!, $telefono: Int!, $email: String!){
+    mutation createAdministrativo($nombre: String!, $apellido: String!, $edad: Int!, $telefono: Int!, $email: String!){
         createAdministrativo(administrativo: {
             nombre: $nombre,
             apellido: $apellido,
             edad: $edad,
             telefono: $telefono,
             email: $email
-        }) 
+        })
     }
-} 
-`;
+`
 
 const InsertarAdministrativo: React.FC = () => {
     
@@ -47,8 +43,19 @@ const InsertarAdministrativo: React.FC = () => {
     const edadInput = useRef<HTMLIonInputElement>(null);
     const telefonoInput = useRef<HTMLIonInputElement>(null);
     const emailInput = useRef<HTMLIonInputElement>(null);
-    console.log("nombreI");
+
     const [createAdministrativo] =useMutation(AGREGAR_ADMIN);
+    const insertarAdministrativo = () => {
+
+        const nombreI = nombreInput.current?.value as string;
+        const apellidoI = apellidoInput.current?.value as string;
+        const edadI = edadInput.current?.value as string;
+        const telefonoI = telefonoInput.current?.value as string;
+        const emailI = emailInput.current?.value as string;
+        if(nombreI && apellidoI && edadI && telefonoI && telefonoI && emailI){
+            createAdministrativo({ variables: {nombre: nombreI, apellido: apellidoI, edad: parseInt(edadI, 10), telefono: parseInt(telefonoI, 10), email: emailI}})
+        }
+    }
 
     return(
   
@@ -80,18 +87,7 @@ const InsertarAdministrativo: React.FC = () => {
                         <IonInput ref={emailInput}> </IonInput>
                     </IonItem>
                 </IonList>
-                <IonButton onClick={e => () => {
-                            console.log("nombreI");
-                            e.preventDefault();
-                            
-                            const nombreI = nombreInput.current?.value as string;
-                            const apellidoI = apellidoInput.current?.value as string;
-                            const edadI = edadInput.current?.value as number;
-                            const telefonoI = telefonoInput.current?.value as number;
-                            const emailI = emailInput.current?.value as string;
-                            createAdministrativo({ variables: {nombre: nombreI, apellido: apellidoI, edad: edadI, telefono: telefonoI, email: emailI}})
-                        }
-                    } color="secondary" shape="round" fill="outline">
+                <IonButton onClick={insertarAdministrativo} color="secondary" shape="round" fill="outline">
                     Registrar
                 </IonButton>
             </IonContent>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
     IonNote, 
     IonPage, 
@@ -31,23 +31,23 @@ const VerInfoAdministrativo: React.FC = () => {
         <IonPage>
             <IonList>
                 <IonItem>
-                    <IonLabel>{data.nombre}</IonLabel>
+                    <IonLabel>{data.administrativoById.nombre}</IonLabel>
                     <IonNote slot="start">Nombre:</IonNote>
                 </IonItem>
                 <IonItem>
-                    <IonLabel>{data.apellido}</IonLabel>
+                    <IonLabel>{data.administrativoById.apellido}</IonLabel>
                     <IonNote slot="start">Apellido:</IonNote>
                 </IonItem>
                 <IonItem>
-                    <IonLabel>{data.edad}</IonLabel>
+                    <IonLabel>{data.administrativoById.edad}</IonLabel>
                     <IonNote slot="start">Edad:</IonNote>
                 </IonItem>
                 <IonItem>
-                    <IonLabel>{data.telefono}</IonLabel>
+                    <IonLabel>{data.administrativoById.telefono}</IonLabel>
                     <IonNote slot="start">Telefono:</IonNote>
                 </IonItem>
                 <IonItem>
-                    <IonLabel>{data.email}</IonLabel>
+                    <IonLabel>{data.administrativoById.email}</IonLabel>
                     <IonNote slot="start">Email:</IonNote>
                 </IonItem>
             </IonList>
