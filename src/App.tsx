@@ -141,7 +141,6 @@ const App: React.FC = () => {
             />
             <Route path="/page/Inicio" component={Inicio} exact />
             <Route path="/page/PersonalStudentData" component={Students} exact />
-            <Route path="/page/PersonalAdminData" component={Admin} exact />
             <Route path="/page/PersonalTeacherData" component={Teacher} exact />
             <Route path="/page/ClasesProfesor" component={TeacherClasses} exact />
             <Route path="/page/ClasesEstudiante" component={StudentClasses} exact />
