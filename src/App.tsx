@@ -1,4 +1,8 @@
-import Menu from "./components/Menu";
+import Menu from './components/Menu';
+
+import { AgregarSalones } from "./pages/Admin/AgregarSalones";
+import { AgregarCursos } from "./pages/Admin/AgregarCursos";
+import { AgregarClases } from "./pages/Admin/AgregarClases";
 
 import { Students } from "./pages/Students/StudentPersonalData";
 import { Admin } from "./pages/Admin/AdminPersonalData";
@@ -82,9 +86,11 @@ const App: React.FC = () => {
       <ApolloProvider client = {client}>
       <IonReactRouter>
         <IonSplitPane contentId="main">
-          <Menu />
+          <Menu/>
           <IonRouterOutlet id="main">
-            <Route path="/page/Inicio" component={Inicio} exact />
+              <Redirect from="/" to="/page/Inicio" exact />
+
+              <Route path="/page/Inicio" component={Inicio} exact />
             <Route path="/page/PersonalStudentData" component={Students} exact />
             <Route path="/page/PersonalAdminData" component={Admin} exact />
             <Route path="/page/PersonalTeacherData" component={Teacher} exact />
@@ -95,13 +101,12 @@ const App: React.FC = () => {
             <Route path="/TeacherCourse" component={TeacherClass} exact />
             <Route path="/Agregarnota" component={TeacherAgregarNota} exact />
             <Route path="/Editarnota" component={TeacherEditGrades} exact />
-
-
-
-
-            <Redirect from="/" to="/page/Inicio" exact />
             <Route path="/ClasesProfesor" component={TeacherClasses} exact />
             <Route path="/ClasesEstudiante" component={StudentClasses} exact />
+            <Route path="/page/AgregarSalones" component={AgregarSalones} exact />
+            <Route path="/page/AgregarCursos" component={AgregarCursos} exact />
+            <Route path="/page/AgregarClases" component={AgregarClases} exact />
+            <Redirect from="/" to="/page/Inbox" exact />
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
