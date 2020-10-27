@@ -45,7 +45,7 @@ function Traerdatos({id}) {
                     <IonItem>con el profesor {profesor}</IonItem>
                     <IonItem>en el salon {salon}</IonItem>
                 </IonList>
-                <IonButton href="Studentgrades" >
+                <IonButton href="/page/Studentgrades" >
                     Ver
                 </IonButton>
             </IonCardContent>

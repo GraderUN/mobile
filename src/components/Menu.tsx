@@ -39,9 +39,16 @@ interface AppPage {
 }
 
 const appPages: AppPage[] = [
+
   {
     title: 'Inicio',
     url: '/page/Inicio',
+    iosIcon: homeOutline,
+    mdIcon: homeSharp
+  },
+  {
+    title: 'Gestion de Usuarios',
+    url: '/page/GestionU',
     iosIcon: homeOutline,
     mdIcon: homeSharp
   },
@@ -100,12 +107,7 @@ const appPages: AppPage[] = [
     iosIcon: logOutOutline,
     mdIcon: logOutSharp
   },
-  {
-    title: 'Gestion de Usuarios',
-    url: '/page/GestionU',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp
-  },
+
 ];
 
 

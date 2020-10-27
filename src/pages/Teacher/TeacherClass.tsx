@@ -52,11 +52,11 @@ function Traerdatos() {
         <IonCard>
                 <IonCardHeader>{id_students}</IonCardHeader>
             <IonCardContent>
-                <IonButton href="/TeacherGrades">
+                <IonButton href="/page/TeacherGrades">
                     ver notas
                 </IonButton>
 
-                <IonButton href="/Agregarnota">
+                <IonButton href="/page/Agregarnota">
                     Agregar Nota
                 </IonButton>
             </IonCardContent>

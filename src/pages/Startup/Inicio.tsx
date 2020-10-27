@@ -21,7 +21,7 @@ const Inicio: React.FC = () => {
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">{name}</IonTitle>
-            <IonTitle>IonInput Examples</IonTitle>
+            <IonTitle>Bienvenido</IonTitle>
           </IonToolbar>
         </IonHeader>
       </IonContent>

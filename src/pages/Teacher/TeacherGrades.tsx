@@ -54,7 +54,7 @@ function Traerdatos() {
                     <IonItem>comentario {NotasComentarios}</IonItem>
 
                 </IonList>
-                <IonButton color="warning" href="/Editarnota">
+                <IonButton color="warning" href="/page/Editarnota">
                     Editar
                 </IonButton>
             </IonCardContent>
