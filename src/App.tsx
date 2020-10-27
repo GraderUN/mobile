@@ -5,6 +5,7 @@ import { AgregarSalones } from "./pages/Admin/AgregarSalones";
 import { AgregarCursos } from "./pages/Admin/AgregarCursos";
 import { AgregarClases } from "./pages/Admin/AgregarClases";
 
+import { AdministrarSalones } from "./pages/Admin/AdministrarSalones";
 
 import React from 'react';
 import { IonApp, IonItem, IonLabel, IonRouterOutlet, IonSplitPane } from '@ionic/react';
@@ -78,6 +79,7 @@ const App: React.FC = () => {
             <Route path="/page/AgregarSalones" component={AgregarSalones} exact />
             <Route path="/page/AgregarCursos" component={AgregarCursos} exact />
             <Route path="/page/AgregarClases" component={AgregarClases} exact />
+            <Route path="/page/AdministrarSalones" component={AdministrarSalones} exact />
             <Redirect from="/" to="/page/Inbox" exact />
           </IonRouterOutlet>
         </IonSplitPane>

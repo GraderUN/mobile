@@ -49,7 +49,7 @@ const appPages: AppPage[] = [
   },
   {
     title: 'Salones ADMIN',
-    url: '/page/AgregarSalones',
+    url: '/page/AdministrarSalones',
     iosIcon: storefrontOutline,
     mdIcon: storefrontSharp
   },

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { gql, useMutation } from '@apollo/client';
-import { briefcase } from 'ionicons/icons';
+//import { briefcase } from 'ionicons/icons';
 import { 
     IonButton, 
     IonContent, 
@@ -12,7 +12,6 @@ import {
     IonItem, 
     IonLabel, 
     IonList, 
-    IonIcon,
     IonButtons,
     IonMenuButton,
     IonCard,
@@ -22,13 +21,26 @@ import {
 const AGREGARSALON = gql`
 mutation($classroom : ClassroomInput!){
     createClassroom(
-        classroom : $ClassroomInput
+        classroom : $classroom
   )
 }
 `;
 
 
 const AgregarSalones: React.FC = () => {
+    const asignarSalon= () =>{
+            console.log("buttom cick")
+           // e.preventDefault();
+
+            const capacidadAux = capacidad.current?.value as string;
+            const descripcionAux = descripcion.current?.value as string;
+            createSalon({
+                variables: { classroom:{
+                    capacidad: parseInt(capacidadAux),
+                    description: descripcionAux
+                }
+                }})
+        }
     const capacidad = useRef<HTMLIonInputElement>(null);
     const descripcion = useRef<HTMLIonInputElement>(null);
 
@@ -60,19 +72,8 @@ const AgregarSalones: React.FC = () => {
                                 <IonInput ref={descripcion}> </IonInput>
                             </IonItem>
                         </IonList>
-                        <IonButton onClick={e => () => {
-
-                            e.preventDefault();
-
-                            const capacidadAux = capacidad.current?.value as number;
-                            const descripcionAux = descripcion.current?.value as string;
-                            createSalon({
-                                variables: {
-                                    capacidad: capacidadAux,
-                                    description: descripcionAux
-                                }})
-                        }
-                        } color="secondary">
+                        <IonButton onClick={asignarSalon}
+                         color="secondary">
                             Agregar salón
                         </IonButton>
                     </IonCardContent>

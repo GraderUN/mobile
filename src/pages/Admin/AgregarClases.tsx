@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { gql, useMutation } from '@apollo/client';
-import { briefcase } from 'ionicons/icons';
 import { 
     IonButton, 
     IonContent, 
@@ -11,34 +10,51 @@ import {
     IonInput, 
     IonItem, 
     IonLabel, 
-    IonList, 
-    IonIcon,
+    IonList,
     IonButtons,
     IonMenuButton,
     IonCard,
     IonCardContent
 } from '@ionic/react';
 
-/*const AGREGARCURSOS = gql`
-mutation(course: CourseInput!){
-    createCourse(
-        course: CourseInput!
-  ){
-    grade
-    letter
-  }
+const AGREGARCLASE = gql`
+mutation createAssignement($assignement: AssignementInput!){
+    createAssignement(
+        assignement: $assignement
+  )
 }
-`;*/
+`;
 
 
 const AgregarClases: React.FC = () => {
+    
     const curso = useRef<HTMLIonInputElement>(null);
-    const materia = useRef<HTMLIonInputElement>(null);
-    const profesor = useRef<HTMLIonInputElement>(null);
     const salon = useRef<HTMLIonInputElement>(null);
     const horario = useRef<HTMLIonInputElement>(null);
+    const profesor = useRef<HTMLIonInputElement>(null);
+    const materia = useRef<HTMLIonInputElement>(null);    
+    
 
-//    const [createSalon] =useMutation(AGREGARCURSOS);
+    const [createClases] =useMutation(AGREGARCLASE);
+    const asignarClases= () =>{
+        console.log("buttom cick")
+       // e.preventDefault();
+       const cursoAux = curso.current?.value as string;
+       const materiaAux = materia.current?.value as string;
+       const profesorAux = profesor.current?.value as string;
+       const salonAux = salon.current?.value as string;
+       const horarioAux = horario.current?.value as string;
+        console.log("buttom cick")
+             createClases({
+                variables: {assignement:{
+                    curso: cursoAux,
+                    salon: salonAux,
+                    horario:horarioAux,
+                    profesor:profesorAux,
+                    materia:materiaAux
+                }
+                }})
+    }
     
     return(
         <IonPage>
@@ -59,15 +75,7 @@ const AgregarClases: React.FC = () => {
                         <IonList>
                             <IonItem>
                                 <IonLabel position="floating" >Curso: </IonLabel>
-                                <IonInput type="number" ref={curso}> </IonInput>
-                            </IonItem>
-                            <IonItem>
-                                <IonLabel position="floating" >materia: </IonLabel>
-                                <IonInput ref={materia}> </IonInput>
-                            </IonItem>
-                            <IonItem>
-                                <IonLabel position="floating" >profesor: </IonLabel>
-                                <IonInput ref={profesor}> </IonInput>
+                                <IonInput ref={curso}> </IonInput>
                             </IonItem>
                             <IonItem>
                                 <IonLabel position="floating" >salon: </IonLabel>
@@ -77,24 +85,18 @@ const AgregarClases: React.FC = () => {
                                 <IonLabel position="floating" >horario: </IonLabel>
                                 <IonInput ref={horario}> </IonInput>
                             </IonItem>
+                            <IonItem>
+                                <IonLabel position="floating" >profesor: </IonLabel>
+                                <IonInput ref={profesor}> </IonInput>
+                            </IonItem>
+                            <IonItem>
+                                <IonLabel position="floating" >materia: </IonLabel>
+                                <IonInput ref={materia}> </IonInput>
+                            </IonItem>
                         </IonList>
-                        <IonButton onClick={e => () => {
-
-                            e.preventDefault();
-
-                            const cursoAux = curso.current?.value as number;
-                            const materiaAux = materia.current?.value as string;
-                            const profesorAux = profesor.current?.value as string;
-                            const salonAux = salon.current?.value as string;
-                            const horarioAux = horario.current?.value as string;
-                          /*  createSalon({
-                                variables: {
-                                    grade: gradeAux,
-                                    letter: letterAux
-                                }})*/
-                        }
-                        } color="secondary">
-                            Agregar salón
+                        <IonButton onClick={asignarClases}
+                         color="secondary">
+                            Agregar clase
                         </IonButton>
                     </IonCardContent>
                 </IonCard>

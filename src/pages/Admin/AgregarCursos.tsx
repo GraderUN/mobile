@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { gql, useMutation } from '@apollo/client';
-import { briefcase } from 'ionicons/icons';
 import { 
     IonButton, 
     IonContent, 
@@ -11,31 +10,43 @@ import {
     IonInput, 
     IonItem, 
     IonLabel, 
-    IonList, 
-    IonIcon,
+    IonList,
     IonButtons,
     IonMenuButton,
     IonCard,
     IonCardContent
 } from '@ionic/react';
 
-/*const AGREGARCURSOS = gql`
-mutation(course: CourseInput!){
+const AGREGARCURSOS = gql`
+mutation($course: CourseInput!){
     createCourse(
-        course: CourseInput!
+        course: $course
   ){
     grade
     letter
   }
 }
-`;*/
+
+`;
 
 
 const AgregarCursos: React.FC = () => {
+    const asignarCurso= () =>{
+        console.log("buttom cick")
+       // e.preventDefault();
+       const gradeAux = grade.current?.value as string;
+       const letterAux = letter.current?.value as string;
+        createCurso({
+            variables: { course:{
+                grade: parseInt(gradeAux),
+                letter: letterAux
+            }
+            }})
+    }
     const grade = useRef<HTMLIonInputElement>(null);
     const letter = useRef<HTMLIonInputElement>(null);
 
-//    const [createSalon] =useMutation(AGREGARCURSOS);
+    const [createCurso] =useMutation(AGREGARCURSOS);
     
     return(
         <IonPage>
@@ -63,19 +74,8 @@ const AgregarCursos: React.FC = () => {
                                 <IonInput ref={letter}> </IonInput>
                             </IonItem>
                         </IonList>
-                        <IonButton onClick={e => () => {
-
-                            e.preventDefault();
-
-                            const gradeAux = grade.current?.value as number;
-                            const letterAux = letter.current?.value as string;
-                          /*  createSalon({
-                                variables: {
-                                    grade: gradeAux,
-                                    letter: letterAux
-                                }})*/
-                        }
-                        } color="secondary">
+                        <IonButton onClick={asignarCurso}
+                         color="secondary">
                             Agregar salón
                         </IonButton>
                     </IonCardContent>
