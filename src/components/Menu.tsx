@@ -48,8 +48,8 @@ const appPages: AppPage[] = [
     mdIcon: documentSharp
   },
   {
-    title: 'Cerrar sesión',
-    url: '/page/Trash',
+    title: 'Agregar Salones',
+    url: '/page/AgregarSalones',
     iosIcon: trashOutline,
     mdIcon: trashSharp
   },

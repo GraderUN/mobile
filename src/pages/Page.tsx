@@ -22,6 +22,7 @@ const Page: React.FC = () => {
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">{name}</IonTitle>
+            <IonTitle>IonInput Examples</IonTitle>
           </IonToolbar>
         </IonHeader>
         <ExchangeRates></ExchangeRates>

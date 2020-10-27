@@ -1,5 +1,5 @@
-//Pagina principal del administrativo
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
+import { gql, useMutation } from '@apollo/client';
 import { briefcase } from 'ionicons/icons';
 import { 
     IonButton, 
@@ -12,53 +12,75 @@ import {
     IonItem, 
     IonLabel, 
     IonList, 
-    IonIcon 
+    IonIcon,
+    IonButtons,
+    IonMenuButton,
+    IonCard,
+    IonCardContent
 } from '@ionic/react';
+
+const AGREGARSALON = gql`
+mutation($classroom : ClassroomInput!){
+    createClassroom(
+        classroom : $ClassroomInput
+  )
+}
+`;
 
 
 const AgregarSalones: React.FC = () => {
-    const [text, setText] = useState<string>();
-    const [number, setNumber] = useState<number>();
+    const capacidad = useRef<HTMLIonInputElement>(null);
+    const descripcion = useRef<HTMLIonInputElement>(null);
+
+    const [createSalon] =useMutation(AGREGARSALON);
+    
     return(
         <IonPage>
             <IonHeader>
-                <IonToolbar>
-                    <IonIcon slot="start" icon={briefcase} />
-                    <IonTitle>Bienvenido a gestión de usuarios</IonTitle>
+            <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton />
+                    </IonButtons>
+                    <IonTitle>Agregar Salón </IonTitle>
                 </IonToolbar>
                 <IonToolbar>
-                    <IonTitle>Seleccione una de las opciones</IonTitle>
+                    <IonTitle>Ingresar un nuevo salón</IonTitle>
                 </IonToolbar>
             </IonHeader>
-            <IonButton color="primary" shape="round" fill="outline">
-                Registrar nuevo estudiante
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Registrar nuevo profesor
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Registrar nuevo administrativo
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Modificar datos de un estudiante
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Modificar datos de un profesor
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Modificar datos de un administrativo
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Eliminar un estudiante
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Eliminar un profesor
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Eliminar un administrativo
-            </IonButton>
+            <IonContent>
+            <IonCard>
+                    <IonCardContent>
+                        <IonList>
+                            <IonItem>
+                                <IonLabel position="floating">Capacidad del salón: </IonLabel>
+                                <IonInput type="number" ref={capacidad}> </IonInput>
+                            </IonItem>
+                            <IonItem>
+                                <IonLabel position="floating">Descripción del salón: </IonLabel>
+                                <IonInput ref={descripcion}> </IonInput>
+                            </IonItem>
+                        </IonList>
+                        <IonButton onClick={e => () => {
+
+                            e.preventDefault();
+
+                            const capacidadAux = capacidad.current?.value as number;
+                            const descripcionAux = descripcion.current?.value as string;
+                            createSalon({
+                                variables: {
+                                    capacidad: capacidadAux,
+                                    description: descripcionAux
+                                }})
+                        }
+                        } color="secondary">
+                            Agregar salón
+                        </IonButton>
+                    </IonCardContent>
+                </IonCard>
+            </IonContent>
+
         </IonPage>
     );
 }
 
-  export default AgregarSalones;
+  export {AgregarSalones};

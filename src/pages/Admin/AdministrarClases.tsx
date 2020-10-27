@@ -15,7 +15,7 @@ import {
 } from '@ionic/react';
 
 
-const AdministrarCursos: React.FC = () => {
+const AdministrarClases: React.FC = () => {
     const [text, setText] = useState<string>();
     const [number, setNumber] = useState<number>();
     return(
@@ -60,4 +60,4 @@ const AdministrarCursos: React.FC = () => {
     );
 }
 
-  export default AdministrarCursos;
+  export default AdministrarClases;
