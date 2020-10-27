@@ -70,8 +70,8 @@ const appPages: AppPage[] = [
     mdIcon: storefrontSharp
   },
   {
-    title: 'Cursos ADMIN',
-    url: '/page/AgregarCursos',
+    title: 'Gestion Materias ADMIN',
+    url: '/page/MateriaManager',
     iosIcon: libraryOutline,
     mdIcon: librarySharp
   },
