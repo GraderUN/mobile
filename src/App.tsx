@@ -72,7 +72,7 @@ import MateriaContextProvider from "./Data/MateriaContextProvider";
 import Inicio from "./pages/Startup/Inicio";
 
 const client = new ApolloClient({
-  uri: "ec2-3-235-30-72.compute-1.amazonaws.com:5000",
+  uri: "http://ec2-3-235-30-72.compute-1.amazonaws.com:5000",
   cache: new InMemoryCache(),
 });
 const EXCHANGE_RATES = gql`
@@ -152,8 +152,6 @@ const App: React.FC = () => {
             <Route path="/page/AgregarSalones" component={AgregarSalones} exact />
             <Route path="/page/AgregarCursos" component={AgregarCursos} exact />
             <Route path="/page/AgregarClases" component={AgregarClases} exact />
-            <Route path="/ClasesProfesor" component={TeacherClasses} exact />
-            <Route path="/ClasesEstudiante" component={StudentClasses} exact />
             <Route path="/page/GestionU" component={GestionUsuarios} exact />
             <Route path="/page/GestionU/RegistrarAdmin" component={InsertarAdministrativo} exact />
             <Route path="/page/GestionU/RegistrarEstudiante" component={InsertarEstudiante} exact />
