@@ -3,6 +3,7 @@ import Page from './pages/Page';
 
 import { AgregarSalones } from "./pages/Admin/AgregarSalones";
 import { AgregarCursos } from "./pages/Admin/AgregarCursos";
+import { AgregarClases } from "./pages/Admin/AgregarClases";
 
 
 import React from 'react';
@@ -76,7 +77,7 @@ const App: React.FC = () => {
             <Route path="/page/:name" component={Page} exact />
             <Route path="/page/AgregarSalones" component={AgregarSalones} exact />
             <Route path="/page/AgregarCursos" component={AgregarCursos} exact />
-
+            <Route path="/page/AgregarClases" component={AgregarClases} exact />
             <Redirect from="/" to="/page/Inbox" exact />
           </IonRouterOutlet>
         </IonSplitPane>

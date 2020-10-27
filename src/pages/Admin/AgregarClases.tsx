@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
+import { gql, useMutation } from '@apollo/client';
 import { briefcase } from 'ionicons/icons';
 import { 
     IonButton, 
@@ -11,53 +12,96 @@ import {
     IonItem, 
     IonLabel, 
     IonList, 
-    IonIcon 
+    IonIcon,
+    IonButtons,
+    IonMenuButton,
+    IonCard,
+    IonCardContent
 } from '@ionic/react';
+
+/*const AGREGARCURSOS = gql`
+mutation(course: CourseInput!){
+    createCourse(
+        course: CourseInput!
+  ){
+    grade
+    letter
+  }
+}
+`;*/
 
 
 const AgregarClases: React.FC = () => {
-    const [text, setText] = useState<string>();
-    const [number, setNumber] = useState<number>();
+    const curso = useRef<HTMLIonInputElement>(null);
+    const materia = useRef<HTMLIonInputElement>(null);
+    const profesor = useRef<HTMLIonInputElement>(null);
+    const salon = useRef<HTMLIonInputElement>(null);
+    const horario = useRef<HTMLIonInputElement>(null);
+
+//    const [createSalon] =useMutation(AGREGARCURSOS);
+    
     return(
         <IonPage>
             <IonHeader>
-                <IonToolbar>
-                    <IonIcon slot="start" icon={briefcase} />
-                    <IonTitle>Bienvenido a gestión de usuarios</IonTitle>
+            <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton />
+                    </IonButtons>
+                    <IonTitle>Agregar un curso </IonTitle>
                 </IonToolbar>
                 <IonToolbar>
-                    <IonTitle>Seleccione una de las opciones</IonTitle>
+                    <IonTitle>Ingresar un nuevo curso</IonTitle>
                 </IonToolbar>
             </IonHeader>
-            <IonButton color="primary" shape="round" fill="outline">
-                Registrar nuevo estudiante
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Registrar nuevo profesor
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Registrar nuevo administrativo
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Modificar datos de un estudiante
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Modificar datos de un profesor
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Modificar datos de un administrativo
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Eliminar un estudiante
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Eliminar un profesor
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Eliminar un administrativo
-            </IonButton>
+            <IonContent>
+            <IonCard>
+                    <IonCardContent>
+                        <IonList>
+                            <IonItem>
+                                <IonLabel position="floating" >Curso: </IonLabel>
+                                <IonInput type="number" ref={curso}> </IonInput>
+                            </IonItem>
+                            <IonItem>
+                                <IonLabel position="floating" >materia: </IonLabel>
+                                <IonInput ref={materia}> </IonInput>
+                            </IonItem>
+                            <IonItem>
+                                <IonLabel position="floating" >profesor: </IonLabel>
+                                <IonInput ref={profesor}> </IonInput>
+                            </IonItem>
+                            <IonItem>
+                                <IonLabel position="floating" >salon: </IonLabel>
+                                <IonInput ref={salon}> </IonInput>
+                            </IonItem>
+                            <IonItem>
+                                <IonLabel position="floating" >horario: </IonLabel>
+                                <IonInput ref={horario}> </IonInput>
+                            </IonItem>
+                        </IonList>
+                        <IonButton onClick={e => () => {
+
+                            e.preventDefault();
+
+                            const cursoAux = curso.current?.value as number;
+                            const materiaAux = materia.current?.value as string;
+                            const profesorAux = profesor.current?.value as string;
+                            const salonAux = salon.current?.value as string;
+                            const horarioAux = horario.current?.value as string;
+                          /*  createSalon({
+                                variables: {
+                                    grade: gradeAux,
+                                    letter: letterAux
+                                }})*/
+                        }
+                        } color="secondary">
+                            Agregar salón
+                        </IonButton>
+                    </IonCardContent>
+                </IonCard>
+            </IonContent>
+
         </IonPage>
     );
 }
 
-  export default AgregarClases;
+  export {AgregarClases};

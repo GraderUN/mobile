@@ -61,7 +61,7 @@ const appPages: AppPage[] = [
   },
   {
     title: 'Clases ADMIN',
-    url: '/page/ClasesAdmin',
+    url: '/page/AgregarClases',
     iosIcon: easelOutline,
     mdIcon: easelSharp
   }
