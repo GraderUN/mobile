@@ -1,13 +1,15 @@
-import Menu from './components/Menu';
+import Menu from "./components/Menu";
 
 import { AgregarSalones } from "./pages/Admin/AgregarSalones";
 import { AgregarCursos } from "./pages/Admin/AgregarCursos";
 import { AgregarClases } from "./pages/Admin/AgregarClases";
 
 import { Students } from "./pages/Students/StudentPersonalData";
-import { Admin } from "./pages/Admin/AdminPersonalData";
 import { Teacher } from "./pages/Teacher/TeacherPersonalData";
-import  Inicio  from "./pages/Startup/Inicio"
+import MateriaManager from "./pages/Admin/MateriaManager";
+import ContenidoMateria from "./pages/Admin/ContenidoMateria";
+import EditarMateria from "./pages/Admin/EditarMateria";
+import EliminarMateria from "./pages/Admin/EliminarMateria";
 
 import TeacherClasses from "./pages/Teacher/TeacherClasses";
 import StudentClasses from "./pages/Students/StudentClasses";
@@ -45,27 +47,29 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
 /* Theme variables */
-import './theme/variables.css';
+import "./theme/variables.css";
 
-import InsertarAdministrativo from './pages/Admin/InsertarAdministrativo';
-import VerInfoAdministrativo from './pages/Admin/VerInfoAdministrativo';
-import InsertarEstudiante from './pages/Admin/InsertarEstudiante';
-import InsertarProfesor from './pages/Admin/InsertarProfesor';
-import EliminarEstudiante from './pages/Admin/EliminarEstudiante';
-import EliminarProfesor from './pages/Admin/EliminarProfesor';
-import ModificarEstudiante from './pages/Admin/ModificarEstudiante';
-import ModificarProfesor from './pages/Admin/ModificarProfesor';
-import GestionUsuarios from './pages/Admin/GestionUsuarios';
-import ModificarAdministrativo from './pages/Admin/ModificarAdministrativo';
-import EliminarAdministrativo from './pages/Admin/EliminarAdministrativo';
-import VerInfoEstudiante from './pages/Admin/VerInfoEstudiante';
-import VerInfoProfesor from './pages/Admin/VerInfoProfesor';
+import InsertarAdministrativo from "./pages/Admin/InsertarAdministrativo";
+import VerInfoAdministrativo from "./pages/Admin/VerInfoAdministrativo";
+import InsertarEstudiante from "./pages/Admin/InsertarEstudiante";
+import InsertarProfesor from "./pages/Admin/InsertarProfesor";
+import EliminarEstudiante from "./pages/Admin/EliminarEstudiante";
+import EliminarProfesor from "./pages/Admin/EliminarProfesor";
+import ModificarEstudiante from "./pages/Admin/ModificarEstudiante";
+import ModificarProfesor from "./pages/Admin/ModificarProfesor";
+import GestionUsuarios from "./pages/Admin/GestionUsuarios";
+import ModificarAdministrativo from "./pages/Admin/ModificarAdministrativo";
+import EliminarAdministrativo from "./pages/Admin/EliminarAdministrativo";
+import VerInfoEstudiante from "./pages/Admin/VerInfoEstudiante";
+import VerInfoProfesor from "./pages/Admin/VerInfoProfesor";
 import StudentGrades from "./pages/Students/StudentGrades";
 import TeacherGrades from "./pages/Teacher/TeacherGrades";
 import TeacherClass from "./pages/Teacher/TeacherClass";
 import TeacherAgregarNota from "./pages/Teacher/TeacherAgregarNota";
 import TeacherEditGrades from "./pages/Teacher/TeacherEditGrade";
 import AdministrarSalones from "./pages/Admin/AdministrarSalones";
+import MateriaContextProvider from "./Data/MateriaContextProvider";
+import Inicio from "./pages/Startup/Inicio";
 
 const client = new ApolloClient({
   uri: "ec2-3-235-30-72.compute-1.amazonaws.com:5000",
@@ -102,9 +106,39 @@ const App: React.FC = () => {
       <IonReactRouter>
         <IonSplitPane contentId="main">
           <Menu/>
+          <MateriaContextProvider>
           <IonRouterOutlet id="main">
             <Redirect from="/" to="/page/Inicio" exact />
-
+            <Route
+                path="/page/MateriaManager"
+                component={MateriaManager}
+                exact
+            />
+            <Route
+                path="/page/ContenidoMateria"
+                component={ContenidoMateria}
+                exact
+            />
+            <Route
+                path="/page/EditarMateria"
+                component={EditarMateria}
+                exact
+            />
+            <Route
+                path="/page/EliminarMateria"
+                component={EliminarMateria}
+                exact
+            />
+            <Route
+                path="/page/PersonalStudentData"
+                component={Students}
+                exact
+            />
+            <Route
+                path="/page/PersonalTeacherData"
+                component={Teacher}
+                exact
+            />
             <Route path="/page/Inicio" component={Inicio} exact />
             <Route path="/page/PersonalStudentData" component={Students} exact />
             <Route path="/page/PersonalAdminData" component={Admin} exact />
@@ -140,6 +174,7 @@ const App: React.FC = () => {
             <Route path="/page/AdministrarSalones" component={AdministrarSalones} exact />
 
           </IonRouterOutlet>
+          </MateriaContextProvider>
         </IonSplitPane>
       </IonReactRouter>
       </ApolloProvider>

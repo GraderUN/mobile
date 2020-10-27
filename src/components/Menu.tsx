@@ -65,12 +65,6 @@ const appPages: AppPage[] = [
     mdIcon: personSharp
   },
   {
-    title: 'Datos personales Administrador',
-    url: '/page/PersonalAdminData',
-    iosIcon: personOutline,
-    mdIcon: personSharp
-  },
-  {
     title: 'Ver clase ESTUDIANTE',
     url: '/page/ClasesEstudiante',
     iosIcon: schoolOutline,
@@ -82,7 +76,12 @@ const appPages: AppPage[] = [
     iosIcon: schoolOutline,
     mdIcon: schoolSharp
   },
-
+  {
+    title: 'Gestion Materias ADMIN',
+    url: '/page/MateriaManager',
+    iosIcon: libraryOutline,
+    mdIcon: librarySharp
+  },
   {
     title: 'Salones ADMIN',
     url: '/page/AdministrarSalones',
