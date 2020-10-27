@@ -17,8 +17,7 @@ import {
 
 
 const GestionUsuarios: React.FC = () => {
-    const [text, setText] = useState<string>();
-    const [number, setNumber] = useState<number>();
+    
     return(
         <IonPage>
             <IonHeader>
@@ -26,36 +25,42 @@ const GestionUsuarios: React.FC = () => {
                     <IonIcon slot="start" icon={briefcase} />
                     <IonTitle>Bienvenido a gestión de usuarios</IonTitle>
                 </IonToolbar>
-                <IonToolbar>
-                    <IonTitle>Seleccione una de las opciones</IonTitle>
-                </IonToolbar>
             </IonHeader>
-            <IonButton color="primary" shape="round" fill="outline">
+            <IonButton href="/page/GestionU/RegistrarEstudiante" color="primary" shape="round" fill="outline">
                 Registrar nuevo estudiante
             </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
+            <IonButton href="/page/GestionU/RegistrarProfesor" color="primary" shape="round" fill="outline">
                 Registrar nuevo profesor
             </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
+            <IonButton href="/page/GestionU/RegistrarAdmin" color="primary" shape="round" fill="outline">
                 Registrar nuevo administrativo
             </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
+            <IonButton href="/page/GestionU/ModificarEstudiante" color="primary" shape="round" fill="outline">
                 Modificar datos de un estudiante
             </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
+            <IonButton href="/page/GestionU/ModificarProfesor" color="primary" shape="round" fill="outline">
                 Modificar datos de un profesor
             </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
+            <IonButton href="/page/GestionU/ModificarAdmin" color="primary" shape="round" fill="outline">
                 Modificar datos de un administrativo
             </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
+            <IonButton href="/page/GestionU/EliminarEstudiante" color="primary" shape="round" fill="outline">
                 Eliminar un estudiante
             </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
+            <IonButton href="/page/GestionU/EliminarProfesor" color="primary" shape="round" fill="outline">
                 Eliminar un profesor
             </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
+            <IonButton href="/page/GestionU/EliminarAdmin" color="primary" shape="round" fill="outline">
                 Eliminar un administrativo
+            </IonButton>
+            <IonButton href="/page/GestionU/VerInfoEstudiante" color="primary" shape="round" fill="outline">
+                Ver información de estudiantes
+            </IonButton>
+            <IonButton href="/page/GestionU/VerInfoProfesor" color="primary" shape="round" fill="outline">
+                Ver información de profesores
+            </IonButton>
+            <IonButton href="/page/GestionU/VerInfoAdmin" color="primary" shape="round" fill="outline">
+                Ver información de administrativos
             </IonButton>
         </IonPage>
     );
