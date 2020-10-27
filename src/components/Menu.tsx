@@ -15,8 +15,6 @@ import { useLocation } from 'react-router-dom';
 import {
   easelOutline,
   easelSharp,
-  homeOutline,
-  homeSharp,
   libraryOutline,
   librarySharp,
   logOutOutline,
@@ -39,12 +37,7 @@ interface AppPage {
 }
 
 const appPages: AppPage[] = [
-  {
-    title: 'Inicio',
-    url: '/page/Inicio',
-    iosIcon: homeOutline,
-    mdIcon: homeSharp
-  },
+
   {
     title: 'Datos personales Estudiante',
     url: '/page/PersonalStudentData',
@@ -54,12 +47,6 @@ const appPages: AppPage[] = [
   {
     title: 'Datos personales Profesor',
     url: '/page/PersonalTeacherData',
-    iosIcon: personOutline,
-    mdIcon: personSharp
-  },
-  {
-    title: 'Datos personales Administrador',
-    url: '/page/PersonalAdminData',
     iosIcon: personOutline,
     mdIcon: personSharp
   },
