@@ -2,13 +2,15 @@ import {
   IonButton,
   IonButtons,
   IonCard,
+  IonCardContent,
   IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
   IonContent,
   IonHeader,
-  IonInput,
+  IonImg,
   IonItem,
   IonLabel,
-  IonList,
   IonMenuButton,
   IonPage,
   IonTitle,
@@ -16,17 +18,19 @@ import {
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import '../Startup/Page.css';
+import "../Startup/Page.css";
 import { useQuery, gql } from "@apollo/client";
 
 import { Plugins } from "@capacitor/core";
 const { Storage } = Plugins;
 
 const Students: React.FC = () => {
-
-  function DatosPersonales({id}) {
+  function DatosPersonales({ id }) {
+    const src =
+      "https://previews.123rf.com/images/ihorbiliavskyi/ihorbiliavskyi1812/ihorbiliavskyi181200088/114296479-graduation-student-avatar-icon-profession-logo-male-character-a-man-in-graduate-cap-and-mantle-peopl.jpg";
+    
     const DATOS_PERSONALES = gql`
-      query($id: Int!){
+      query($id: Int!) {
         estudianteById(id: $id) {
           id
           nombre
@@ -40,37 +44,28 @@ const Students: React.FC = () => {
         }
       }
     `;
-    
-    const { loading, error, data } = useQuery(DATOS_PERSONALES, {variables: {id}});
-    if (loading) return <p>Loading...</p>;
+
+    const { loading, error, data } = useQuery(DATOS_PERSONALES, {
+      variables: { id },
+    });
+    if (loading) return <p>CARGANDO</p>;
     if (error) return <p>Error :(</p>;
 
     return (
-      <IonList>
-        <IonItem>
-          <IonLabel>
-            Tu nombre: {data.estudianteById.nombre}{" "}
-            {data.estudianteById.apellido}
-          </IonLabel>
-        </IonItem>
-        <IonItem>
-          <IonLabel>Tu edad: {data.estudianteById.edad}</IonLabel>
-        </IonItem>
-        <IonItem>
-          <IonLabel>Tu email: email@generico.com</IonLabel>
-        </IonItem>
-        <IonItem>
-          <IonLabel>
-            El nombre de tu tutor: {data.estudianteById.nombreTutor}
-          </IonLabel>
-        </IonItem>
-        <IonItem>
-          <IonLabel>
-            El telefono de tu tutor: {data.estudianteById.nombreTutor}{" "}
-            {data.estudianteById.nombreTutor}
-          </IonLabel>
-        </IonItem>
-      </IonList>
+      <IonCard>
+        <IonCardHeader>
+          <IonCardTitle>
+            {data.estudianteById.nombre} {data.estudianteById.apellido}
+          </IonCardTitle>
+          <IonCardSubtitle>
+            Tutor: {data.estudianteById.nombreTutor}{" "}
+            {data.estudianteById.apellidoTutor}
+          </IonCardSubtitle>
+        </IonCardHeader>
+        <IonCardContent>
+          <IonImg src={src}></IonImg>
+        </IonCardContent>
+      </IonCard>
     );
   }
 
@@ -84,7 +79,6 @@ const Students: React.FC = () => {
     loadData();
   });
 
-  let studentId = 0;
   const [fullData, setfullData] = useState<string>("");
 
   const { name } = useParams<{ name: string }>();
@@ -105,14 +99,25 @@ const Students: React.FC = () => {
             <IonTitle size="large">{name}</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <DatosPersonales id={parseInt(fullData)}/>
         <IonItem>
-          <IonLabel> DATO: {parseInt(fullData)}</IonLabel>
+          <IonLabel>Bienvenido</IonLabel>
         </IonItem>
+        <IonItem>
+          <IonLabel className="ion-text-wrap">
+            A continuación podrás ver tú información personal:
+          </IonLabel>
+        </IonItem>
+        <DatosPersonales id={parseInt(fullData)} />
         <IonCard>
           <IonCardHeader>
-            <IonButton href="/pages/Inbox">Botón</IonButton>
+            <IonCardTitle>
+              Si deseas cambiar alguno de tus datos personales, envía una
+              solicitud aqui.
+            </IonCardTitle>
           </IonCardHeader>
+          <IonCardContent>
+            <IonButton href="/pages/Inbox">Botón</IonButton>
+          </IonCardContent>
         </IonCard>
       </IonContent>
     </IonPage>
