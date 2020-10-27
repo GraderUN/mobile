@@ -47,24 +47,25 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import './theme/variables.css';
 
-import InsertarAdministrativo from './Administrativo/InsertarAdministrativo';
-import VerInfoAdministrativo from './Administrativo/VerInfoAdministrativo';
-import InsertarEstudiante from './Administrativo/InsertarEstudiante';
-import InsertarProfesor from './Administrativo/InsertarProfesor';
-import EliminarEstudiante from './Administrativo/EliminarEstudiante';
-import EliminarProfesor from './Administrativo/EliminarProfesor';
-import ModificarEstudiante from './Administrativo/ModificarEstudiante';
-import ModificarProfesor from './Administrativo/ModificarProfesor';
-import GestionUsuarios from './Administrativo/GestionUsuarios';
-import ModificarAdministrativo from './Administrativo/ModificarAdministrativo';
-import EliminarAdministrativo from './Administrativo/EliminarAdministrativo';
-import VerInfoEstudiante from './Administrativo/VerInfoEstudiante';
-import VerInfoProfesor from './Administrativo/VerInfoProfesor';
+import InsertarAdministrativo from './pages/Admin/InsertarAdministrativo';
+import VerInfoAdministrativo from './pages/Admin/VerInfoAdministrativo';
+import InsertarEstudiante from './pages/Admin/InsertarEstudiante';
+import InsertarProfesor from './pages/Admin/InsertarProfesor';
+import EliminarEstudiante from './pages/Admin/EliminarEstudiante';
+import EliminarProfesor from './pages/Admin/EliminarProfesor';
+import ModificarEstudiante from './pages/Admin/ModificarEstudiante';
+import ModificarProfesor from './pages/Admin/ModificarProfesor';
+import GestionUsuarios from './pages/Admin/GestionUsuarios';
+import ModificarAdministrativo from './pages/Admin/ModificarAdministrativo';
+import EliminarAdministrativo from './pages/Admin/EliminarAdministrativo';
+import VerInfoEstudiante from './pages/Admin/VerInfoEstudiante';
+import VerInfoProfesor from './pages/Admin/VerInfoProfesor';
 import StudentGrades from "./pages/Students/StudentGrades";
 import TeacherGrades from "./pages/Teacher/TeacherGrades";
 import TeacherClass from "./pages/Teacher/TeacherClass";
 import TeacherAgregarNota from "./pages/Teacher/TeacherAgregarNota";
 import TeacherEditGrades from "./pages/Teacher/TeacherEditGrade";
+import AdministrarSalones from "./pages/Admin/AdministrarSalones";
 
 const client = new ApolloClient({
   uri: "http://localhost:5000",
@@ -136,6 +137,10 @@ const App: React.FC = () => {
               <Route path="/page/GestionU/VerInfoAdmin" component={VerInfoAdministrativo} exact />
               <Route path="/page/GestionU/VerInfoEstudiante" component={VerInfoEstudiante} exact />
               <Route path="/page/GestionU/VerInfoProfesor" component={VerInfoProfesor} exact />
+              <Route path="/page/AgregarSalones" component={AgregarSalones} exact />
+              <Route path="/page/AgregarCursos" component={AgregarCursos} exact />
+              <Route path="/page/AgregarClases" component={AgregarClases} exact />
+              <Route path="/page/AdministrarSalones" component={AdministrarSalones} exact />
               <Redirect from="/" to="/page/GestionU" exact />
           </IonRouterOutlet>
         </IonSplitPane>

@@ -13,8 +13,6 @@ import {
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import {
-  documentAttachOutline,
-  documentAttachSharp,
   easelOutline,
   easelSharp,
   homeOutline,
@@ -77,27 +75,22 @@ const appPages: AppPage[] = [
     iosIcon: schoolOutline,
     mdIcon: schoolSharp
   },
-  {
-    title: 'Solicitudes',
-    url: '/page/Solicitudes',
-    iosIcon: documentAttachOutline,
-    mdIcon: documentAttachSharp
-  },
+
   {
     title: 'Salones ADMIN',
-    url: '/page/SalonesAdmin',
+    url: '/page/AdministrarSalones',
     iosIcon: storefrontOutline,
     mdIcon: storefrontSharp
   },
   {
     title: 'Cursos ADMIN',
-    url: '/page/CursosAdmin',
+    url: '/page/AgregarCursos',
     iosIcon: libraryOutline,
     mdIcon: librarySharp
   },
   {
     title: 'Clases ADMIN',
-    url: '/page/ClasesAdmin',
+    url: '/page/AgregarClases',
     iosIcon: easelOutline,
     mdIcon: easelSharp
   },
