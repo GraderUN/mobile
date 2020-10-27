@@ -5,7 +5,6 @@ import {
   IonCardHeader,
   IonContent,
   IonHeader,
-  IonInput,
   IonItem,
   IonLabel,
   IonList,
@@ -41,7 +40,7 @@ const Students: React.FC = () => {
       }
     `;
     
-    const { loading, error, data } = useQuery(DATOS_PERSONALES, {variables: {id}});
+    const { loading, error, data } = useQuery(DATOS_PERSONALES, {variables: {id: id}});
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
@@ -84,7 +83,6 @@ const Students: React.FC = () => {
     loadData();
   });
 
-  let studentId = 0;
   const [fullData, setfullData] = useState<string>("");
 
   const { name } = useParams<{ name: string }>();

@@ -13,21 +13,8 @@ import {
     IonButton, IonButtons, IonMenuButton, IonCard, IonCardContent
 } from '@ionic/react';
 
-/*
-interface administrativo{
-
-    id: number,
-    nombre: string,
-    apellido: string,
-    edad: number,
-    telefono: number,
-    email: string
-
-}
-*/
-
 const AGREGARNOTA = gql`
-mutation($notasGestionInput : notasGestionInput!){
+mutation createNota($notasGestionInput : notasGestionInput!){
   createNota(
     notasGestionInput : $notasGestionInput
   )
@@ -44,6 +31,27 @@ const TeacherAgregarNota: React.FC = () => {
     const notaComentario = useRef<HTMLIonInputElement>(null)
 
     const [createAdministrativo] =useMutation(AGREGARNOTA);
+    const crear = () => {
+
+
+        const estudianteI = notaIdEstudiante.current?.value as string;
+        const tipoI = notaTipoNotasId.current?.value as string;
+        const valorI = notaValor.current?.value as string;
+        const porcentajeI = notaPorcentaje.current?.value as string;
+        const periodoI = notaPeriodo.current?.value as string;
+        const commentI = notaComentario.current?.value as string;
+        createAdministrativo({
+            variables: {
+                notasGestionInput:{
+                    notaIdEstudiante: estudianteI,
+                    notaTipoNotasId: tipoI,
+                    notaValor: parseFloat(valorI) ,
+                    notaPorcentaje: parseInt(porcentajeI),
+                    notaPeriodo: parseInt(periodoI),
+                    notaComentario: commentI
+                }
+            }})
+    }
 
 
     return(
@@ -86,27 +94,7 @@ const TeacherAgregarNota: React.FC = () => {
                                 <IonInput ref={notaComentario}> </IonInput>
                             </IonItem>
                         </IonList>
-                        <IonButton onClick={e => () => {
-
-                            e.preventDefault();
-
-                            const estudianteI = notaIdEstudiante.current?.value as string;
-                            const tipoI = notaTipoNotasId.current?.value as string;
-                            const valorI = notaValor.current?.value as number;
-                            const porcentajeI = notaPorcentaje.current?.value as number;
-                            const periodoI = notaPeriodo.current?.value as number;
-                            const commentI = notaComentario.current?.value as string;
-                            createAdministrativo({
-                                variables: {
-                                    notaIdEstudiante: estudianteI,
-                                    notaTipoNotasId: tipoI,
-                                    notaValor: valorI,
-                                    notaPorcentaje: porcentajeI,
-                                    notaPeriodo: periodoI,
-                                    notaComentario: commentI
-                                }})
-                        }
-                        } color="secondary">
+                        <IonButton onClick={crear}  color="secondary">
                             Agregar
                         </IonButton>
                     </IonCardContent>

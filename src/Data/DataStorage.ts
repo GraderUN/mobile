@@ -11,6 +11,7 @@ async function setUser(userId: string) {
   });
 }
 
+
 function setUserStorage(id: string) {
     setUser(id).then(resolve => {
         return true;

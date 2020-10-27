@@ -13,27 +13,30 @@ import React from 'react';
 import '../Startup/Page.css';
 import {gql, useQuery} from "@apollo/client";
 
+import { Plugins } from "@capacitor/core";
+const { Storage } = Plugins;
 
 const NOTAS = gql`
-    query{
+    query($datosEstudianteClase : datosEstudianteClase!){
     NotasEstudianteClase(
-      datosEstudianteClase:{
-      estudianteId: 1074187999,
-      claseId: 1
-    }
+      datosEstudianteClase: $datosEstudianteClase
     ){
     notasIdEstudiante,
     notasValor,
     notasPorcentaje,
     notasPeriodo,
-    NotasComentarios,
+    notasComentarios,
     tipoNotasNombre,
   }
 }
 `;
 
-function Traerdatos() {
-    const { loading, error, data } = useQuery(NOTAS);
+function Traerdatos({clase , id}) {
+    const { loading, error, data } = useQuery(NOTAS, {variables:{
+        datosEstudianteClase:{
+            estudianteId: id,
+            claseId: clase
+            }}});
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
@@ -50,6 +53,8 @@ function Traerdatos() {
                     <IonItem>recuerde que el porcentaje de la nota es {notasPorcentaje}</IonItem>
                     <IonItem>nota en el periodo {notasPeriodo}</IonItem>
                     <IonItem>tipo de nota {tipoNotasNombre}</IonItem>
+                    <IonItem>comentarios {NotasComentarios}</IonItem>
+
 
                 </IonList>
 
@@ -59,7 +64,8 @@ function Traerdatos() {
     ));
 }
 
-
+let clase = "5f977f16e5994ac676b66da2"
+let id = 11
 const StudentGrades: React.FC = () => {
 
     return (
@@ -73,7 +79,7 @@ const StudentGrades: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <Traerdatos/>
+                <Traerdatos clase={clase} id={id}/>
             </IonContent>
 
         </IonPage>

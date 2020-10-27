@@ -1,5 +1,5 @@
 import React, { useRef} from 'react';
-import {gql, useMutation, useQuery} from '@apollo/client';
+import {gql, useMutation} from '@apollo/client';
 import {
     IonContent,
     IonHeader,
@@ -13,37 +13,12 @@ import {
     IonButton, IonButtons, IonMenuButton, IonCard, IonCardContent
 } from '@ionic/react';
 
-/*
-interface administrativo{
-
-    id: number,
-    nombre: string,
-    apellido: string,
-    edad: number,
-    telefono: number,
-    email: string
-
-}
-*/
-
-const GETNOTA = gql`
-query($id: Int!){
-  getNotabyId(
-    id: $id
-  ){
-    notasId,
-    notasValor,
-    notasPeriodo,
-    notasPorcentaje,
-    notasComentarios
-  }
-}
-`;
 
 const UPDATENOTA = gql`
-mutation($id: Int! , $notasUpdateInput : notasUpdateInput!){
+mutation updateNota($id: Int! , $notasUpdateInput : notasUpdateInput!){
   updateNota(
-    notasGestionInput : $notasGestionInput
+    id: $id
+    notasUpdateInput : $notasUpdateInput
   )
 }
 `;
@@ -52,22 +27,32 @@ let thisId = 1;
 
 const TeacherEditGrade: React.FC = () => {
 
-    const { loading, error, data } = useQuery(GETNOTA , {variables :
-            {id : thisId}});
 
-/*
-    const id =  useRef<HTMLIonInputElement>(data.getNotabyId.notasId);
-    const notaValor = useRef<HTMLIonInputElement>(data.getNotabyId.notasValor);
-    const notaPorcentaje = useRef<HTMLIonInputElement>(data.getNotabyId.notasPorcentaje);
-    const notaPeriodo = useRef<HTMLIonInputElement>(data.getNotabyId.notasPeriodo);
-    const notaComentario = useRef<HTMLIonInputElement>(data.getNotabyId.notasComentarios)
-    */
     const notaValor = useRef<HTMLIonInputElement>(null);
     const notaPorcentaje = useRef<HTMLIonInputElement>(null);
     const notaPeriodo = useRef<HTMLIonInputElement>(null);
     const notaComentario = useRef<HTMLIonInputElement>(null)
 
     const [updateNota] =useMutation(UPDATENOTA);
+
+    const editar = () =>{
+
+        const valorI = notaValor.current?.value as string;
+        const porcentajeI = notaPorcentaje.current?.value as string;
+        const periodoI = notaPeriodo.current?.value as string;
+        const commentI = notaComentario.current?.value as string
+        updateNota({
+            variables: {
+                id: thisId,
+                notasUpdateInput:{
+                    notaValor: Number.parseFloat(valorI),
+                    notaPorcentaje: parseInt(porcentajeI , 10),
+                    notaPeriodo: parseInt(periodoI , 10),
+                    notaComentario: commentI
+                }
+            }})
+    }
+
     return(
 
         <IonPage>
@@ -89,7 +74,7 @@ const TeacherEditGrade: React.FC = () => {
 
                             <IonItem>
                                 <IonLabel >Nota: </IonLabel>
-                                <IonInput ref={notaValor}> </IonInput>
+                                <IonInput ref={notaValor} > </IonInput>
                             </IonItem>
                             <IonItem>
                                 <IonLabel >Porcentaje:</IonLabel>
@@ -104,27 +89,8 @@ const TeacherEditGrade: React.FC = () => {
                                 <IonInput ref={notaComentario}> </IonInput>
                             </IonItem>
                         </IonList>
-                        <IonButton onClick={e => () => {
-
-                            e.preventDefault();
-
-                            const valorI = notaValor.current?.value as number;
-                            const porcentajeI = notaPorcentaje.current?.value as number;
-                            const periodoI = notaPeriodo.current?.value as string;
-                            const commentI = notaComentario.current?.value as string
-                            updateNota({
-                                variables: {
-                                    id: thisId,
-                                    notasUpdateInput:{
-                                        notaValor: valorI,
-                                        notaPorcentaje: porcentajeI,
-                                        notaPeriodo: periodoI,
-                                        notaComentario: commentI
-                                    }
-                                }})
-                        }
-                        } color="secondary">
-                            Agregar
+                        <IonButton onClick={editar} color="secondary">
+                            Confirmar
                         </IonButton>
                     </IonCardContent>
                 </IonCard>

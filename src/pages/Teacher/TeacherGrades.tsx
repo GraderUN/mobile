@@ -25,14 +25,16 @@ const NOTAS = gql`
     notasValor,
     notasPorcentaje,
     notasPeriodo,
-    NotasComentarios,
+    notasComentarios,
     tipoNotasNombre
   }
 }
 `;
 
+let claseId = "5f977f16e5994ac676b66da2"
+let estudianteId = 11
 function Traerdatos() {
-    const { loading, error, data } = useQuery(NOTAS , {variables : {datosEstudianteClase :{claseId : 1 , estudianteId : 1074187999} }});
+    const { loading, error, data } = useQuery(NOTAS , {variables : {datosEstudianteClase :{claseId : claseId , estudianteId : estudianteId} }});
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
@@ -62,7 +64,6 @@ function Traerdatos() {
 }
 
 const TeacherGrades: React.FC = () => {
-    //let variable = 1074187999;
 
     return (
         <IonPage>

@@ -10,14 +10,16 @@ import {
     IonTitle,
     IonToolbar
 } from '@ionic/react';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import '../Startup/Page.css';
 import {gql, useQuery} from "@apollo/client";
 
+import { Plugins } from "@capacitor/core";
+const { Storage } = Plugins;
 
 const CLASES = gql`
-    query {
-        assignementsbyStudent(id: "11"){
+    query ($id: String!){
+        assignementsbyStudent(id: $id){
             materia,
             salon,
             profesor,
@@ -26,8 +28,8 @@ const CLASES = gql`
     }
 `;
 
-function Traerdatos() {
-    const { loading, error, data } = useQuery(CLASES);
+function Traerdatos({id}) {
+    const { loading, error, data } = useQuery(CLASES , {variables:{id: id}});
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
@@ -55,6 +57,19 @@ function Traerdatos() {
 
 const StudentClasses: React.FC = () => {
 
+    async function loadData() {
+        const { value }: any = await Storage.get({ key: "user" });
+        let data = JSON.parse(value);
+        setId(data.id);
+    }
+
+    useEffect(() => {
+        loadData();
+    });
+
+    const [id, setId] = useState<string>("");
+
+
     return (
         <IonPage>
             <IonHeader>
@@ -66,7 +81,7 @@ const StudentClasses: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <Traerdatos/>
+                <Traerdatos id={id}/>
             </IonContent>
         </IonPage>
     );

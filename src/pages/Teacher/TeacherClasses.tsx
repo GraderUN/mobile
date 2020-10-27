@@ -16,8 +16,9 @@ import {gql, useQuery} from "@apollo/client";
 
 
 const CLASES = gql`
-    query {
-        AssignementsByProfessor(professor: "15"){
+    query ($professor: String!){
+        AssignementsByProfessor(professor: $professor){
+            id,
             curso,
             materia,
             salon,
@@ -26,11 +27,9 @@ const CLASES = gql`
     }
 `;
 
+let profesor = "17";
 function Traerdatos() {
-    const { loading, error, data } = useQuery(CLASES);
-
-    console.log(data);
-
+    const { loading, error, data } = useQuery(CLASES,{variables: {professor: profesor}});
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 

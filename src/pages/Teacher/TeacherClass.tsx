@@ -17,16 +17,19 @@ import {gql, useQuery} from "@apollo/client";
 
 
 const COURSE = gql`
-    query{
-        courseById(id:"5f8e5d11090c20a6b6feef3d"){
+    query($id: String!){
+        courseById(id : $id){
         grade,
         letter,
         id_students
         }
     }     
 `;
+
+let curso = "5f8f875e306ee1e29983bef4";
+
 function TraerEncabezado() {
-    const { loading, error, data } = useQuery(COURSE);
+    const { loading, error, data } = useQuery(COURSE, {variables: {id: curso}});
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
@@ -40,7 +43,7 @@ function TraerEncabezado() {
     )
 }
 function Traerdatos() {
-    const { loading, error, data } = useQuery(COURSE);
+    const { loading, error, data } = useQuery(COURSE , {variables: {id: curso}});
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
