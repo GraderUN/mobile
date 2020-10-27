@@ -12,7 +12,25 @@ import {
 
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { archiveOutline, archiveSharp, documentOutline, documentSharp, homeOutline, homeSharp,personOutline, personSharp, schoolOutline, schoolSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import {
+  documentAttachOutline,
+  documentAttachSharp,
+  easelOutline,
+  easelSharp,
+  homeOutline,
+  homeSharp,
+  libraryOutline,
+  librarySharp,
+  logOutOutline,
+  logOutSharp,
+  personOutline,
+  personSharp,
+  schoolOutline,
+  schoolSharp,
+  storefrontOutline,
+  storefrontSharp,
+  trashOutline, trashSharp
+} from 'ionicons/icons';
 import './Menu.css';
 
 interface AppPage {
@@ -30,29 +48,23 @@ const appPages: AppPage[] = [
     mdIcon: homeSharp
   },
   {
-    title: 'Datos personales',
-    url: '/page/Outbox',
-    iosIcon: personOutline,
-    mdIcon: personSharp
-  },
-  {
-    title: 'Notas',
-    url: '/page/Favorites',
-    iosIcon: schoolOutline,
-    mdIcon: schoolSharp
-  },
-  {
-    title: 'Solicitudes',
-    url: '/page/Favorites',
-    iosIcon: documentOutline,
-    mdIcon: documentSharp
-  },
-  {
-    title: 'Agregar Salones',
+    title: 'Salones ADMIN',
     url: '/page/AgregarSalones',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp
+    iosIcon: storefrontOutline,
+    mdIcon: storefrontSharp
   },
+  {
+    title: 'Cursos ADMIN',
+    url: '/page/AgregarCursos',
+    iosIcon: libraryOutline,
+    mdIcon: librarySharp
+  },
+  {
+    title: 'Clases ADMIN',
+    url: '/page/ClasesAdmin',
+    iosIcon: easelOutline,
+    mdIcon: easelSharp
+  }
 ];
 
 const Menu: React.FC = () => {
