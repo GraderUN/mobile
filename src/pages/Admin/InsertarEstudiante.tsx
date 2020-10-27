@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { 
     IonButton, 
     IonIcon, 
@@ -12,24 +12,69 @@ import {
     IonLabel, 
     IonList 
 } from '@ionic/react';
+import { gql, useMutation } from '@apollo/client';
 
-interface estudiante{
-
-    id: number,
-    nombre: string,
-    apellido: string,
-    edad: number,
-    sexo: string,
-    nombreTutor: string,
-    apellidoTutor: string,
-    telefonoTutor: bigint,
-    emailTutor: string
-
-}
+const AGREGAR_ESTUDIANTE = gql`
+    mutation createEstudiante(
+        $nombre: String!, 
+        $apellido: String!, 
+        $edad: Int!, 
+        $sexo: String!,
+        $nombreTutor: String!,
+        $apellidoTutor: String!,
+        $telefonoTutor: Int!, 
+        $emailTutor: String!){
+        createEstudiante(estudiante: {
+            nombre: $nombre,
+            apellido: $apellido,
+            edad: $edad,
+            sexo: $sexo,
+            nombreTutor: $nombreTutor,
+            apellidoTutor: $apellidoTutor,
+            telefonoTutor: $telefonoTutor,
+            emailTutor: $emailTutor
+        })
+    }
+`
 
 const InsertarEstudiante: React.FC = () => {
-    const [text, setText] = useState<string>();
-    const [number, setNumber] = useState<number>();
+
+    const nombreInput = useRef<HTMLIonInputElement>(null);
+    const apellidoInput = useRef<HTMLIonInputElement>(null);
+    const edadInput = useRef<HTMLIonInputElement>(null);
+    const sexoInput = useRef<HTMLIonInputElement>(null);
+    const nombreTInput = useRef<HTMLIonInputElement>(null);
+    const apellidoTInput = useRef<HTMLIonInputElement>(null);
+    const telefonoInput = useRef<HTMLIonInputElement>(null);
+    const emailInput = useRef<HTMLIonInputElement>(null);
+
+    const [createEstudiante] =useMutation(AGREGAR_ESTUDIANTE);
+    const insertarEstudiante = () => {
+
+        const nombreI = nombreInput.current?.value as string;
+        const apellidoI = apellidoInput.current?.value as string;
+        const edadI = edadInput.current?.value as string;
+        const sexoI = sexoInput.current?.value as string;
+        const nombreTI = nombreTInput.current?.value as string;
+        const apellidoTI = apellidoTInput.current?.value as string;
+        const telefonoI = telefonoInput.current?.value as string;
+        const emailI = emailInput.current?.value as string;
+        if(nombreI && apellidoI && edadI && sexoI && nombreTI && apellidoTI && telefonoI && emailI){
+            createEstudiante({ 
+                variables: {
+                    nombre: nombreI, 
+                    apellido: apellidoI, 
+                    edad: parseInt(edadI, 10), 
+                    sexo: sexoI,
+                    nombreTutor: nombreTI,
+                    apellidoTutor: apellidoTI,
+                    telefonoTutor: parseInt(telefonoI, 10), 
+                    emailTutor: emailI
+                }
+            })
+        }
+    }
+
     return(
 
         <IonPage>
@@ -42,35 +87,35 @@ const InsertarEstudiante: React.FC = () => {
                 <IonList>
                     <IonItem>
                         <IonLabel position="stacked">Ingrese el nombre</IonLabel>
-                        <IonInput value={text}> </IonInput>
+                        <IonInput ref={nombreInput}> </IonInput>
                     </IonItem>
                     <IonItem>
                         <IonLabel position="stacked">Ingrese el apellido</IonLabel>
-                        <IonInput value={number}> </IonInput>
+                        <IonInput ref={apellidoInput}> </IonInput>
                     </IonItem>
                     <IonItem>
                         <IonLabel position="stacked">Ingrese la edad</IonLabel>
-                        <IonInput value={text}> </IonInput>
+                        <IonInput ref={edadInput}> </IonInput>
                     </IonItem>
                     <IonItem>
                         <IonLabel position="stacked">Ingrese el sexo</IonLabel>
-                        <IonInput value={text}> </IonInput>
+                        <IonInput ref={sexoInput}> </IonInput>
                     </IonItem>
                     <IonItem>
                         <IonLabel position="stacked">Ingrese el nombre del tutor</IonLabel>
-                        <IonInput value={text}> </IonInput>
+                        <IonInput ref={nombreTInput}> </IonInput>
                     </IonItem><IonItem>
                         <IonLabel position="stacked">Ingrese el apellido del tutor</IonLabel>
-                        <IonInput value={text}> </IonInput>
+                        <IonInput ref={apellidoTInput}> </IonInput>
                     </IonItem><IonItem>
                         <IonLabel position="stacked">Ingrese el telefono del tutor</IonLabel>
-                        <IonInput value={number}> </IonInput>
+                        <IonInput ref={telefonoInput}> </IonInput>
                     </IonItem><IonItem>
                         <IonLabel position="stacked">Ingrese el email del tutor</IonLabel>
-                        <IonInput value={text}> </IonInput>
+                        <IonInput ref={emailInput}> </IonInput>
                     </IonItem>
                 </IonList>
-                <IonButton color="secondary" shape="round" fill="outline">
+                <IonButton onClick={insertarEstudiante} color="secondary" shape="round" fill="outline">
                     Registrar
                 </IonButton>
             </IonContent>

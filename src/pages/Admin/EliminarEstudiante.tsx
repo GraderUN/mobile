@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { 
     IonButton, 
     IonContent, 
@@ -11,10 +11,27 @@ import {
     IonLabel, 
     IonList 
 } from '@ionic/react';
+import { gql, useMutation } from '@apollo/client';
+
+const ELIMINAR_ESTUDIANTE = gql`
+    mutation deleteEstudiante($id: Int!){
+        deleteEstudiante(id: $id)
+    }
+`
 
 const EliminarEstudiante: React.FC = () => {
-    const [text, setText] = useState<string>();
-    const [number, setNumber] = useState<number>();
+
+    const idInput = useRef<HTMLIonInputElement>(null);
+    const [deleteEstudiante] =useMutation(ELIMINAR_ESTUDIANTE);
+
+    const eliminarEstudiante = () => {
+
+        const idI = idInput.current?.value as string;
+        if(idI){
+            deleteEstudiante({ variables: {id: parseInt(idI, 10)}})
+        }
+    }
+    
     return(
 
         <IonPage>
@@ -25,26 +42,12 @@ const EliminarEstudiante: React.FC = () => {
             </IonHeader>
             <IonContent>
                 <IonList>
-                    <IonItem>
-                        <IonLabel position="stacked">Ingrese el nombre</IonLabel>
-                        <IonInput value={text}> </IonInput>
-                    </IonItem>
-                    <IonItem>
-                        <IonLabel position="stacked">Ingrese el apellido</IonLabel>
-                        <IonInput value={number}> </IonInput>
-                    </IonItem>
-                    <IonItem>
-                        <IonLabel position="stacked">Ingrese la edad</IonLabel>
-                        <IonInput value={text}> </IonInput>
-                    </IonItem><IonItem>
-                        <IonLabel position="stacked">Ingrese el telefono</IonLabel>
-                        <IonInput value={number}> </IonInput>
-                    </IonItem><IonItem>
-                        <IonLabel position="stacked">Ingrese el email</IonLabel>
-                        <IonInput value={text}> </IonInput>
+                <IonItem>
+                        <IonLabel position="stacked">Ingrese el ID del estudiante a eliminar</IonLabel>
+                        <IonInput ref={idInput}> </IonInput>
                     </IonItem>
                 </IonList>
-                <IonButton color="secondary" shape="round" fill="outline">
+                <IonButton onClick={eliminarEstudiante} color="secondary" shape="round" fill="outline">
                         Eliminar
                 </IonButton>
             </IonContent>

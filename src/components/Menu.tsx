@@ -108,12 +108,13 @@ const appPages: AppPage[] = [
     mdIcon: logOutSharp
   },
   {
-    title: 'Insertar Administrativo',
-    url: '/page/InsertarAdministrativo',
+    title: 'Gestion de Usuarios',
+    url: '/page/GestionU',
     iosIcon: trashOutline,
     mdIcon: trashSharp
   },
 ];
+
 
 const Menu: React.FC = () => {
   const location = useLocation();
