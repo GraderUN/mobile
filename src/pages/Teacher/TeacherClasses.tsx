@@ -10,9 +10,11 @@ import {
     IonTitle,
     IonToolbar
 } from '@ionic/react';
-import React from 'react';
+import React, {useContext} from 'react';
 import '../Startup/Page.css';
 import {gql, useQuery} from "@apollo/client";
+import CursoContext from "../../Data/CursoContext";
+import {useHistory} from "react-router";
 
 
 const CLASES = gql`
@@ -28,34 +30,42 @@ const CLASES = gql`
 `;
 
 let profesor = "17";
-function Traerdatos() {
-    const { loading, error, data } = useQuery(CLASES,{variables: {professor: profesor}});
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
-
-    return data.AssignementsByProfessor.map(({ curso ,materia, salon , horario}) => (
-        <IonCard>
-            <IonCardHeader>
-                <IonCardSubtitle>{horario}</IonCardSubtitle>
-                <IonCardTitle>{materia}</IonCardTitle>
-            </IonCardHeader>
-            <IonCardContent>
-                <IonList>
-                    <IonItem>en el salon {salon}</IonItem>
-                    <IonItem>con el curso {curso}</IonItem>
-                </IonList>
-                <IonButton href="/page/TeacherCourse">
-                    ver curso
-                </IonButton>
-            </IonCardContent>
-        </IonCard>
-
-    ));
-}
-
 
 const TeacherClasses: React.FC = () => {
 
+    const history = useHistory();
+
+    const cursoCtxt = useContext(CursoContext);
+    function Traerdatos() {
+        const { loading, error, data } = useQuery(CLASES,{variables: {professor: profesor}});
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error :(</p>;
+
+        return data.AssignementsByProfessor.map(({ curso ,materia, salon , horario}) => (
+            <IonCard>
+                <IonCardHeader>
+                    <IonCardSubtitle>{horario}</IonCardSubtitle>
+                    <IonCardTitle>{materia}</IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent>
+                    <IonList>
+                        <IonItem>en el salon {salon}</IonItem>
+                        <IonItem>con el curso {curso}</IonItem>
+                    </IonList>
+                    <IonButton onClick = {
+                        ()=>{cursoCtxt.changeCurso(curso);
+                            console.log(cursoCtxt.curso.id);
+                            console.log(curso)
+                            history.push("/page/ContenidoMateria");
+                        }
+                    }>
+                        ver curso
+                    </IonButton>
+                </IonCardContent>
+            </IonCard>
+
+        ));
+    }
     return (
         <IonPage>
             <IonHeader>
@@ -69,7 +79,6 @@ const TeacherClasses: React.FC = () => {
             <IonContent>
                 <Traerdatos/>
             </IonContent>
-
         </IonPage>
     );
 };
