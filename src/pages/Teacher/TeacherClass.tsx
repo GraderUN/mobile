@@ -1,4 +1,5 @@
 import {
+    IonBackButton,
     IonButton,
     IonButtons,
     IonCard,
@@ -6,7 +7,6 @@ import {
     IonCardHeader,
     IonContent,
     IonHeader, IonItem, IonLabel,
-    IonMenuButton,
     IonPage,
     IonTitle,
     IonToolbar
@@ -73,7 +73,7 @@ const TeacherClass: React.FC = () => {
             <IonHeader>
                 <IonToolbar>
                     <IonButtons slot="start">
-                        <IonMenuButton />
+                        <IonBackButton defaultHref="/page/ClasesProfesor" />
                     </IonButtons>
                     <IonTitle>Estudiantes</IonTitle>
                 </IonToolbar>

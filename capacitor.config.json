@@ -1,12 +1,12 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "pruebaFinal",
+  "appName": "GraderUN",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",
   "plugins": {
     "SplashScreen": {
-      "launchShowDuration": 0
+      "launchShowDuration": 3
     }
   },
   "cordova": {}

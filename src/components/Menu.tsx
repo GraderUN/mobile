@@ -27,7 +27,6 @@ import {
   schoolSharp,
   storefrontOutline,
   storefrontSharp,
-  trashOutline, trashSharp
 } from 'ionicons/icons';
 import './Menu.css';
 

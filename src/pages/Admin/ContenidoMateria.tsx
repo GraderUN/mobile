@@ -1,5 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import {
+  IonBackButton,
   IonButtons,
   IonCard,
   IonCardContent,
@@ -8,7 +9,6 @@ import {
   IonCardTitle,
   IonContent,
   IonHeader,
-  IonMenuButton,
   IonPage,
   IonTitle,
   IonToolbar,
@@ -58,7 +58,7 @@ const SubjectContent: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonMenuButton />
+            <IonBackButton/>
           </IonButtons>
           <IonTitle></IonTitle>
         </IonToolbar>

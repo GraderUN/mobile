@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { gql, useMutation } from '@apollo/client';
-import { briefcase } from 'ionicons/icons';
 import { 
     IonButton, 
     IonContent, 
@@ -12,7 +11,6 @@ import {
     IonItem, 
     IonLabel, 
     IonList, 
-    IonIcon,
     IonButtons,
     IonMenuButton,
     IonCard,

@@ -21,7 +21,7 @@ import { useQuery, gql } from "@apollo/client";
 import { Plugins } from "@capacitor/core";
 const { Storage } = Plugins;
 
-const Teacher: React.FC = () => {
+const TeacherPersonalData: React.FC = () => {
   function DatosPersonales({ id }) {
     const src =
       "https://unblast.com/wp-content/uploads/2020/09/Male-Teacher-Illustration.jpg";
@@ -99,4 +99,4 @@ const Teacher: React.FC = () => {
   );
 };
 
-export { Teacher };
+export { TeacherPersonalData };
