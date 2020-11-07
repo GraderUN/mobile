@@ -30,6 +30,8 @@ const SubjectContent: React.FC = () => {
   `;
 
   const materiasCtxt = useContext(MateriasContext);
+  
+  
 
   function GetMateria({ id }) {
     const { loading, error, data } = useQuery(GET_MATERIA, {

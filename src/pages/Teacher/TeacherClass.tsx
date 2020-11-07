@@ -33,6 +33,10 @@ const COURSE = gql`
 
 const TeacherClass: React.FC = () => {
     const cursoCtxt = useContext(CursoContext);
+
+    console.log(cursoCtxt.curso);
+    
+
     function TraerEncabezado() {
         const { loading, error, data } = useQuery(COURSE, {variables: {id: cursoCtxt.curso}});
 

@@ -3,12 +3,12 @@ import CursoContext , { Curso, CursoContextModel } from './CursoContext';
 
 const CursoContextProvider: React.FC = (props) => {
 
-    const initial = {id: ""}
+    const initial = {id: "121231231231231231321"};
     const [curso, setCurso] = useState<Curso>(initial);
 
     const changeCurso= (id: string) => {
         const newCurso: Curso = {
-            id,
+            id
         };
         setCurso(newCurso);
     };
