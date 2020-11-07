@@ -81,7 +81,7 @@ import MateriaContextProvider from "./Data/MateriaContextProvider";
 
 /*API GATEWAY CONNECTION */
 const client = new ApolloClient({
-  uri: "https://48p1r2roz4.sse.codesandbox.io",
+  uri: "http://localhost:5000/",
   cache: new InMemoryCache(),
 });
 

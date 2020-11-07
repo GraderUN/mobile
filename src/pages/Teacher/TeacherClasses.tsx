@@ -34,7 +34,7 @@ function Traerdatos() {
     if (error) return <p>Error :(</p>;
 
     return data.AssignementsByProfessor.map(({ curso ,materia, salon , horario}) => (
-        <IonCard>
+        <IonCard key={materia}>
             <IonCardHeader>
                 <IonCardSubtitle>{horario}</IonCardSubtitle>
                 <IonCardTitle>{materia}</IonCardTitle>

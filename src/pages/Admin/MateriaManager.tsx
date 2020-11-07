@@ -126,8 +126,8 @@ function VerMaterias() {
   
   let id:number=1;
   let name:string="Materia de prueba";
-  let grade:number=9;
-  let content:string="Contenido de prueba"
+  let grade:number=15;
+  let content:string="Contenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de prueba"
 
   
   return (
@@ -159,7 +159,7 @@ function VerMaterias() {
         <IonCardContent>
           
           <IonList>
-    <IonItem>Pertenece al grado 6</IonItem>
+    <IonItem>Pertenece al grado: {grade}</IonItem>
     <IonButton slot="end" color="warning" onClick= {() => {
       materiasCtxt.addMateria(id,name,grade,content);
       console.log("CLICK EN EDITAR");

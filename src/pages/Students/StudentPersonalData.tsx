@@ -25,7 +25,7 @@ import { Plugins } from "@capacitor/core";
 const { Storage } = Plugins;
 
 const Students: React.FC = () => {
-  /*function DatosPersonales({ id }) {
+  function DatosPersonales({ id }) {
     const src =
       "https://previews.123rf.com/images/ihorbiliavskyi/ihorbiliavskyi1812/ihorbiliavskyi181200088/114296479-graduation-student-avatar-icon-profession-logo-male-character-a-man-in-graduate-cap-and-mantle-peopl.jpg";
     
@@ -66,7 +66,7 @@ const Students: React.FC = () => {
       </IonCard>
     );
   }
-*/
+
   async function loadData() {
     const { value }: any = await Storage.get({ key: "user" });
     let data = JSON.parse(value);
@@ -132,7 +132,7 @@ const Students: React.FC = () => {
             A continuación podrás ver tú información personal:
           </IonLabel>
         </IonItem>
-        <ExchangeRates />
+        {/*AGSONODNAS */}
         <IonCard>
           <IonCardHeader>
             <IonCardTitle>
