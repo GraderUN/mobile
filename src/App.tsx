@@ -79,10 +79,11 @@ import "./theme/variables.css";
 /* Contexto para variables */
 import MateriaContextProvider from "./Data/MateriaContextProvider";
 import CursoContextProvider from "./Data/CursoContextProvider";
+import Login from "./components/Login";
 
 /*API GATEWAY CONNECTION */
 const client = new ApolloClient({
-  uri: "http://localhost:5000",
+  uri: "http://ec2-3-214-224-154.compute-1.amazonaws.com:5000",
   cache: new InMemoryCache(),
 });
 
@@ -122,6 +123,15 @@ const App: React.FC = () => {
               <CursoContextProvider>
                 <IonRouterOutlet id="main">
                   <Redirect from="/" to="/page/PersonalStudentData" exact />
+                  {/* LOGIN */}
+
+                  <Route
+                      path="/page/Login"
+                      component={Login}
+                      exact
+                  />
+
+
                   {/* INICIO */}
 
                   <Route
