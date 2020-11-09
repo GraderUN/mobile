@@ -1,63 +1,86 @@
-import React, { useState } from 'react';
-import { briefcase } from 'ionicons/icons';
+import React from 'react';
+import { add } from 'ionicons/icons';
+import {gql, useQuery} from "@apollo/client";
 import { 
     IonButton, 
+    IonButtons,
     IonContent, 
     IonHeader, 
+    IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
+    IonCardTitle,
+    IonMenuButton,
     IonPage, 
     IonTitle, 
     IonToolbar, 
-    IonInput, 
     IonItem, 
-    IonLabel, 
+    IonFab,
+    IonFabButton,
     IonList, 
     IonIcon 
 } from '@ionic/react';
 
+const SALON = gql`
+    query {
+        allClassrooms{
+            id
+            description
+            capacidad
+        }
+    }
+`;
+
+
+function Traerdatos() {
+    const { loading, error, data } = useQuery(SALON);
+
+    console.log(data);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error :(</p>;
+
+    return data.allClassrooms.map(({ id ,description, capacidad}) => (
+        <IonCard key={id}>
+            <IonCardHeader>
+                <IonCardTitle>{description}</IonCardTitle>
+                <IonCardSubtitle>{id}</IonCardSubtitle>
+            </IonCardHeader>
+            <IonCardContent>
+                <IonList>
+                    <IonItem>capacidad {capacidad}</IonItem>
+
+                </IonList>
+                <IonButton href="/" color="secondary">
+                    Editar
+                </IonButton>
+                <IonButton href="/" color="danger">
+                    Eliminar
+                </IonButton>
+            </IonCardContent>
+        </IonCard>
+
+    ));
+}
 
 const AdministrarClases: React.FC = () => {
-    const [text, setText] = useState<string>();
-    const [number, setNumber] = useState<number>();
-    return(
+    return (
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonIcon slot="start" icon={briefcase} />
-                    <IonTitle>Bienvenido a gestión de usuarios</IonTitle>
-                </IonToolbar>
-                <IonToolbar>
-                    <IonTitle>Seleccione una de las opciones</IonTitle>
+                    <IonButtons slot="start">
+                        <IonMenuButton />
+                    </IonButtons>
+                    <IonTitle> Salones</IonTitle>
                 </IonToolbar>
             </IonHeader>
-            <IonButton color="primary" shape="round" fill="outline">
-                Registrar nuevo estudiante
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Registrar nuevo profesor
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Registrar nuevo administrativo
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Modificar datos de un estudiante
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Modificar datos de un profesor
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Modificar datos de un administrativo
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Eliminar un estudiante
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Eliminar un profesor
-            </IonButton>
-            <IonButton color="primary" shape="round" fill="outline">
-                Eliminar un administrativo
-            </IonButton>
+            <IonContent>
+                <IonFab vertical="bottom" horizontal="start" slot="fixed">
+                <IonFabButton href="/page/AgregarSalones">
+                    <IonIcon icon={add} />
+                </IonFabButton>
+                </IonFab>
+                <Traerdatos/>
+            </IonContent>
         </IonPage>
-    );
+);
 }
-
   export default AdministrarClases;
