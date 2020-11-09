@@ -81,7 +81,6 @@ const AdministrarSalones: React.FC = () => {
                 </IonFab>
                 <Traerdatos/>
             </IonContent>
-
         </IonPage>
     );
 };
