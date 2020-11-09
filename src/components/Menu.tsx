@@ -55,13 +55,13 @@ const appPages: AppPage[] = [
   },
   {
     title: 'Cursos ADMIN',
-    url: '/page/AgregarCursos',
+    url: '/page/AdministrarCursos',
     iosIcon: libraryOutline,
     mdIcon: librarySharp
   },
   {
     title: 'Clases ADMIN',
-    url: '/page/AgregarClases',
+    url: '/page/AdministrarClases',
     iosIcon: easelOutline,
     mdIcon: easelSharp
   }
