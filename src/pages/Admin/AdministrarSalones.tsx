@@ -37,7 +37,7 @@ function Traerdatos() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
-    return data.allClassrooms.map(({ id ,description, capacidad}) => (
+    return data.allClassrooms.map(({id ,description, capacidad}) => (
         <IonCard key={id}>
             <IonCardHeader>
                 <IonCardTitle>{description}</IonCardTitle>
@@ -46,7 +46,6 @@ function Traerdatos() {
             <IonCardContent>
                 <IonList>
                     <IonItem>capacidad {capacidad}</IonItem>
-
                 </IonList>
                 <IonButton href="/" color="secondary">
                     Editar

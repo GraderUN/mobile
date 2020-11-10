@@ -81,6 +81,6 @@ const AdministrarClases: React.FC = () => {
                 <Traerdatos/>
             </IonContent>
         </IonPage>
-);
+    );
 }
-  export default AdministrarClases;
+  export {AdministrarClases};
