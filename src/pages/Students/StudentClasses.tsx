@@ -10,16 +10,20 @@ import {
     IonTitle,
     IonToolbar
 } from '@ionic/react';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import '../Startup/Page.css';
 import {gql, useQuery} from "@apollo/client";
 
 import { Plugins } from "@capacitor/core";
+import {useHistory} from "react-router";
+import CursoContext from "../../Data/CursoContext";
+import ClassContext from "../../Data/ClassContext";
 const { Storage } = Plugins;
 
 const CLASES = gql`
     query ($id: String!){
         assignementsbyStudent(id: $id){
+            id
             materia,
             salon,
             profesor,
@@ -28,31 +32,7 @@ const CLASES = gql`
     }
 `;
 
-function Traerdatos({id}) {
-    const { loading, error, data } = useQuery(CLASES , {variables:{id: id}});
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
-
-    return data.assignementsbyStudent.map(({ materia, salon , profesor , horario}) => (
-        <IonCard>
-            <IonCardHeader>
-                <IonCardSubtitle>{horario}</IonCardSubtitle>
-                <IonCardTitle>{materia}</IonCardTitle>
-            </IonCardHeader>
-            <IonCardContent>
-                <IonList>
-                    <IonItem>con el profesor {profesor}</IonItem>
-                    <IonItem>en el salon {salon}</IonItem>
-                </IonList>
-                <IonButton href="/page/Studentgrades" >
-                    Ver
-                </IonButton>
-            </IonCardContent>
-        </IonCard>
-
-    ));
-}
 
 
 const StudentClasses: React.FC = () => {
@@ -69,7 +49,38 @@ const StudentClasses: React.FC = () => {
 
     const [id, setId] = useState<string>("");
 
+    const history = useHistory();
 
+    const claseCtxt = useContext(ClassContext);
+
+    function Traerdatos({id}) {
+        const { loading, error, data } = useQuery(CLASES , {variables:{id: id}});
+
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error :(</p>;
+
+        return data.assignementsbyStudent.map(({ id, materia, salon , profesor , horario}) => (
+            <IonCard>
+                <IonCardHeader>
+                    <IonCardSubtitle>{horario}</IonCardSubtitle>
+                    <IonCardTitle>{materia}</IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent>
+                    <IonList>
+                        <IonItem>con el profesor {profesor}</IonItem>
+                        <IonItem>en el salon {salon}</IonItem>
+                    </IonList>
+                    <IonButton onClick={() => {
+                        claseCtxt.changeClass(id);
+                        history.push("/page/Studentgrades");
+                    }} >
+                        Ver
+                    </IonButton>
+                </IonCardContent>
+            </IonCard>
+
+        ));
+    }
     return (
         <IonPage>
             <IonHeader>
