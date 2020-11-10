@@ -46,8 +46,20 @@ const appPages: AppPage[] = [
     mdIcon: homeSharp
   },
   {
-    title: 'Gestion de Usuarios',
-    url: '/page/GestionU',
+    title: 'Gestion de Estudiantes',
+    url: '/page/GestionE',
+    iosIcon: homeOutline,
+    mdIcon: homeSharp
+  },
+  {
+    title: 'Gestion de Profesores',
+    url: '/page/GestionP',
+    iosIcon: homeOutline,
+    mdIcon: homeSharp
+  },
+  {
+    title: 'Gestion de Administrativos',
+    url: '/page/GestionA',
     iosIcon: homeOutline,
     mdIcon: homeSharp
   },

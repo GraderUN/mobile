@@ -24,7 +24,7 @@ import EliminarEstudiante from "./pages/Admin/EliminarEstudiante";
 import EliminarProfesor from "./pages/Admin/EliminarProfesor";
 import ModificarEstudiante from "./pages/Admin/ModificarEstudiante";
 import ModificarProfesor from "./pages/Admin/ModificarProfesor";
-import GestionUsuarios from "./pages/Admin/GestionUsuarios";
+import GestionUsuarios from "./pages/Admin/Dashboard/GestionEstudiante";
 import ModificarAdministrativo from "./pages/Admin/ModificarAdministrativo";
 import EliminarAdministrativo from "./pages/Admin/EliminarAdministrativo";
 import VerInfoEstudiante from "./pages/Admin/VerInfoEstudiante";
@@ -80,6 +80,9 @@ import "./theme/variables.css";
 import MateriaContextProvider from "./Data/MateriaContextProvider";
 import CursoContextProvider from "./Data/CursoContextProvider";
 import Login from "./components/Login";
+import GestionEstudiante from "./pages/Admin/Dashboard/GestionEstudiante";
+import GestionProfe from "./pages/Admin/Dashboard/GestionProfe";
+import GestionAdmin from "./pages/Admin/Dashboard/GestionAdmin";
 
 /*API GATEWAY CONNECTION */
 const client = new ApolloClient({
@@ -194,6 +197,21 @@ const App: React.FC = () => {
                   {/* Administrador */}
 
                   <Route
+                      path="/page/GestionA"
+                      component={GestionAdmin}
+                      exact
+                  />
+                  <Route
+                      path="/page/GestionU/RegistrarAdmin"
+                      component={InsertarAdministrativo}
+                      exact
+                  />
+                  <Route
+                      path="/page/GestionU/RegistrarEstudiante"
+                      component={InsertarEstudiante}
+                      exact
+                  />
+                  <Route
                       path="/page/MateriaManager"
                       component={MateriaManager}
                       exact
@@ -229,18 +247,13 @@ const App: React.FC = () => {
                       exact
                   />
                   <Route
-                      path="/page/GestionU"
-                      component={GestionUsuarios}
+                      path="/page/GestionE"
+                      component={GestionEstudiante}
                       exact
                   />
                   <Route
-                      path="/page/GestionU/RegistrarAdmin"
-                      component={InsertarAdministrativo}
-                      exact
-                  />
-                  <Route
-                      path="/page/GestionU/RegistrarEstudiante"
-                      component={InsertarEstudiante}
+                      path="/page/GestionP"
+                      component={GestionProfe}
                       exact
                   />
                   <Route
