@@ -12,7 +12,6 @@ import {
     IonFab,
     IonFabButton,
     IonIcon
-
 } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import React from 'react';
@@ -32,7 +31,7 @@ const SALON = gql`
 function Traerdatos() {
     const { loading, error, data } = useQuery(SALON);
 
-    console.log(data);
+
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
@@ -84,4 +83,4 @@ const AdministrarSalones: React.FC = () => {
     );
 };
 
-export {AdministrarSalones} ;
+export default AdministrarSalones ;

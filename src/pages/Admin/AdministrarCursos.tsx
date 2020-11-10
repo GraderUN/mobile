@@ -1,52 +1,50 @@
-import { 
-    IonButton, 
+import {
+    IonButton,
     IonButtons,
-    IonContent, 
-    IonHeader, 
     IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
     IonCardTitle,
+    IonContent,
+    IonHeader, IonItem, IonList,
     IonMenuButton,
-    IonPage, 
-    IonTitle, 
-    IonToolbar, 
-    IonItem, 
+    IonPage,
+    IonTitle,
+    IonToolbar,
     IonFab,
     IonFabButton,
-    IonList, 
-    IonIcon 
+    IonIcon
 } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import React from 'react';
 import {gql, useQuery} from "@apollo/client";
 
-const CURSO = gql`
-    query{
-        allCourses {
+
+const SALON = gql`
+    query {
+        allClassrooms{
             id
-            grade
-            letter
+            description
+            capacidad
         }
     }
 `;
 
 function Traerdatos() {
-    const { loading, error, data } = useQuery(CURSO);
+    const { loading, error, data } = useQuery(SALON);
 
-    console.log("data.....",data);
+
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
-    return data.allCourses.map(({ id ,grade, letter}) => (
+    return data.allClassrooms.map(({id ,description, capacidad}) => (
         <IonCard key={id}>
             <IonCardHeader>
-                <IonCardTitle>{grade}</IonCardTitle>
+                <IonCardTitle>{description}</IonCardTitle>
                 <IonCardSubtitle>{id}</IonCardSubtitle>
             </IonCardHeader>
             <IonCardContent>
                 <IonList>
-                    <IonItem>grado: {letter}</IonItem>
-
+                    <IonItem>capacidad {capacidad}</IonItem>
                 </IonList>
                 <IonButton href="/" color="secondary">
                     Editar
@@ -62,6 +60,7 @@ function Traerdatos() {
 
 
 const AdministrarCursos: React.FC = () => {
+
     return (
         <IonPage>
             <IonHeader>
@@ -69,12 +68,12 @@ const AdministrarCursos: React.FC = () => {
                     <IonButtons slot="start">
                         <IonMenuButton />
                     </IonButtons>
-                    <IonTitle> Cursos</IonTitle>
+                    <IonTitle> Salones</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
                 <IonFab vertical="bottom" horizontal="start" slot="fixed">
-                <IonFabButton href="/page/AgregarCursos">
+                <IonFabButton href="/page/AgregarSalones">
                     <IonIcon icon={add} />
                 </IonFabButton>
                 </IonFab>
@@ -82,6 +81,6 @@ const AdministrarCursos: React.FC = () => {
             </IonContent>
         </IonPage>
     );
-}
+};
 
-  export default {AdministrarCursos};
+export default AdministrarCursos ;
