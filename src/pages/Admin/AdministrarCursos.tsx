@@ -20,10 +20,10 @@ import {gql, useQuery} from "@apollo/client";
 
 const SALON = gql`
     query {
-        allClassrooms{
+        allCourses{
             id
-            description
-            capacidad
+            letter
+            grade
         }
     }
 `;
@@ -36,15 +36,15 @@ function Traerdatos() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
-    return data.allClassrooms.map(({id ,description, capacidad}) => (
+    return data.allCourses.map(({id ,letter, grade}) => (
         <IonCard key={id}>
             <IonCardHeader>
-                <IonCardTitle>{description}</IonCardTitle>
+                <IonCardTitle>{letter}</IonCardTitle>
                 <IonCardSubtitle>{id}</IonCardSubtitle>
             </IonCardHeader>
             <IonCardContent>
                 <IonList>
-                    <IonItem>capacidad {capacidad}</IonItem>
+                    <IonItem>capacidad {grade}</IonItem>
                 </IonList>
                 <IonButton href="/" color="secondary">
                     Editar
@@ -68,7 +68,7 @@ const AdministrarCursos: React.FC = () => {
                     <IonButtons slot="start">
                         <IonMenuButton />
                     </IonButtons>
-                    <IonTitle> Salones</IonTitle>
+                    <IonTitle> Cursos</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>

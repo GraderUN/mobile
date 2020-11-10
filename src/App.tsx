@@ -5,9 +5,6 @@ import { AgregarSalones } from "./pages/Admin/AgregarSalones";
 import { AgregarCursos } from "./pages/Admin/AgregarCursos";
 import { AgregarClases } from "./pages/Admin/AgregarClases";
 
-import  { AdministrarSalones }  from "./pages/Admin/AdministrarSalones";
-import  AdministrarCursos  from "./pages/Admin/AdministrarCursos";
-
 import React from 'react';
 import { IonApp, IonItem, IonLabel, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -35,11 +32,13 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import AdministrarCursos from "./pages/Admin/AdministrarCursos";
+import AdministrarSalones from "./pages/Admin/AdministrarSalones";
 
 
 
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/',
+  uri: 'http://localhost:5000',
   cache: new InMemoryCache()
 });
 const EXCHANGE_RATES = gql`
@@ -82,7 +81,6 @@ const App: React.FC = () => {
             <Route path="/page/AgregarClases" component={AgregarClases} exact />
             <Route path="/page/AdministrarSalones" component={AdministrarSalones} exact />
             <Route path="/page/AdministrarCursos" component={AdministrarCursos} exact />
-
             <Redirect from="/" to="/page/Inbox" exact />
           </IonRouterOutlet>
         </IonSplitPane>
