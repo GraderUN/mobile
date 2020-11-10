@@ -3,7 +3,7 @@ import MateriasContext, { Materia, MateriaContextModel } from './MateriaContext'
 
 const MateriaContextProvider: React.FC = (props) => {
     
-    const initial = {id: 0, name: "", grade:0, content:""}
+    const initial = {id: 0, name: "", grade:0, content:""};
     const [materia, setMateria] = useState<Materia>(initial);
     
     const addMateria = (id: number, name:string, grade: number, content: string) => {
@@ -12,8 +12,9 @@ const MateriaContextProvider: React.FC = (props) => {
             name,
             grade,
             content
-        };
+        };        
         setMateria(newMateria);
+        
     };  
 
     const materiaContext: MateriaContextModel ={

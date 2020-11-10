@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { gql, useMutation } from '@apollo/client';
-import { briefcase } from 'ionicons/icons';
 import { 
     IonButton, 
     IonContent, 
@@ -11,12 +10,11 @@ import {
     IonInput, 
     IonItem, 
     IonLabel, 
-    IonList, 
-    IonIcon,
+    IonList,    
     IonButtons,
-    IonMenuButton,
     IonCard,
-    IonCardContent
+    IonCardContent,
+    IonBackButton
 } from '@ionic/react';
 
 const AGREGARSALON = gql`
@@ -39,7 +37,7 @@ const AgregarSalones: React.FC = () => {
             <IonHeader>
             <IonToolbar>
                     <IonButtons slot="start">
-                        <IonMenuButton />
+                        <IonBackButton defaultHref="/page/AdministrarSalones" />
                     </IonButtons>
                     <IonTitle>Agregar Salón </IonTitle>
                 </IonToolbar>

@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { gql, useMutation } from '@apollo/client';
-import { briefcase } from 'ionicons/icons';
 import { 
     IonButton, 
     IonContent, 
@@ -12,7 +11,6 @@ import {
     IonItem, 
     IonLabel, 
     IonList, 
-    IonIcon,
     IonButtons,
     IonMenuButton,
     IonCard,
@@ -78,24 +76,6 @@ const AgregarClases: React.FC = () => {
                                 <IonInput ref={horario}> </IonInput>
                             </IonItem>
                         </IonList>
-                        <IonButton onClick={e => () => {
-
-                            e.preventDefault();
-
-                            const cursoAux = curso.current?.value as number;
-                            const materiaAux = materia.current?.value as string;
-                            const profesorAux = profesor.current?.value as string;
-                            const salonAux = salon.current?.value as string;
-                            const horarioAux = horario.current?.value as string;
-                          /*  createSalon({
-                                variables: {
-                                    grade: gradeAux,
-                                    letter: letterAux
-                                }})*/
-                        }
-                        } color="secondary">
-                            Agregar salón
-                        </IonButton>
                     </IonCardContent>
                 </IonCard>
             </IonContent>
