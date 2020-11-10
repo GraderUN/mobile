@@ -18,9 +18,10 @@ import {
 import React, {useContext, useEffect, useState} from "react";
 import "../Startup/Page.css";
 import { gql, useQuery } from "@apollo/client";
-import CursoContext from "../../Data/CursoContext";
+import CursoContext from "../../Data/Courses/CursoContext";
 import { useHistory } from "react-router";
 import {Plugins} from "@capacitor/core";
+import ClassContext from "../../Data/Classes/ClassContext";
 
 const { Storage } = Plugins;
 
@@ -37,7 +38,7 @@ const CLASES = gql`
   }
 `;
 
-//let profesor = "17";
+let profesor = "17";
 
 const TeacherClasses: React.FC = () => {
 
@@ -51,22 +52,25 @@ const TeacherClasses: React.FC = () => {
     loadData();
   });
 
-  const [id, setId] = useState<string>("");
+  const [user, setId] = useState<string>("");
 
   const history = useHistory();
 
   const cursoCtxt = useContext(CursoContext);
+  const classCtxt = useContext(ClassContext);
 
   function Traerdatos({id}) {
     const { loading, error, data } = useQuery(CLASES, {
-      variables: { professor: id },
+      //variables: { professor: user },
+      variables: { professor: profesor },
     });
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
     return data.AssignementsByProfessor.map(
       ({ curso, materia, salon, horario }) => (
-        <IonCard>
+
+          <IonCard key={id}>
           <IonCardHeader>
             <IonCardSubtitle>{horario}</IonCardSubtitle>
             <IonCardTitle>{materia}</IonCardTitle>
@@ -79,6 +83,7 @@ const TeacherClasses: React.FC = () => {
             <IonButton
               onClick={() => {
                 cursoCtxt.changeCurso(curso);
+                classCtxt.changeClass(id);
                 history.push("/page/TeacherCourse");
               }}
             >
@@ -100,7 +105,7 @@ const TeacherClasses: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <Traerdatos id={id}/>
+        <Traerdatos id={user}/>
       </IonContent>
     </IonPage>
   );

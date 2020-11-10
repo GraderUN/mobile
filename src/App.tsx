@@ -78,7 +78,7 @@ import "./theme/variables.css";
 
 /* Contexto para variables */
 import MateriaContextProvider from "./Data/MateriaContextProvider";
-import CursoContextProvider from "./Data/CursoContextProvider";
+import CursoContextProvider from "./Data/Courses/CursoContextProvider";
 import Login from "./components/Login";
 import GestionEstudiante from "./pages/Admin/Dashboard/GestionEstudiante";
 import GestionProfe from "./pages/Admin/Dashboard/GestionProfe";
@@ -86,7 +86,7 @@ import GestionAdmin from "./pages/Admin/Dashboard/GestionAdmin";
 
 /*API GATEWAY CONNECTION */
 const client = new ApolloClient({
-  uri: "http://ec2-3-214-224-154.compute-1.amazonaws.com:5000",
+  uri: "http://localhost:5000",
   cache: new InMemoryCache(),
 });
 
@@ -146,7 +146,7 @@ const App: React.FC = () => {
                   {/* Profesor */}
 
                   <Route
-                      path="/Agregarnota"
+                      path="/page/Agregarnota"
                       component={TeacherAgregarNota}
                       exact
                   />
@@ -156,7 +156,7 @@ const App: React.FC = () => {
                       exact
                   />
                   <Route
-                      path="/Editarnota"
+                      path="/page/Editarnota"
                       component={TeacherEditGrades}
                       exact
                   />
@@ -171,7 +171,7 @@ const App: React.FC = () => {
                       exact
                   />
                   <Route
-                      path="/TeacherGrades"
+                      path="/page/TeacherGrades"
                       component={TeacherGrades}
                       exact
                   />

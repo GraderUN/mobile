@@ -10,9 +10,11 @@ import {
     IonTitle,
     IonToolbar
 } from '@ionic/react';
-import React from 'react';
+import React, {useContext} from 'react';
 import '../Startup/Page.css';
 import {gql, useQuery} from "@apollo/client";
+import CursoContext from "../../Data/Courses/CursoContext";
+import ClassContext from "../../Data/Classes/ClassContext";
 
 
 const NOTAS = gql`
@@ -31,11 +33,13 @@ const NOTAS = gql`
 }
 `;
 
-let claseId = "5f977f16e5994ac676b66da2"
+//let claseId = "5f977f16e5994ac676b66da2"
 let estudianteId = 11
 function Traerdatos() {
-    const { loading, error, data } = useQuery(NOTAS , {variables : {datosEstudianteClase :{claseId : claseId , estudianteId : estudianteId} }});
+    const classCtxt = useContext(ClassContext);
 
+    const { loading, error, data } = useQuery(NOTAS , {variables : {datosEstudianteClase :{claseId : classCtxt.clase.id , estudianteId : estudianteId} }});
+    console.log(classCtxt.clase.id)
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 

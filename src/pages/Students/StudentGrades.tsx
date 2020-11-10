@@ -19,8 +19,8 @@ import "../Startup/Page.css";
 import { gql, useQuery } from "@apollo/client";
 
 import { Plugins } from "@capacitor/core";
-import CursoContext from "../../Data/CursoContext";
-import ClassContext from "../../Data/ClassContext";
+import CursoContext from "../../Data/Courses/CursoContext";
+import ClassContext from "../../Data/Classes/ClassContext";
 const { Storage } = Plugins;
 
 const NOTAS = gql`

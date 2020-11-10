@@ -16,8 +16,8 @@ import {gql, useQuery} from "@apollo/client";
 
 import { Plugins } from "@capacitor/core";
 import {useHistory} from "react-router";
-import CursoContext from "../../Data/CursoContext";
-import ClassContext from "../../Data/ClassContext";
+import CursoContext from "../../Data/Courses/CursoContext";
+import ClassContext from "../../Data/Classes/ClassContext";
 const { Storage } = Plugins;
 
 const CLASES = gql`
@@ -60,7 +60,7 @@ const StudentClasses: React.FC = () => {
         if (error) return <p>Error :(</p>;
 
         return data.assignementsbyStudent.map(({ id, materia, salon , profesor , horario}) => (
-            <IonCard>
+            <IonCard key={id}>
                 <IonCardHeader>
                     <IonCardSubtitle>{horario}</IonCardSubtitle>
                     <IonCardTitle>{materia}</IonCardTitle>
