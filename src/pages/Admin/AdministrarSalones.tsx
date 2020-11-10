@@ -72,7 +72,7 @@ const AdministrarSalones: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <IonFab vertical="bottom" horizontal="start" slot="fixed">
+                <IonFab vertical="bottom" horizontal="end" slot="fixed">
                 <IonFabButton href="/page/AgregarSalones">
                     <IonIcon icon={add} />
                 </IonFabButton>

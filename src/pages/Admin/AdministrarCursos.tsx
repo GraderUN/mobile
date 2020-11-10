@@ -1,17 +1,18 @@
 import {
     IonButton,
     IonButtons,
-    IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
+    IonCard, IonCardContent, IonCardHeader,
     IonCardTitle,
     IonContent,
-    IonHeader, IonItem, IonList,
+    IonHeader,
     IonMenuButton,
     IonPage,
     IonTitle,
     IonToolbar,
     IonFab,
     IonFabButton,
-    IonIcon
+    IonIcon,
+    IonBadge
 } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import React from 'react';
@@ -39,13 +40,13 @@ function Traerdatos() {
     return data.allCourses.map(({id ,letter, grade}) => (
         <IonCard key={id}>
             <IonCardHeader>
-                <IonCardTitle>{letter}</IonCardTitle>
-                <IonCardSubtitle>{id}</IonCardSubtitle>
+                <IonCardTitle>
+                
+                <IonBadge color="light">Curso: </IonBadge>
+                {grade}-{letter}
+                </IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-                <IonList>
-                    <IonItem>capacidad {grade}</IonItem>
-                </IonList>
                 <IonButton href="/" color="secondary">
                     Editar
                 </IonButton>
@@ -72,8 +73,8 @@ const AdministrarCursos: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <IonFab vertical="bottom" horizontal="start" slot="fixed">
-                <IonFabButton href="/page/AgregarSalones">
+                <IonFab vertical="bottom" horizontal="end" slot="fixed">
+                <IonFabButton href="/page/AgregarCursos">
                     <IonIcon icon={add} />
                 </IonFabButton>
                 </IonFab>

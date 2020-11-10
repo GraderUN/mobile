@@ -1,53 +1,55 @@
-import React from 'react';
-import { add } from 'ionicons/icons';
-import {gql, useQuery} from "@apollo/client";
-import { 
-    IonButton, 
+import {
+    IonButton,
     IonButtons,
-    IonContent, 
-    IonHeader, 
     IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
     IonCardTitle,
+    IonContent,
+    IonHeader, IonItem, IonList,
     IonMenuButton,
-    IonPage, 
-    IonTitle, 
-    IonToolbar, 
-    IonItem, 
+    IonPage,
+    IonTitle,
+    IonToolbar,
     IonFab,
     IonFabButton,
-    IonList, 
-    IonIcon 
+    IonIcon
 } from '@ionic/react';
+import { add } from 'ionicons/icons';
+import React from 'react';
+import {gql, useQuery} from "@apollo/client";
+
 
 const SALON = gql`
     query {
-        allClassrooms{
+        allAssignements{
             id
-            description
-            capacidad
+            curso
+            salon
+            horario
+            materia
+            profesor
         }
     }
 `;
 
-
 function Traerdatos() {
     const { loading, error, data } = useQuery(SALON);
 
-    console.log(data);
+
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
-    return data.allClassrooms.map(({ id ,description, capacidad}) => (
+    return data.allAssignements.map(({id,curso,salon,horario,materia,profesor}) => (
         <IonCard key={id}>
             <IonCardHeader>
-                <IonCardTitle>{description}</IonCardTitle>
+    <IonCardTitle>{materia}-{profesor}</IonCardTitle>
                 <IonCardSubtitle>{id}</IonCardSubtitle>
             </IonCardHeader>
             <IonCardContent>
                 <IonList>
-                    <IonItem>capacidad {capacidad}</IonItem>
-
+                    <IonItem>horario {horario}</IonItem>
+                    <IonItem>capacidad {curso}</IonItem>
+                    <IonItem>capacidad {salon}</IonItem>
                 </IonList>
                 <IonButton href="/" color="secondary">
                     Editar
@@ -61,7 +63,9 @@ function Traerdatos() {
     ));
 }
 
+
 const AdministrarClases: React.FC = () => {
+
     return (
         <IonPage>
             <IonHeader>
@@ -69,12 +73,12 @@ const AdministrarClases: React.FC = () => {
                     <IonButtons slot="start">
                         <IonMenuButton />
                     </IonButtons>
-                    <IonTitle> Salones</IonTitle>
+                    <IonTitle> Clases </IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <IonFab vertical="bottom" horizontal="start" slot="fixed">
-                <IonFabButton href="/page/AgregarSalones">
+                <IonFab vertical="bottom" horizontal="end" slot="fixed">
+                <IonFabButton href="/page/AgregarClases">
                     <IonIcon icon={add} />
                 </IonFabButton>
                 </IonFab>
@@ -82,5 +86,6 @@ const AdministrarClases: React.FC = () => {
             </IonContent>
         </IonPage>
     );
-}
-  export {AdministrarClases};
+};
+
+export default AdministrarClases ;

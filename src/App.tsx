@@ -34,7 +34,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import AdministrarCursos from "./pages/Admin/AdministrarCursos";
 import AdministrarSalones from "./pages/Admin/AdministrarSalones";
-
+import AdministrarClases from "./pages/Admin/AdministrarClases";
 
 
 const client = new ApolloClient({
@@ -81,6 +81,7 @@ const App: React.FC = () => {
             <Route path="/page/AgregarClases" component={AgregarClases} exact />
             <Route path="/page/AdministrarSalones" component={AdministrarSalones} exact />
             <Route path="/page/AdministrarCursos" component={AdministrarCursos} exact />
+            <Route path="/page/AdministrarClases" component={AdministrarClases} exact />
             <Redirect from="/" to="/page/Inbox" exact />
           </IonRouterOutlet>
         </IonSplitPane>
