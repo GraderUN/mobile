@@ -7,7 +7,10 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonContent,
+  IonFab,
+  IonFabButton,
   IonHeader,
+  IonIcon,
   IonItem,
   IonList,
   IonMenuButton,
@@ -15,6 +18,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { add } from "ionicons/icons";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
 import MateriaContext from "../../Data/MateriaContext";
@@ -47,7 +51,7 @@ function VerMaterias() {
     
 
     if (loading) return <p>CARGANDO</p>;
-    if (error) return <p>Error :(</p>;
+    if (error) return <p>Error :</p>;
 
     return data.getSubjects.map(({ id, name, grade, content }) => (
       <IonCard key={id}>
@@ -118,7 +122,14 @@ function VerMaterias() {
       </IonCard>
     ));
   }
+  
+  
+  let id:number=1;
+  let name:string="Materia de prueba";
+  let grade:number=15;
+  let content:string="Contenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de pruebaContenido de prueba"
 
+  
   return (
     <IonPage>
       <IonHeader>
@@ -136,7 +147,38 @@ function VerMaterias() {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-            <VerMaterias/>
+        <IonCard key={1}>
+        <IonCardHeader onClick={ () => { 
+          materiasCtxt.addMateria(id,name,grade,content);
+          console.log(materiasCtxt.materia);
+          history.push("/page/ContenidoMateria");
+          
+      }}>
+          <IonCardTitle>Nombre de la materia: {name}</IonCardTitle>
+        </IonCardHeader>
+        <IonCardContent>
+          
+          <IonList>
+    <IonItem>Pertenece al grado: {grade}</IonItem>
+    <IonButton slot="end" color="warning" onClick= {() => {
+      materiasCtxt.addMateria(id,name,grade,content);
+      console.log("CLICK EN EDITAR");
+      history.push("/page/EditarMateria");
+    }}>Editar</IonButton>
+    <IonButton slot="end" color="danger" onClick= {() => {
+      materiasCtxt.addMateria(id,name,grade,content);
+      console.log("CLICK EN Eliminar");
+      history.push("/page/EliminarMateria");
+    }}>Eliminar</IonButton>
+          </IonList>
+        </IonCardContent>
+      </IonCard>
+      <IonFab vertical="bottom" horizontal="start" slot="fixed">
+                    {/* CAMBIAR EL HREF Y HACER EL AÑADIR */}
+                    <IonFabButton href="/page/NUEVA QUE NO HE HECHO">
+                        <IonIcon icon={add} />
+                    </IonFabButton>
+                </IonFab>
         </IonContent>
       </IonContent>
     </IonPage>

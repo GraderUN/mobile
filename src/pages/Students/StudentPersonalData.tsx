@@ -80,6 +80,33 @@ const Students: React.FC = () => {
   const [fullData, setfullData] = useState<string>("");
 
   const { name } = useParams<{ name: string }>();
+
+  function ExchangeRates() {
+    const EXCHANGE_RATES = gql`
+      query($currency: String!) {
+        rates(currency: $currency) {
+          currency
+          rate
+        }
+      }
+    `;
+    const { loading, error, data } = useQuery(EXCHANGE_RATES, {
+      variables: { currency: fullData },
+    });
+    let n: number = 0;
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error :(</p>;
+
+    return data.rates.map(({ currency, rate }) => (
+      <IonItem key={n}>
+        <IonLabel>
+          {currency} : {rate}
+          {(n = n + 1)}
+        </IonLabel>
+      </IonItem>
+    ));
+  }
+
   return (
     <IonPage>
       <IonHeader>
@@ -105,7 +132,7 @@ const Students: React.FC = () => {
             A continuación podrás ver tú información personal:
           </IonLabel>
         </IonItem>
-        <DatosPersonales id={parseInt(fullData)} />
+        {/*AGSONODNAS */}
         <IonCard>
           <IonCardHeader>
             <IonCardTitle>
@@ -114,7 +141,7 @@ const Students: React.FC = () => {
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            <IonButton href="/pages/Inbox">Botón</IonButton>
+            <IonButton href="/pages/Inbox">USER ID: {fullData}</IonButton>
           </IonCardContent>
         </IonCard>
       </IonContent>

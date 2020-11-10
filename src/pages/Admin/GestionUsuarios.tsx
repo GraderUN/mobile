@@ -1,31 +1,30 @@
 //Pagina principal del administrativo
-import React, { useState } from 'react';
-import { briefcase } from 'ionicons/icons';
+import React from 'react';
+
 import { 
     IonButton, 
-    IonContent, 
     IonHeader, 
     IonPage, 
     IonTitle, 
     IonToolbar, 
-    IonInput, 
-    IonItem, 
-    IonLabel, 
-    IonList, 
-    IonIcon 
+    IonButtons,
+    IonMenuButton
 } from '@ionic/react';
 
 
 const GestionUsuarios: React.FC = () => {
     
     return(
+
         <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonIcon slot="start" icon={briefcase} />
-                    <IonTitle>Bienvenido a gestión de usuarios</IonTitle>
-                </IonToolbar>
-            </IonHeader>
+        <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonMenuButton />
+            </IonButtons>
+            <IonTitle size="small">Bienvenido a gestión de usuarios</IonTitle>
+          </IonToolbar>
+        </IonHeader>
             <IonButton href="/page/GestionU/RegistrarEstudiante" color="primary" shape="round" fill="outline">
                 Registrar nuevo estudiante
             </IonButton>

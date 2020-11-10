@@ -4,12 +4,12 @@ import {
   IonHeader,
   IonToolbar,
   IonButtons,
-  IonMenuButton,
   IonTitle,
   IonContent,
   IonItem,
   IonLabel,
   IonButton,
+  IonBackButton,
 } from "@ionic/react";
 import React, { useContext } from "react";
 import MateriasContext from "../../Data/MateriaContext";
@@ -42,7 +42,7 @@ const TeacherClass: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonMenuButton />
+            <IonBackButton/>
           </IonButtons>
           <IonTitle>{materiasCtxt.materia.name}</IonTitle>
         </IonToolbar>
