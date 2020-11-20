@@ -16,8 +16,8 @@ import {gql, useQuery} from "@apollo/client";
 
 import { Plugins } from "@capacitor/core";
 import {useHistory} from "react-router";
-import CursoContext from "../../Data/Courses/CursoContext";
 import ClassContext from "../../Data/Classes/ClassContext";
+import {setContext} from "@apollo/client/link/context";
 const { Storage } = Plugins;
 
 const CLASES = gql`
@@ -31,7 +31,6 @@ const CLASES = gql`
         }
     }
 `;
-
 
 
 

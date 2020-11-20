@@ -12,10 +12,11 @@ import React, {useRef} from 'react';
 import {personCircle} from "ionicons/icons";
 import firebase from "firebase";
 import firebaseApp from "../firebase/firebaseInit";
-import {log} from "util";
+import {useHistory} from "react-router";
 
 const Login: React.FC = () => {
 
+    const history = useHistory();
     const myemail = useRef<HTMLIonInputElement>(null);
     const mypass = useRef<HTMLIonInputElement>(null);
     return (
@@ -30,7 +31,7 @@ const Login: React.FC = () => {
                 <IonRow>
                     <IonCol>
                         <IonIcon
-                            style={{ fontSize: "70px", color: "#0040ff" }}
+                            style={{ fontSize: "70px", color: "secondary" }}
                             icon={personCircle}
                         />
                     </IonCol>
@@ -66,22 +67,23 @@ const Login: React.FC = () => {
                         </p>
                         <IonButton expand="block" onClick={
                             ()=>{
+                                //myemail.current?.value as string
+                                //
                                 firebaseApp.auth().signInWithEmailAndPassword(myemail.current?.value as string,
-                                    mypass.current?.value as string).then(user=>{
-                                    console.log(user)
-                                    firebaseApp.auth().currentUser?.getIdTokenResult()
-                                        .then((idTokenResult) => {
-                                            // Confirm the user is an Admin.
-                                            console.log(idTokenResult.claims)
-                                        })
-                                        .catch((error) => {
-                                            console.log(error);
-                                        });
-                                }).catch((error)=>{
-                                    console.log(error)
+                                    mypass.current?.value as string).then(user => {
+                                    firebase.auth().currentUser?.getIdTokenResult().then((idTokenResult) => {
+                                        let Role = idTokenResult.claims.role
+                                        let Token = idTokenResult.token;
+                                        sessionStorage.setItem("role" , Role);
+                                        sessionStorage.setItem("token" , Token);
+                                        history.push("/page/inicio")
+                                    }).catch(err => {
+                                        console.log(err)
+                                    })
+
+                            }).catch(err => {
+                                    console.log(err)
                                 })
-
-
                             }
                         }>
                         Login

@@ -4,7 +4,7 @@ import Menu from "./components/Menu";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route } from "react-router-dom";
 
-import { ApolloProvider } from "@apollo/client";
+import {ApolloProvider, createHttpLink} from "@apollo/client";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { useQuery, gql } from "@apollo/client";
 
@@ -83,12 +83,26 @@ import Login from "./components/Login";
 import GestionEstudiante from "./pages/Admin/Dashboard/GestionEstudiante";
 import GestionProfe from "./pages/Admin/Dashboard/GestionProfe";
 import GestionAdmin from "./pages/Admin/Dashboard/GestionAdmin";
+import {setContext} from "@apollo/client/link/context";
+
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = sessionStorage.getItem('token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `${token}` : "",
+    }
+  }
+});
 
 /*API GATEWAY CONNECTION */
 const client = new ApolloClient({
-  uri: "http://localhost:5000",
-  cache: new InMemoryCache(),
-});
+      link: authLink.concat(createHttpLink({uri: "http://localhost:5000"})),
+      cache: new InMemoryCache(),
+})
 
 
 const EXCHANGE_RATES = gql`
