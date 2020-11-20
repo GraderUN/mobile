@@ -1,12 +1,13 @@
 {
+  "linuxAndroidStudioPath": "/snap/android-studio/current/android-studio/bin/studio.sh",
   "appId": "io.ionic.starter",
-  "appName": "pruebaFinal",
+  "appName": "GraderUN",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",
   "plugins": {
     "SplashScreen": {
-      "launchShowDuration": 0
+      "launchShowDuration": 3
     }
   },
   "cordova": {}

@@ -1,9 +1,8 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonItem, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
 import { useParams } from 'react-router';
 import './Page.css';
-import {ExchangeRates} from '../App';
-const Page: React.FC = () => {
+const Inicio: React.FC = () => {
 
   const { name } = useParams<{ name: string; }>();
 
@@ -14,7 +13,7 @@ const Page: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>{name}</IonTitle>
+          <IonTitle>Inicio</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -22,13 +21,16 @@ const Page: React.FC = () => {
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">{name}</IonTitle>
-            <IonTitle>IonInput Examples</IonTitle>
+            <IonTitle>Bienvenido</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExchangeRates></ExchangeRates>
+        <IonItem>
+        <IonTitle>BIENVENIDO</IonTitle>
+        </IonItem>
+
       </IonContent>
     </IonPage>
   );
 };
 
-export default Page;
+export default Inicio;

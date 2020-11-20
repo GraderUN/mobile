@@ -32,11 +32,10 @@ function Traerdatos() {
     const { loading, error, data } = useQuery(SALON);
 
 
-
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
-    return data.allClassrooms.map(({id ,description, capacidad}) => (
+    return data.allClassrooms.map(({ id ,description, capacidad}) => (
         <IonCard key={id}>
             <IonCardHeader>
                 <IonCardTitle>{description}</IonCardTitle>
@@ -72,13 +71,14 @@ const AdministrarSalones: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <IonFab vertical="bottom" horizontal="end" slot="fixed">
-                <IonFabButton href="/page/AgregarSalones">
-                    <IonIcon icon={add} />
-                </IonFabButton>
+                <IonFab vertical="bottom" horizontal="start" slot="fixed">
+                    <IonFabButton href="/page/AgregarSalones">
+                        <IonIcon icon={add} />
+                    </IonFabButton>
                 </IonFab>
                 <Traerdatos/>
             </IonContent>
+
         </IonPage>
     );
 };

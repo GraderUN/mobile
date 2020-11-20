@@ -13,7 +13,8 @@
 .env.test.local
 .env.production.local
 .vscode
-
+#android
+/android
 # Logs
 logs
 *.log

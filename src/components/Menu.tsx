@@ -32,11 +32,48 @@ interface AppPage {
 }
 
 const appPages: AppPage[] = [
+
   {
     title: 'Inicio',
-    url: '/page/Inbox',
+    url: '/page/Inicio',
     iosIcon: homeOutline,
     mdIcon: homeSharp
+  },
+  {
+    title: 'Gestion de Usuarios',
+    url: '/page/GestionU',
+    iosIcon: homeOutline,
+    mdIcon: homeSharp
+  },
+  {
+    title: 'Datos personales Estudiante',
+    url: '/page/PersonalStudentData',
+    iosIcon: personOutline,
+    mdIcon: personSharp
+  },
+  {
+    title: 'Datos personales Profesor',
+    url: '/page/PersonalTeacherData',
+    iosIcon: personOutline,
+    mdIcon: personSharp
+  },
+  {
+    title: 'Ver clase ESTUDIANTE',
+    url: '/page/ClasesEstudiante',
+    iosIcon: schoolOutline,
+    mdIcon: schoolSharp
+  },
+  {
+    title: 'Ver clase PROFESOR',
+    url: '/page/ClasesProfesor',
+    iosIcon: schoolOutline,
+    mdIcon: schoolSharp
+  },
+  {
+    title: 'Gestion Materias ADMIN',
+    url: '/page/MateriaManager',
+    iosIcon: libraryOutline,
+    mdIcon: librarySharp
   },
   {
     title: 'Salones ADMIN',
@@ -55,8 +92,16 @@ const appPages: AppPage[] = [
     url: '/page/AdministrarClases',
     iosIcon: easelOutline,
     mdIcon: easelSharp
-  }
+  },
+  {
+    title: 'Cerrar sesión',
+    url: '/page/Trash',
+    iosIcon: logOutOutline,
+    mdIcon: logOutSharp
+  },
+
 ];
+
 
 const Menu: React.FC = () => {
   const location = useLocation();
