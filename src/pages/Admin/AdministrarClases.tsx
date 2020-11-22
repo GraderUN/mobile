@@ -30,7 +30,7 @@ const SALON = gql`
         }
     }
 `;
-
+ 
 function Traerdatos() {
     const { loading, error, data } = useQuery(SALON);
 
@@ -47,9 +47,9 @@ function Traerdatos() {
             </IonCardHeader>
             <IonCardContent>
                 <IonList>
-                    <IonItem>horario {horario}</IonItem>
-                    <IonItem>capacidad {curso}</IonItem>
-                    <IonItem>capacidad {salon}</IonItem>
+                    <IonItem>horario: {horario}</IonItem>
+                    <IonItem>Curso: {curso}</IonItem>
+                    <IonItem>Salón: {salon}</IonItem>
                 </IonList>
                 <IonButton href="/" color="secondary">
                     Editar
