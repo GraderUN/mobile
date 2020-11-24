@@ -14,11 +14,13 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "../Startup/Page.css";
 import { gql, useQuery } from "@apollo/client";
 
 import { Plugins } from "@capacitor/core";
+import CursoContext from "../../Data/Courses/CursoContext";
+import ClassContext from "../../Data/Classes/ClassContext";
 const { Storage } = Plugins;
 
 const NOTAS = gql`
@@ -76,10 +78,26 @@ function Traerdatos({ clase, id }) {
   );
 }
 
-let clase = "5f977f16e5994ac676b66da2";
-let id = 11;
+//let clase = "5f977f16e5994ac676b66da2";
+//let id = 11;
 const StudentGrades: React.FC = () => {
-  return (
+
+    async function loadData() {
+        const { value }: any = await Storage.get({ key: "user" });
+        let data = JSON.parse(value);
+        setId(data.id);
+    }
+
+    useEffect(() => {
+        loadData();
+    });
+
+    const [id, setId] = useState<string>("");
+
+    const classCtx = useContext(ClassContext);
+
+
+    return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
@@ -90,7 +108,7 @@ const StudentGrades: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <Traerdatos clase={clase} id={id} />
+        <Traerdatos clase={classCtx.clase} id={id} />
       </IonContent>
     </IonPage>
   );

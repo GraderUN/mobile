@@ -14,7 +14,9 @@ import {
 import React, {useContext} from 'react';
 import '../Startup/Page.css';
 import {gql, useQuery} from "@apollo/client";
-import CursoContext from "../../Data/CursoContext";
+import CursoContext from "../../Data/Courses/CursoContext";
+import {useHistory} from "react-router";
+import StudentContexto from "../../Data/Students/StudentContexto";
 
 
 const COURSE = gql`
@@ -32,13 +34,12 @@ const COURSE = gql`
 
 
 const TeacherClass: React.FC = () => {
+
+    const history = useHistory();
     const cursoCtxt = useContext(CursoContext);
 
-    console.log(cursoCtxt.curso);
-    
-
     function TraerEncabezado() {
-        const { loading, error, data } = useQuery(COURSE, {variables: {id: cursoCtxt.curso}});
+        const { loading, error, data } = useQuery(COURSE, {variables: cursoCtxt.curso});
 
         if (loading) return <p>Loading...</p>;
         if (error) return <p>Error :(</p>;
@@ -53,7 +54,9 @@ const TeacherClass: React.FC = () => {
     }
 
     function Traerdatos() {
-        const { loading, error, data } = useQuery(COURSE , {variables: {id: cursoCtxt.curso}});
+
+        const studentCtx = useContext(StudentContexto);
+        const { loading, error, data } = useQuery(COURSE , {variables: cursoCtxt.curso});
 
         if (loading) return <p>Loading...</p>;
         if (error) return <p>Error :(</p>;
@@ -62,11 +65,16 @@ const TeacherClass: React.FC = () => {
             <IonCard>
                 <IonCardHeader>{id_students}</IonCardHeader>
                 <IonCardContent>
-                    <IonButton href="/page/TeacherGrades">
+                    <IonButton onClick={() => {
+                        studentCtx.changeStudent(id_students)
+                        history.push("/page/TeacherGrades");
+                    }}>
                         ver notas
                     </IonButton>
 
-                    <IonButton href="/page/Agregarnota">
+                    <IonButton onClick={() => {
+                        studentCtx.changeStudent(id_students)
+                        history.push("/page/Agregarnota")}}>
                         Agregar Nota
                     </IonButton>
                 </IonCardContent>

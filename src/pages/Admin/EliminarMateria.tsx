@@ -52,7 +52,7 @@ const TeacherClass: React.FC = () => {
        
        <IonButton onClick={() => {
 
-       }}>SI</IonButton>
+       }}>Eliminar</IonButton>
       </IonContent>
     </IonPage>
   );

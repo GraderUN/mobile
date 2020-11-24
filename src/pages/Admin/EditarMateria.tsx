@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import {
   IonPage,
   IonHeader,
@@ -12,14 +12,34 @@ import {
   IonCard,
   IonButton,
   IonBackButton,
+  IonAlert,
+  IonInput,
 } from "@ionic/react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import MateriasContext from "../../Data/MateriaContext";
 
 const TeacherClass: React.FC = () => {
+  const contentInput = useRef<HTMLIonInputElement>(null);
   const materiasCtxt = useContext(MateriasContext);
-  const [content, setContent] = useState<string>();
 
+  const [showAlert1, setShowAlert1] = useState(false);
+
+  const GET_CONTENIDO = gql`
+    query($id: Int!) {
+      getContent(id: $id) {
+        content
+      }
+    }
+  `;
+  const UPDATE_CONTENIDO = gql`
+    mutation($id: Int!, $content: String!) {
+      putContent(id: $id, content: $content) {
+        rows
+        response
+      }
+    }
+  `;
+  /*
   const ACTUALIZAR = gql`
     mutation putContent($id: Int!, $content: String!) {
       putContent(id: $id, content: $content) {
@@ -39,13 +59,48 @@ const TeacherClass: React.FC = () => {
     );
     return (<IonItem>NOT</IonItem>);
   }
+*/
+  function Updatecontent({ content }) {
+    const [updateContenido] = useMutation(UPDATE_CONTENIDO, {
+      variables: { id: materiasCtxt.materia.id, content: content },
+    });
+
+    return (
+      <IonItem>
+        <IonButton
+          color="warning"
+          onClick={() => {
+            updateContenido().then((result)=> {
+              
+              if (result.data.putContent.response === "Success") {
+                setShowAlert1(true);
+              }
+            }).catch(()=> {
+              console.log("ERROR FATAL");
+              
+            });
+          }}
+        >
+          Actualizar Contenido
+        </IonButton>
+        <IonAlert
+          isOpen={showAlert1}
+          onDidDismiss={() => setShowAlert1(false)}
+          cssClass="my-custom-class"
+          header={"La materia "+ materiasCtxt.materia.name}
+          message={"Fue modificada correctamente"}
+          buttons={["OK"]}
+        />
+      </IonItem>
+    );
+  }
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton/>
+            <IonBackButton />
           </IonButtons>
           <IonTitle>{materiasCtxt.materia.name}</IonTitle>
         </IonToolbar>
@@ -60,23 +115,16 @@ const TeacherClass: React.FC = () => {
           </IonItem>
           <IonItem>
             <IonLabel position="floating">Contenido:</IonLabel>
-            <IonTextarea className="ion-text-wrap"
-              value={content}
-              placeholder={materiasCtxt.materia.content}
-              onIonChange={(e) => setContent(e.detail.value!)}
-            ></IonTextarea>
+            <IonInput
+              className="ion-text-wrap"
+              value={materiasCtxt.materia.content}
+              placeholder="Contenido"
+              ref = {contentInput}
+            ></IonInput>
           </IonItem>
         </IonCard>
         <IonItem>
-          <IonButton
-            color="warning"
-            onClick={() => {
-                console.log("HIZO CLICK");
-              return (<IonContent><ActualizarContenido/></IonContent>)
-            }}
-          >
-            Actualizar datos
-          </IonButton>
+          <Updatecontent content={contentInput.current?.value as string} />
         </IonItem>
       </IonContent>
     </IonPage>
