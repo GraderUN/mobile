@@ -30,6 +30,7 @@ import EliminarAdministrativo from "./pages/Admin/EliminarAdministrativo";
 import VerInfoEstudiante from "./pages/Admin/VerInfoEstudiante";
 import VerInfoProfesor from "./pages/Admin/VerInfoProfesor";
 import AdministrarSalones from "./pages/Admin/AdministrarSalones";
+import CrearMateria from "./pages/Admin/CrearMateria";
 
 /* Estudiante */
 import { Students } from "./pages/Students/StudentPersonalData";
@@ -83,7 +84,7 @@ import Login from "./components/Login";
 
 /*API GATEWAY CONNECTION */
 const client = new ApolloClient({
-  uri: "http://ec2-3-214-224-154.compute-1.amazonaws.com:5000",
+  uri: " http://ec2-34-204-176-145.compute-1.amazonaws.com:5000",
   cache: new InMemoryCache(),
 });
 
@@ -193,6 +194,11 @@ const App: React.FC = () => {
 
                   {/* Administrador */}
 
+                  <Route
+                      path="/page/CrearMateria"
+                      component={CrearMateria}
+                      exact
+                  />
                   <Route
                       path="/page/MateriaManager"
                       component={MateriaManager}

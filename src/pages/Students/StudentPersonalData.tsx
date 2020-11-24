@@ -47,7 +47,7 @@ const Students: React.FC = () => {
     
     const { loading, error, data } = useQuery(DATOS_PERSONALES, {variables: {id: id}});
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
+    if (error) return <p>Error :</p>;
 
     return (
       <IonCard>
@@ -70,14 +70,14 @@ const Students: React.FC = () => {
   async function loadData() {
     const { value }: any = await Storage.get({ key: "user" });
     let data = JSON.parse(value);
-    setfullData(data.id);
+    setUser(data.id);
   }
 
   useEffect(() => {
     loadData();
-  });
+  },[]);
 
-  const [fullData, setfullData] = useState<string>("");
+  const [user, setUser] = useState<string>("");
 
   const { name } = useParams<{ name: string }>();
 
@@ -91,7 +91,7 @@ const Students: React.FC = () => {
       }
     `;
     const { loading, error, data } = useQuery(EXCHANGE_RATES, {
-      variables: { currency: fullData },
+      variables: { currency: user },
     });
     let n: number = 0;
     if (loading) return <p>Loading...</p>;
@@ -132,7 +132,7 @@ const Students: React.FC = () => {
             A continuación podrás ver tú información personal:
           </IonLabel>
         </IonItem>
-        {/*AGSONODNAS */}
+        <DatosPersonales id={parseInt(user)}/>
         <IonCard>
           <IonCardHeader>
             <IonCardTitle>
@@ -141,7 +141,7 @@ const Students: React.FC = () => {
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            <IonButton href="/pages/Inbox">USER ID: {fullData}</IonButton>
+            <IonButton href="/pages/Inbox">USER ID: {user}</IonButton>
           </IonCardContent>
         </IonCard>
       </IonContent>

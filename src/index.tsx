@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { setUserStorage } from "./Data/DataStorage";
 
 
-setUserStorage("USD");
+setUserStorage("17");
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
