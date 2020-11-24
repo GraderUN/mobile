@@ -81,32 +81,6 @@ const Students: React.FC = () => {
 
   const { name } = useParams<{ name: string }>();
 
-  function ExchangeRates() {
-    const EXCHANGE_RATES = gql`
-      query($currency: String!) {
-        rates(currency: $currency) {
-          currency
-          rate
-        }
-      }
-    `;
-    const { loading, error, data } = useQuery(EXCHANGE_RATES, {
-      variables: { currency: user },
-    });
-    let n: number = 0;
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
-
-    return data.rates.map(({ currency, rate }) => (
-      <IonItem key={n}>
-        <IonLabel>
-          {currency} : {rate}
-          {(n = n + 1)}
-        </IonLabel>
-      </IonItem>
-    ));
-  }
-
   return (
     <IonPage>
       <IonHeader>

@@ -40,7 +40,7 @@ interface AppPage {
   title: string;
 }
 
-var role = "teacher";
+var role = "admin";
 
 /*const appAdmin: AppPage[] = [
   {
@@ -151,13 +151,6 @@ const appTeacher1={
     iosIcon: schoolOutline,
     mdIcon: schoolSharp
   }
-/*------------- signOut ---------------*/ 
-const appClose =  {
-    title: 'Cerrar sesión',
-    url: '/page/Trash',
-    iosIcon: logOutOutline,
-    mdIcon: logOutSharp
-  };
 /*------------- appStart ---------------*/ 
 const appPages: AppPage[] = [
   {
@@ -196,15 +189,13 @@ switch(role) {
   case 'student': { 
     //appPages.concat(appTeacher,appCerrar);
     appPages.push(appStudent);
-    appPages.push(appClose);
     break;
   } 
   case 'teacher': {
     appPages.push(appTeacher1); 
     appPages.push(appTeacher2);
     appPages.push(appTeacher3);
-    appPages.push(appClose);
-     break; 
+     break;
   } 
   case 'admin': { 
     appPages.push(appAdmin1);
@@ -213,12 +204,10 @@ switch(role) {
     appPages.push(appAdmin4);
     appPages.push(appAdmin5);
     appPages.push(appAdmin6);
-    appPages.push(appClose);
-    break; 
+    break;
  } 
   default: { 
-    appPages.push(appClose);
-     break; 
+     break;
   } 
 } 
 
