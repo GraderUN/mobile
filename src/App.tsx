@@ -23,7 +23,6 @@ import EliminarEstudiante from "./pages/Admin/EliminarEstudiante";
 import EliminarProfesor from "./pages/Admin/EliminarProfesor";
 import ModificarEstudiante from "./pages/Admin/ModificarEstudiante";
 import ModificarProfesor from "./pages/Admin/ModificarProfesor";
-import GestionUsuarios from "./pages/Admin/Dashboard/GestionEstudiante";
 import ModificarAdministrativo from "./pages/Admin/ModificarAdministrativo";
 import EliminarAdministrativo from "./pages/Admin/EliminarAdministrativo";
 import VerInfoEstudiante from "./pages/Admin/VerInfoEstudiante";
@@ -81,6 +80,8 @@ import GestionEstudiante from "./pages/Admin/Dashboard/GestionEstudiante";
 import GestionProfe from "./pages/Admin/Dashboard/GestionProfe";
 import GestionAdmin from "./pages/Admin/Dashboard/GestionAdmin";
 import { setContext } from "@apollo/client/link/context";
+import Puntajes from "./pages/external/punctuation";
+import punctuation from "./pages/external/punctuation";
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
@@ -235,7 +236,10 @@ const App: React.FC = () => {
                     component={GestionEstudiante}
                     exact
                   />
-                  <Route path="/page/GestionP" component={GestionProfe} exact />
+                  <Route path="/page/GestionP"
+                         component={GestionProfe}
+                         exact
+                  />
                   <Route
                     path="/page/GestionU/RegistrarProfesor"
                     component={InsertarProfesor}
@@ -306,6 +310,12 @@ const App: React.FC = () => {
                     component={AdministrarSalones}
                     exact
                   />
+                  <Route
+                      path="/page/Puntajes"
+                      component={punctuation}
+                      exact
+                  />
+
                 </IonRouterOutlet>
               </CursoContextProvider>
             </MateriaContextProvider>

@@ -114,6 +114,12 @@ const appPages: AppPage[] = [
     iosIcon: easelOutline,
     mdIcon: easelSharp
   },
+  {
+    title: 'SOAP 2D',
+    url: '/page/Puntajes',
+    iosIcon: easelOutline,
+    mdIcon: easelSharp
+  },
 ];
 
 
