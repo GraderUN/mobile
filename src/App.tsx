@@ -4,7 +4,7 @@ import Menu from "./components/Menu";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route } from "react-router-dom";
 
-import { ApolloProvider } from "@apollo/client";
+import { ApolloProvider, createHttpLink } from "@apollo/client";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { useQuery, gql } from "@apollo/client";
 
@@ -24,7 +24,7 @@ import EliminarEstudiante from "./pages/Admin/EliminarEstudiante";
 import EliminarProfesor from "./pages/Admin/EliminarProfesor";
 import ModificarEstudiante from "./pages/Admin/ModificarEstudiante";
 import ModificarProfesor from "./pages/Admin/ModificarProfesor";
-import GestionUsuarios from "./pages/Admin/GestionUsuarios";
+import GestionUsuarios from "./pages/Admin/Dashboard/GestionEstudiante";
 import ModificarAdministrativo from "./pages/Admin/ModificarAdministrativo";
 import EliminarAdministrativo from "./pages/Admin/EliminarAdministrativo";
 import VerInfoEstudiante from "./pages/Admin/VerInfoEstudiante";
@@ -57,7 +57,6 @@ import {
   IonSplitPane,
 } from "@ionic/react";
 
-
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -79,15 +78,30 @@ import "./theme/variables.css";
 
 /* Contexto para variables */
 import MateriaContextProvider from "./Data/MateriaContextProvider";
-import CursoContextProvider from "./Data/CursoContextProvider";
+import CursoContextProvider from "./Data/Courses/CursoContextProvider";
 import Login from "./components/Login";
+import GestionEstudiante from "./pages/Admin/Dashboard/GestionEstudiante";
+import GestionProfe from "./pages/Admin/Dashboard/GestionProfe";
+import GestionAdmin from "./pages/Admin/Dashboard/GestionAdmin";
+import { setContext } from "@apollo/client/link/context";
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = sessionStorage.getItem("token");
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `${token}` : "",
+    },
+  };
+});
 
 /*API GATEWAY CONNECTION */
 const client = new ApolloClient({
-  uri: " http://ec2-34-204-176-145.compute-1.amazonaws.com:5000",
+  link: authLink.concat(createHttpLink({ uri: "http://localhost:5000" })),
   cache: new InMemoryCache(),
 });
-
 
 const EXCHANGE_RATES = gql`
   query GetExchangeRates {
@@ -126,198 +140,197 @@ const App: React.FC = () => {
                   <Redirect from="/" to="/page/PersonalStudentData" exact />
                   {/* LOGIN */}
 
-                  <Route
-                      path="/page/Login"
-                      component={Login}
-                      exact
-                  />
-
+                  <Route path="/page/Login" component={Login} exact />
 
                   {/* INICIO */}
 
-                  <Route
-                      path="/page/Inicio"
-                      component={Inicio}
-                      exact
-                  />
+                  <Route path="/page/Inicio" component={Inicio} exact />
 
                   {/* Profesor */}
 
                   <Route
-                      path="/Agregarnota"
-                      component={TeacherAgregarNota}
-                      exact
+                    path="/page/Agregarnota"
+                    component={TeacherAgregarNota}
+                    exact
                   />
                   <Route
-                      path="/page/ClasesProfesor"
-                      component={TeacherClasses}
-                      exact
+                    path="/page/ClasesProfesor"
+                    component={TeacherClasses}
+                    exact
                   />
                   <Route
-                      path="/Editarnota"
-                      component={TeacherEditGrades}
-                      exact
+                    path="/page/Editarnota"
+                    component={TeacherEditGrades}
+                    exact
                   />
                   <Route
-                      path="/page/PersonalTeacherData"
-                      component={TeacherPersonalData}
-                      exact
+                    path="/page/PersonalTeacherData"
+                    component={TeacherPersonalData}
+                    exact
                   />
                   <Route
-                      path="/page/TeacherCourse"
-                      component={TeacherClass}
-                      exact
+                    path="/page/TeacherCourse"
+                    component={TeacherClass}
+                    exact
                   />
                   <Route
-                      path="/TeacherGrades"
-                      component={TeacherGrades}
-                      exact
+                    path="/page/TeacherGrades"
+                    component={TeacherGrades}
+                    exact
                   />
 
                   {/* Estudiante */}
 
                   <Route
-                      path="/page/ClasesEstudiante"
-                      component={StudentClasses}
-                      exact
+                    path="/page/ClasesEstudiante"
+                    component={StudentClasses}
+                    exact
                   />
                   <Route
-                      path="/page/Studentgrades"
-                      component={StudentGrades}
-                      exact
+                    path="/page/Studentgrades"
+                    component={StudentGrades}
+                    exact
                   />
                   <Route
-                      path="/page/PersonalStudentData"
-                      component={Students}
-                      exact
+                    path="/page/PersonalStudentData"
+                    component={Students}
+                    exact
                   />
 
                   {/* Administrador */}
 
                   <Route
-                      path="/page/CrearMateria"
-                      component={CrearMateria}
-                      exact
+                    path="/page/CrearMateria"
+                    component={CrearMateria}
+                    exact
+                  />
+
+                  <Route 
+                  path="/page/GestionA" 
+                  component={GestionAdmin} 
+                  exact 
+                  />
+                  
+                  <Route
+                    path="/page/GestionU/RegistrarAdmin"
+                    component={InsertarAdministrativo}
+                    exact
                   />
                   <Route
-                      path="/page/MateriaManager"
-                      component={MateriaManager}
-                      exact
+                    path="/page/GestionU/RegistrarEstudiante"
+                    component={InsertarEstudiante}
+                    exact
                   />
                   <Route
-                      path="/page/ContenidoMateria"
-                      component={ContenidoMateria}
-                      exact
+                    path="/page/MateriaManager"
+                    component={MateriaManager}
+                    exact
                   />
                   <Route
-                      path="/page/EditarMateria"
-                      component={EditarMateria}
-                      exact
+                    path="/page/ContenidoMateria"
+                    component={ContenidoMateria}
+                    exact
                   />
                   <Route
-                      path="/page/EliminarMateria"
-                      component={EliminarMateria}
-                      exact
+                    path="/page/EditarMateria"
+                    component={EditarMateria}
+                    exact
                   />
                   <Route
-                      path="/page/AgregarSalones"
-                      component={AgregarSalones}
-                      exact
+                    path="/page/EliminarMateria"
+                    component={EliminarMateria}
+                    exact
                   />
                   <Route
-                      path="/page/AgregarCursos"
-                      component={AgregarCursos}
-                      exact
+                    path="/page/AgregarSalones"
+                    component={AgregarSalones}
+                    exact
                   />
                   <Route
-                      path="/page/AgregarClases"
-                      component={AgregarClases}
-                      exact
+                    path="/page/AgregarCursos"
+                    component={AgregarCursos}
+                    exact
                   />
                   <Route
-                      path="/page/GestionU"
-                      component={GestionUsuarios}
-                      exact
+                    path="/page/AgregarClases"
+                    component={AgregarClases}
+                    exact
                   />
                   <Route
-                      path="/page/GestionU/RegistrarAdmin"
-                      component={InsertarAdministrativo}
-                      exact
+                    path="/page/GestionE"
+                    component={GestionEstudiante}
+                    exact
+                  />
+                  <Route path="/page/GestionP" component={GestionProfe} exact />
+                  <Route
+                    path="/page/GestionU/RegistrarProfesor"
+                    component={InsertarProfesor}
+                    exact
                   />
                   <Route
-                      path="/page/GestionU/RegistrarEstudiante"
-                      component={InsertarEstudiante}
-                      exact
+                    path="/page/GestionU/ModificarAdmin"
+                    component={ModificarAdministrativo}
+                    exact
                   />
                   <Route
-                      path="/page/GestionU/RegistrarProfesor"
-                      component={InsertarProfesor}
-                      exact
+                    path="/page/GestionU/ModificarEstudiante"
+                    component={ModificarEstudiante}
+                    exact
                   />
                   <Route
-                      path="/page/GestionU/ModificarAdmin"
-                      component={ModificarAdministrativo}
-                      exact
+                    path="/page/GestionU/ModificarProfesor"
+                    component={ModificarProfesor}
+                    exact
                   />
                   <Route
-                      path="/page/GestionU/ModificarEstudiante"
-                      component={ModificarEstudiante}
-                      exact
+                    path="/page/GestionU/EliminarAdmin"
+                    component={EliminarAdministrativo}
+                    exact
                   />
                   <Route
-                      path="/page/GestionU/ModificarProfesor"
-                      component={ModificarProfesor}
-                      exact
+                    path="/page/GestionU/EliminarEstudiante"
+                    component={EliminarEstudiante}
+                    exact
                   />
                   <Route
-                      path="/page/GestionU/EliminarAdmin"
-                      component={EliminarAdministrativo}
-                      exact
+                    path="/page/GestionU/EliminarProfesor"
+                    component={EliminarProfesor}
+                    exact
                   />
                   <Route
-                      path="/page/GestionU/EliminarEstudiante"
-                      component={EliminarEstudiante}
-                      exact
+                    path="/page/GestionU/VerInfoAdmin"
+                    component={VerInfoAdministrativo}
+                    exact
                   />
                   <Route
-                      path="/page/GestionU/EliminarProfesor"
-                      component={EliminarProfesor}
-                      exact
+                    path="/page/GestionU/VerInfoEstudiante"
+                    component={VerInfoEstudiante}
+                    exact
                   />
                   <Route
-                      path="/page/GestionU/VerInfoAdmin"
-                      component={VerInfoAdministrativo}
-                      exact
+                    path="/page/GestionU/VerInfoProfesor"
+                    component={VerInfoProfesor}
+                    exact
                   />
                   <Route
-                      path="/page/GestionU/VerInfoEstudiante"
-                      component={VerInfoEstudiante}
-                      exact
+                    path="/page/AgregarSalones"
+                    component={AgregarSalones}
+                    exact
                   />
                   <Route
-                      path="/page/GestionU/VerInfoProfesor"
-                      component={VerInfoProfesor}
-                      exact
+                    path="/page/AgregarCursos"
+                    component={AgregarCursos}
+                    exact
                   />
                   <Route
-                      path="/page/AgregarSalones"
-                      component={AgregarSalones}
-                      exact
+                    path="/page/AgregarClases"
+                    component={AgregarClases}
+                    exact
                   />
                   <Route
-                      path="/page/AgregarCursos"
-                      component={AgregarCursos}
-                      exact
-                  />
-                  <Route
-                      path="/page/AgregarClases"
-                      component={AgregarClases}
-                      exact
-                  />
-                  <Route
-                      path="/page/AdministrarSalones"
-                      component={AdministrarSalones}
-                      exact
+                    path="/page/AdministrarSalones"
+                    component={AdministrarSalones}
+                    exact
                   />
                 </IonRouterOutlet>
               </CursoContextProvider>

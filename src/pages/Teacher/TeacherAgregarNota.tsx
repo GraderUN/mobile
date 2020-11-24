@@ -1,4 +1,4 @@
-import React, { useRef} from 'react';
+import React, {useContext, useRef} from 'react';
 import { gql, useMutation } from '@apollo/client';
 import {
     IonContent,
@@ -12,6 +12,7 @@ import {
     IonList,
     IonButton, IonButtons, IonMenuButton, IonCard, IonCardContent
 } from '@ionic/react';
+import StudentContexto from "../../Data/Students/StudentContexto";
 
 const AGREGARNOTA = gql`
 mutation createNota($notasGestionInput : notasGestionInput!){
@@ -23,7 +24,8 @@ mutation createNota($notasGestionInput : notasGestionInput!){
 
 const TeacherAgregarNota: React.FC = () => {
 
-    const notaIdEstudiante = useRef<HTMLIonInputElement>(null);
+    const studentCtx = useContext(StudentContexto)
+
     const notaTipoNotasId = useRef<HTMLIonInputElement>(null);
     const notaValor = useRef<HTMLIonInputElement>(null);
     const notaPorcentaje = useRef<HTMLIonInputElement>(null);
@@ -34,7 +36,6 @@ const TeacherAgregarNota: React.FC = () => {
     const crear = () => {
 
 
-        const estudianteI = notaIdEstudiante.current?.value as string;
         const tipoI = notaTipoNotasId.current?.value as string;
         const valorI = notaValor.current?.value as string;
         const porcentajeI = notaPorcentaje.current?.value as string;
@@ -43,7 +44,7 @@ const TeacherAgregarNota: React.FC = () => {
         createAdministrativo({
             variables: {
                 notasGestionInput:{
-                    notaIdEstudiante: estudianteI,
+                    notaIdEstudiante: studentCtx.student.id,
                     notaTipoNotasId: tipoI,
                     notaValor: parseFloat(valorI) ,
                     notaPorcentaje: parseInt(porcentajeI),
@@ -70,8 +71,7 @@ const TeacherAgregarNota: React.FC = () => {
                     <IonCardContent>
                         <IonList>
                             <IonItem>
-                                <IonLabel >Id del estudiante: </IonLabel>
-                                <IonInput ref={notaIdEstudiante}> </IonInput>
+                                <IonLabel >Id del estudiante: {studentCtx.student.id}</IonLabel>
                             </IonItem>
                             <IonItem>
                                 <IonLabel >Tipo de nota: </IonLabel>
