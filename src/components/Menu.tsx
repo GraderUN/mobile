@@ -37,7 +37,7 @@ interface AppPage {
   title: string;
 }
 
-var role = "admin";
+var role = "teacher";
 
 /*const appAdmin: AppPage[] = [
   {
