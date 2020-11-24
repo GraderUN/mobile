@@ -37,7 +37,7 @@ interface AppPage {
   title: string;
 }
 
-var role = "teacher";
+var role = "admin";
 
 /*const appAdmin: AppPage[] = [
   {
@@ -206,6 +206,6 @@ const Menu: React.FC = () => {
       </IonContent>
     </IonMenu>
   );
-};
+}; 
 
 export default Menu;

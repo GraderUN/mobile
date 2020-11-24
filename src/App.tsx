@@ -317,6 +317,16 @@ const App: React.FC = () => {
                       component={AdministrarSalones}
                       exact
                   />
+                  <Route
+                      path="/pages/Admin/AdministrarCursos"
+                      component={AdministrarCursos}
+                      exact
+                  />
+                  <Route
+                      path="/pages/Admin/AdministrarClases"
+                      component={AdministrarClases}
+                      exact
+                  />
                 </IonRouterOutlet>
               </CursoContextProvider>
             </MateriaContextProvider>
