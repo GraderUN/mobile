@@ -120,7 +120,8 @@ function ExchangeRates() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  return data.rates.map(({ currency, rate }) => (
+  return data.
+  rates.map(({ currency, rate }) => (
     <IonItem>
       <IonLabel>
         {currency} : {rate}
