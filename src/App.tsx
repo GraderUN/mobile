@@ -6,7 +6,6 @@ import { Redirect, Route } from "react-router-dom";
 
 import { ApolloProvider, createHttpLink } from "@apollo/client";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { useQuery, gql } from "@apollo/client";
 
 /* ADMIN */
 import { AgregarSalones } from "./pages/Admin/AgregarSalones";
@@ -51,8 +50,6 @@ import TeacherEditGrades from "./pages/Teacher/TeacherEditGrade";
 /* Ionic */
 import {
   IonApp,
-  IonItem,
-  IonLabel,
   IonRouterOutlet,
   IonSplitPane,
 } from "@ionic/react";
@@ -103,29 +100,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const EXCHANGE_RATES = gql`
-  query GetExchangeRates {
-    rates(currency: "USD") {
-      currency
-      rate
-    }
-  }
-`;
-
-function ExchangeRates() {
-  const { loading, error, data } = useQuery(EXCHANGE_RATES);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-
-  return data.rates.map(({ currency, rate }) => (
-    <IonItem>
-      <IonLabel>
-        {currency} : {rate}
-      </IonLabel>
-    </IonItem>
-  ));
-}
 
 const App: React.FC = () => {
   return (
@@ -342,4 +316,4 @@ const App: React.FC = () => {
   );
 };
 
-export { App, ExchangeRates };
+export { App };
