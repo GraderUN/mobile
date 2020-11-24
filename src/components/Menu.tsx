@@ -1,4 +1,5 @@
 import {
+  IonButton,
   IonContent,
   IonIcon,
   IonItem,
@@ -22,13 +23,15 @@ import {
   logOutOutline,
   logOutSharp,
   personOutline,
-  personSharp,
+  personSharp, refresh,
   schoolOutline,
   schoolSharp,
   storefrontOutline,
   storefrontSharp,
 } from 'ionicons/icons';
 import './Menu.css';
+import {useHistory} from "react-router";
+import { RefresherEventDetail } from '@ionic/core';
 
 interface AppPage {
   url: string;
@@ -46,8 +49,20 @@ const appPages: AppPage[] = [
     mdIcon: homeSharp
   },
   {
-    title: 'Gestion de Usuarios',
-    url: '/page/GestionU',
+    title: 'Gestion de Estudiantes',
+    url: '/page/GestionE',
+    iosIcon: homeOutline,
+    mdIcon: homeSharp
+  },
+  {
+    title: 'Gestion de Profesores',
+    url: '/page/GestionP',
+    iosIcon: homeOutline,
+    mdIcon: homeSharp
+  },
+  {
+    title: 'Gestion de Administrativos',
+    url: '/page/GestionA',
     iosIcon: homeOutline,
     mdIcon: homeSharp
   },
@@ -99,19 +114,20 @@ const appPages: AppPage[] = [
     iosIcon: easelOutline,
     mdIcon: easelSharp
   },
-  {
-    title: 'Cerrar sesión',
-    url: '/page/Trash',
-    iosIcon: logOutOutline,
-    mdIcon: logOutSharp
-  },
-
 ];
 
 
 const Menu: React.FC = () => {
   const location = useLocation();
+  const history = useHistory();
+  function doRefresh(event: CustomEvent<RefresherEventDetail>) {
+    console.log('Begin async operation');
 
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.detail.complete();
+    }, 2000);
+  }
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
@@ -128,6 +144,15 @@ const Menu: React.FC = () => {
               </IonMenuToggle>
             );
           })}
+          <IonItem
+              onClick={()=>{
+                history.push('/page/Login')
+                sessionStorage.clear();
+                window.location.reload();
+              }} className={location.pathname === '/page/Login' ? 'selected' : ''} routerLink={'/page/Login'} routerDirection="none" lines="none" detail={false}>
+            <IonIcon slot="start" ios={logOutOutline} md={logOutSharp} />
+            <IonLabel>{'Cerrar sesión'}</IonLabel>
+          </IonItem>
         </IonList>
       </IonContent>
     </IonMenu>

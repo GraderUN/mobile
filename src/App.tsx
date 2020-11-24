@@ -4,7 +4,7 @@ import Menu from "./components/Menu";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route } from "react-router-dom";
 
-import { ApolloProvider } from "@apollo/client";
+import {ApolloProvider, createHttpLink} from "@apollo/client";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { useQuery, gql } from "@apollo/client";
 
@@ -24,7 +24,7 @@ import EliminarEstudiante from "./pages/Admin/EliminarEstudiante";
 import EliminarProfesor from "./pages/Admin/EliminarProfesor";
 import ModificarEstudiante from "./pages/Admin/ModificarEstudiante";
 import ModificarProfesor from "./pages/Admin/ModificarProfesor";
-import GestionUsuarios from "./pages/Admin/GestionUsuarios";
+import GestionUsuarios from "./pages/Admin/Dashboard/GestionEstudiante";
 import ModificarAdministrativo from "./pages/Admin/ModificarAdministrativo";
 import EliminarAdministrativo from "./pages/Admin/EliminarAdministrativo";
 import VerInfoEstudiante from "./pages/Admin/VerInfoEstudiante";
@@ -78,14 +78,31 @@ import "./theme/variables.css";
 
 /* Contexto para variables */
 import MateriaContextProvider from "./Data/MateriaContextProvider";
-import CursoContextProvider from "./Data/CursoContextProvider";
+import CursoContextProvider from "./Data/Courses/CursoContextProvider";
 import Login from "./components/Login";
+import GestionEstudiante from "./pages/Admin/Dashboard/GestionEstudiante";
+import GestionProfe from "./pages/Admin/Dashboard/GestionProfe";
+import GestionAdmin from "./pages/Admin/Dashboard/GestionAdmin";
+import {setContext} from "@apollo/client/link/context";
+
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = sessionStorage.getItem('token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `${token}` : "",
+    }
+  }
+});
 
 /*API GATEWAY CONNECTION */
 const client = new ApolloClient({
-  uri: "http://ec2-3-214-224-154.compute-1.amazonaws.com:5000",
-  cache: new InMemoryCache(),
-});
+      link: authLink.concat(createHttpLink({uri: "http://localhost:5000"})),
+      cache: new InMemoryCache(),
+})
 
 
 const EXCHANGE_RATES = gql`
@@ -103,7 +120,8 @@ function ExchangeRates() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  return data.rates.map(({ currency, rate }) => (
+  return data.
+  rates.map(({ currency, rate }) => (
     <IonItem>
       <IonLabel>
         {currency} : {rate}
@@ -143,7 +161,7 @@ const App: React.FC = () => {
                   {/* Profesor */}
 
                   <Route
-                      path="/Agregarnota"
+                      path="/page/Agregarnota"
                       component={TeacherAgregarNota}
                       exact
                   />
@@ -153,7 +171,7 @@ const App: React.FC = () => {
                       exact
                   />
                   <Route
-                      path="/Editarnota"
+                      path="/page/Editarnota"
                       component={TeacherEditGrades}
                       exact
                   />
@@ -168,7 +186,7 @@ const App: React.FC = () => {
                       exact
                   />
                   <Route
-                      path="/TeacherGrades"
+                      path="/page/TeacherGrades"
                       component={TeacherGrades}
                       exact
                   />
@@ -193,6 +211,21 @@ const App: React.FC = () => {
 
                   {/* Administrador */}
 
+                  <Route
+                      path="/page/GestionA"
+                      component={GestionAdmin}
+                      exact
+                  />
+                  <Route
+                      path="/page/GestionU/RegistrarAdmin"
+                      component={InsertarAdministrativo}
+                      exact
+                  />
+                  <Route
+                      path="/page/GestionU/RegistrarEstudiante"
+                      component={InsertarEstudiante}
+                      exact
+                  />
                   <Route
                       path="/page/MateriaManager"
                       component={MateriaManager}
@@ -229,18 +262,13 @@ const App: React.FC = () => {
                       exact
                   />
                   <Route
-                      path="/page/GestionU"
-                      component={GestionUsuarios}
+                      path="/page/GestionE"
+                      component={GestionEstudiante}
                       exact
                   />
                   <Route
-                      path="/page/GestionU/RegistrarAdmin"
-                      component={InsertarAdministrativo}
-                      exact
-                  />
-                  <Route
-                      path="/page/GestionU/RegistrarEstudiante"
-                      component={InsertarEstudiante}
+                      path="/page/GestionP"
+                      component={GestionProfe}
                       exact
                   />
                   <Route

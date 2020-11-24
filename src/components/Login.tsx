@@ -8,12 +8,17 @@ import {
     IonTitle,
     IonToolbar
 } from '@ionic/react';
-import React from 'react';
+import React, {useRef} from 'react';
 import {personCircle} from "ionicons/icons";
+import firebase from "firebase";
+import firebaseApp from "../firebase/firebaseInit";
+import {useHistory} from "react-router";
 
 const Login: React.FC = () => {
 
-
+    const history = useHistory();
+    const myemail = useRef<HTMLIonInputElement>(null);
+    const mypass = useRef<HTMLIonInputElement>(null);
     return (
         <IonPage>
             <IonHeader>
@@ -26,7 +31,7 @@ const Login: React.FC = () => {
                 <IonRow>
                     <IonCol>
                         <IonIcon
-                            style={{ fontSize: "70px", color: "#0040ff" }}
+                            style={{ fontSize: "70px", color: "secondary" }}
                             icon={personCircle}
                         />
                     </IonCol>
@@ -39,6 +44,7 @@ const Login: React.FC = () => {
                             <IonLabel position="floating"> Email</IonLabel>
                             <IonInput
                                 type="email"
+                                ref={myemail}
                             >
                             </IonInput>
                         </IonItem>
@@ -46,6 +52,7 @@ const Login: React.FC = () => {
                             <IonLabel position="floating"> Password</IonLabel>
                             <IonInput
                                 type="password"
+                                ref={mypass}
                             >
                             </IonInput>
                         </IonItem>
@@ -58,7 +65,27 @@ const Login: React.FC = () => {
                         <p style={{ fontSize: "small" }}>
                             By clicking LOGIN you agree to our <a href="#">Policy</a>
                         </p>
-                        <IonButton expand="block" >
+                        <IonButton expand="block" onClick={
+                            ()=>{
+                                //myemail.current?.value as string
+                                //
+                                firebaseApp.auth().signInWithEmailAndPassword(myemail.current?.value as string,
+                                    mypass.current?.value as string).then(user => {
+                                    firebase.auth().currentUser?.getIdTokenResult().then((idTokenResult) => {
+                                        let Role = idTokenResult.claims.role
+                                        let Token = idTokenResult.token;
+                                        sessionStorage.setItem("role" , Role);
+                                        sessionStorage.setItem("token" , Token);
+                                        history.push("/page/inicio")
+                                    }).catch(err => {
+                                        console.log(err)
+                                    })
+
+                            }).catch(err => {
+                                    console.log(err)
+                                })
+                            }
+                        }>
                         Login
                     </IonButton>
                     </IonCol>
